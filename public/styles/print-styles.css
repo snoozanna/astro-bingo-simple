@@ -1,0 +1,53 @@
+/* PRINTNG CHART */
+@media print {
+  button,
+  header,
+  a,
+  main,
+  footer,
+  .nav-wrapper,
+  .modal-footer,
+  .modal-overlay {
+    display: none !important;
+  }
+
+  body {
+    min-height: auto;
+    padding-bottom: 0;
+  }
+
+  .modal {
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    top: 0;
+    padding: 0;
+    margin-top: -60px;
+    max-height: 100%;
+  }
+
+  .modal .modal-content {
+    margin-top: 0px;
+    padding: 0 !important;
+  }
+
+  .modal .pick-modal .open {
+    top: 0;
+  }
+
+  #chart {
+    margin-top: 30px;
+  }
+
+  .chart-heading {
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 3rem;
+  }
+
+  .birthday {
+    margin-top: 40px;
+  }
+}

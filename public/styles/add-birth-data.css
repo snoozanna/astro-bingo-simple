@@ -1,0 +1,25 @@
+/* .add-data-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+@media print {
+  form,
+  button,
+  header,
+  footer,
+  .main-header,
+  #location-section,
+  #main-data-section {
+    display: none !important;
+  }
+  body {
+    min-height: auto;
+    padding-bottom: 0;
+  }
+}
+
+.circle-container {
+  outline: solid 1px black;
+}

@@ -1,0 +1,21 @@
+.trans-btn,
+.print-btn {
+  display: none;
+}
+
+.page-header {
+  background-color: #700fb5;
+}
+.logo-container {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+p {
+  color: ivory;
+}
+
+.logo {
+  max-width: 10%;
+}

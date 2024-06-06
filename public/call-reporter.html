@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astrology Bingo</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <!-- 3rd party styles -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+
+  <!-- our own styles  -->
+  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="/styles/generator.css">
+  <link rel="stylesheet" href="/styles/call-reporter.css">
+
+
+  <!-- 3rd party scripts -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
+
+
+  <!-- our own scripts  -->
+  <script src="./scripts/call-reporter.js" type="module"></script>
+
+
+
+</head>
+
+<body>
+  <!-- <header class="page-header">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo center">Astrology Bingo</a>
+      </div>
+    </nav>
+  </header> -->
+  <main>
+
+
+    <section class="grid-section">
+      <div class="upper-controls" id="upperControls">
+        <div id="phrase" class="phrase"></div>
+      </div>
+      <div class="grid-container" id="grid-container"></div>
+      <div id="lowerControls" class="controls lower"></div>
+    </section>
+
+
+  </main>
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+
+          <nav class="footer-nav">
+            <a class="grey-text text-lighten-3" href="/index.html">Birth charts in play</a>
+            <a class="grey-text text-lighten-3" href="/add-birth-data.html">Add birth chart</a>
+            <a class="grey-text text-lighten-3" href="/generator.html">Random call generator</a>
+            <a class="grey-text text-lighten-3" href="/call-reporter.html">Grid</a>
+            <a class="grey-text text-lighten-3" href="/current-call.html">Current call</a>
+            <a class="grey-text text-lighten-3" href="/example-chart.html">Example chart</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+
+  <!-- Modal Structure -->
+  <div id="birthchart-modal" class="modal">
+    <div class="modal-content">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

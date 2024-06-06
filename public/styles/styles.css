@@ -1,0 +1,313 @@
+@font-face {
+  font-family: Chromate;
+  src: url("./../assets/fonts/Chromate-Regular.otf");
+}
+
+body {
+  min-height: 100vh;
+  text-align: center;
+  /* font-family: "Wolpe Pegasus", Courier, monospace; */
+  font-family: Chromate;
+  /* "Courier New", */
+  padding-bottom: 64px;
+}
+/* 
+.cursor {
+  cursor: url("../assets/img/mouse-planet.png"), auto;
+} */
+
+.birthchart-section-container {
+  padding: 15px;
+}
+
+.owner {
+  margin: 0;
+  font-size: 2.56rem;
+  padding-bottom: 5px;
+}
+
+.list-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-group-item {
+  padding: 7px 15px 15px;
+  border: 1px black solid;
+  border-radius: 15px;
+  background-color: lavender;
+}
+
+button {
+  font-family: "Wolpe Pegasus", Courier, monospace;
+}
+
+.icons-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 150px;
+  margin: auto;
+}
+
+.icons-list .icon-item {
+  /* margin-inline-end: 5px; */
+  padding: 5px;
+  background-color: #fff;
+  color: black;
+  margin-block-end: 10px;
+  margin-inline-end: 5px;
+  display: flex;
+  /* border-radius: 4px; */
+  outline: 1px solid black;
+}
+
+.icons-list .icon-item.called {
+  /* background-color: black; */
+  color: goldenrod;
+}
+
+.icons-list .icon-item:last-child {
+  margin-inline-end: 0;
+}
+
+.icon-item .planet-name {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+  font-weight: bold;
+}
+
+.icon-item .sign-name {
+  margin: 0;
+}
+
+.icon-item .sign.icon {
+  margin: 0;
+  fill: currentColor;
+  max-width: 18px;
+  padding: 0px;
+}
+
+.chart {
+  padding: 10px;
+}
+
+.modal {
+  max-height: 85%;
+  width: 75%;
+}
+
+.cip-controls .delete-chart {
+  margin-inline-end: 15px;
+}
+
+.bc-template {
+  width: 100%;
+  height: 800px;
+  display: block;
+  /* outline: solid 1px rgb(78, 75, 75); */
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .sign.icon.chart {
+} */
+
+.chart-id {
+  padding: 10px;
+  font-size: 0.6rem;
+}
+
+.page-footer {
+  background-color: #ee6e73;
+  bottom: 0;
+  left: 0;
+  padding-top: 0;
+  width: 100%;
+  /* height: 10%; */
+  position: fixed;
+  z-index: 1;
+}
+
+.page-footer .row:last-child {
+  margin-block-end: 0;
+}
+
+svg,
+path {
+  cursor: default;
+}
+
+.controls {
+  padding: 7px;
+}
+
+.footer-nav {
+  display: flex;
+  border: none;
+  box-shadow: none;
+  justify-content: space-around;
+}
+
+.footer-nav a {
+  display: flex;
+  margin-inline-end: 15px;
+}
+.footer-nav a:last-child {
+  margin-inline-end: 0;
+}
+
+.birthchart-list-container {
+  padding: 0 15px;
+}
+
+/* .btn-danger {
+  background-color: #F44336 !important;
+} */
+
+.called.icon-item {
+  background-color: rgb(215, 38, 165) !important;
+}
+
+.called .sign.icon path {
+  fill: #fcfcfc;
+}
+
+/* WORD ROTATION */
+
+.inner-word.sun {
+  transform: rotate(-69deg);
+}
+
+.inner-word.moon {
+  transform: rotate(71deg);
+}
+
+.inner-word.ascendant {
+  transform: rotate(15deg);
+}
+
+.inner-word.mars {
+  transform: rotate(24deg);
+}
+
+.inner-word.mercury {
+  transform: rotate(-34deg);
+}
+
+.inner-word.venus {
+  transform: rotate(-22deg);
+}
+
+.inner-word.jupiter {
+  transform: rotate(50deg);
+}
+
+.inner-word.descendant {
+  transform: rotate(42deg);
+}
+
+.inner-word.pluto {
+  transform: rotate(-21deg);
+}
+
+.inner-word.neptune {
+  transform: rotate(-42deg);
+}
+
+.inner-word.uranus {
+  transform: rotate(-69deg);
+}
+
+.inner-word.saturn {
+  transform: rotate(80deg);
+}
+
+.transparent {
+  fill: none !important;
+  stroke: transparent !important;
+}
+
+g.transparent > circle {
+  fill: none !important;
+  stroke: transparent !important;
+}
+
+g.transparent > path {
+  fill: none !important;
+  stroke: transparent !important;
+}
+
+g.transparent > line {
+  fill: none !important;
+  stroke: transparent !important;
+}
+
+/* ICONS IN SHOW CHART  */
+
+.icon-item.icon-sun {
+  order: 1;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-mercury {
+  order: 2;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-venus {
+  order: 3;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-mars {
+  order: 4;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-jupiter {
+  order: 5;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-saturn {
+  order: 6;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-uranus {
+  order: 7;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-neptune {
+  order: 8;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-pluto {
+  order: 9;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-ascendant {
+  order: 10;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-descendant {
+  order: 11;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-moon {
+  order: 12;
+  background-color: rgb(245, 228, 202);
+}

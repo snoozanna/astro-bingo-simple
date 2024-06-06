@@ -1,0 +1,7 @@
+# Installing hug server
+
+# https://www.hug.rest/website/quickstart
+
+# pip3 install hug -U
+# # Or if pip is set to Python3 pip
+# pip install hug -U

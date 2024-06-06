@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astrology Bingo</title>
+
+  <!-- 3rd party styles -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.5.0/print.min.css"
+    integrity="sha512-zrPsLVYkdDha4rbMGgk9892aIBPeXti7W77FwOuOBV85bhRYi9Gh+gK+GWJzrUnaCiIEm7YfXOxW8rzYyTuI1A=="
+    crossorigin="anonymous" />
+
+  <!-- our own styles  -->
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="stylesheet" href="./styles/add-birth-data.css">
+
+  <!-- 3rd party scripts -->
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer>
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.5.0/print.min.js"
+    integrity="sha512-lzGE9ZqdrztBEk1wtq4O60N3WbsTlIvvm6ULCxWRt+CwpRD4WUbgC5aatbtourCUC15PJpqcpZk3VLs12vpNoA=="
+    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
+    crossorigin="anonymous" defer></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.0.2/firebase.js"></script>
+  <script defer src="/__/firebase/8.0.2/firebase-database.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" defer></script>
+
+  <!-- our own scripts  -->
+  <!-- <script src="scripts/main.js" type="module"></script> -->
+  <script src="./scripts/add-birth-data.js" type="module"></script>
+
+
+
+
+</head>
+
+<body>
+  <header class="page-header">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">Astrology Bingo</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+
+    <header class="main-header">
+      <h1>Where were you born?</h1>
+    </header>
+    <section id="location-section">
+
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <form method="POST" id="location-form">
+              <div class="input-field col s12">
+                <input placeholder="Placename" id="placename-input" type="text" class="validate" name="placename">
+                <label for="location2">Placename</label>
+                <button class="btn waves-effect waves-light add-data" id="placename-btn" type="submit" name="">Find
+                  lat/long
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <div id="location-choices"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="main-data-section">
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <form class="add-data-form" action="http://localhost:8000/formatData" id="addDataForm">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="First name" id="firstname" name="firstname" type="text">
+                  <label for="firstname">First name</label>
+                </div>
+                <div class="input-field col s12">
+                  <input placeholder="Last name" id="lastname" name="lastname" type="text">
+                  <label for="lastname">Last name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input placeholder="Date of Birth" id="dob" class="datepicker" name="date" type="text">
+                  <label for="dob">Date of Birth</label>
+                </div>
+                <div class="input-field col s6">
+                  <input placeholder="Time of Birth" id="tob" class="timepicker" name="time" type="text">
+                  <label for="tob">Time of Birth</label>
+                </div>
+                <div class="input-field col s6">
+                  <input placeholder="Location1" id="location1" type="text" class="validate" name="location1">
+                  <label for="location1">Latitude</label>
+                </div>
+                <div class="input-field col s6">
+                  <input placeholder="Location2" id="location2" type="text" class="validate" name="location2">
+                  <label for="location2">Longitude</label>
+                </div>
+                <div class="input-field col s6">
+                  <input placeholder="UTC offset" id="utcoffset" type="text" class="validate" name="utcoffset">
+                  <label for="location2">UTC Offset</label>
+                  <a class="waves-effect waves-teal btn-flat find-utc" id="find-utc">Find UTC offset
+                  </a>
+                </div>
+                <div class="input-field col s6">
+                  <button class="btn waves-effect waves-light add-data" id="add-data" type="submit" name="action">Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- <p id="UTCoffset">Time UTC offset</p> -->
+
+    <section id="chart-display">
+      <div id="target"></div>
+    </section>
+
+
+
+
+  </main>
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+
+          <nav class="footer-nav">
+            <a class="grey-text text-lighten-3" href="/index.html">Birth charts in play</a>
+            <a class="grey-text text-lighten-3" href="/add-birth-data.html">Add birth chart</a>
+            <a class="grey-text text-lighten-3" href="/generator.html">Random call generator</a>
+            <a class="grey-text text-lighten-3" href="/call-reporter.html">Grid</a>
+            <a class="grey-text text-lighten-3" href="/current-call.html">Current call</a>
+            <a class="grey-text text-lighten-3" href="/example-chart.html">Example chart</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+</body>
+
+</html>
