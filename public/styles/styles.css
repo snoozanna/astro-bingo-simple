@@ -250,6 +250,24 @@ g.transparent > line {
   stroke: transparent !important;
 }
 
+/* SIMPLE CHART  */
+.simple-word.inner-word{
+  text-transform: uppercase;
+}
+.simple-word.inner-word.sun {
+  transform: rotate(0deg);
+}
+
+.simple-word.inner-word.moon {
+  transform: rotate(0deg);
+}
+
+.simple-word.inner-word.ascendant {
+  transform: rotate(0deg);
+}
+
+
+
 /* ICONS IN SHOW CHART  */
 
 .icon-item.icon-sun {

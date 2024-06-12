@@ -197,7 +197,7 @@ function renderChart(player, mount = chartMountNode) {
       })`
     );
   }
-  player.renderChart({ mountNode: mount });
+  player.renderSmallChart({ mountNode: mount });
   setTimeout(() => {
     mount.scrollIntoView({
       behavior: "smooth",

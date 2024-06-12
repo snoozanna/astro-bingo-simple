@@ -38,16 +38,16 @@
   }
 
   #chart {
-    margin-top: 30px;
+    margin-top: 0px;
   }
 
   .chart-heading {
     margin-top: 0;
-    margin-bottom: 40px;
-    font-size: 3rem;
+    margin-bottom: 10px;
+    font-size: 4rem;
   }
 
   .birthday {
-    margin-top: 40px;
+    margin-top: 10px;
   }
 }

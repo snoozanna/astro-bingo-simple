@@ -7,10 +7,10 @@ import { isElement } from "../utilities.js";
  * Basic (grid with items); Admin (lineguides and call button)
  ***************************************************************************/
 
-class BingoDisplayGrid {
+class SimpleGenerator {
   constructor({
     game,
-    domNodes: { gridArea, controls, phraseDisplay, prevCallDisplay },
+    domNodes: { gridArea, controls, phraseDisplay, prevCallDisplay, gameControls },
     classes: {
       calledClass = "called",
       hoveringClass = "hover",
@@ -24,6 +24,7 @@ class BingoDisplayGrid {
     this.controls = controls;
     this.phraseDisplay = phraseDisplay;
     this.prevCallDisplay = prevCallDisplay;
+    this.gameControls = gameControls;
     this.classes = {
       calledClass,
       hoveringClass,
@@ -130,60 +131,7 @@ class BingoDisplayGrid {
       return;
     }
 
-    // Create the table parts
-    const table = document.createElement("table");
-    table.classList.add("call-table");
-    table.id = "call-table";
-    const thead = document.createElement("thead");
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-    td.classList.add("blank-cell");
-
-    tr.append(td);
-
-    // Now insert one <th> per planet
-    for (const planet of BirthChart.planets) {
-      const th = document.createElement("th");
-      th.textContent = planet;
-      th.dataset.planet = planet;
-      th.classList.add(planet);
-      th.setAttribute("scope", "col");
-      tr.append(th);
-    }
-
-    tr.append(td.cloneNode());
-
-    thead.append(tr);
-    table.append(thead);
-
-    // Now do the rows (Nested loops is OK here because very small data set)
-    const tbody = document.createElement("tbody");
-    for (const sign of BirthChart.signs) {
-      const row = document.createElement("tr");
-      const rowHeader = document.createElement("th");
-      rowHeader.textContent = sign;
-      rowHeader.dataset.sign = sign;
-      rowHeader.classList.add(sign);
-      row.append(rowHeader);
-      for (const planet of BirthChart.planets) {
-        const cell = document.createElement("td");
-        cell.dataset.planet = planet;
-        cell.dataset.sign = sign;
-        cell.classList.add(planet, sign);
-        cell.textContent = "";
-        row.append(cell);
-      }
-      row.append(rowHeader.cloneNode(true));
-      tbody.append(row);
-    }
-    table.append(tbody);
-
-    const tfoot = document.createElement("tfoot");
-    tfoot.append(tr.cloneNode(true));
-    table.append(tfoot);
-
-    // Put this here after the cloning.
-    td.id = "blank-cell";
+   
 
     if (settings.features.controls && !this.controls.querySelector("#call")) {
       // Put the call button in
@@ -205,86 +153,18 @@ class BingoDisplayGrid {
       this.controls.append(callButton);
     }
 
-    this.gridArea.innerHTML = "";
-    this.gridArea.append(table);
 
     if (settings.features.controls) {
       this.addControls();
     }
 
-    if (settings.features.hoverguides) {
-      this.setUpHoverGuides();
-    }
-
-    if (settings.features.clickable) {
-      this.setUpClickable();
-    }
+    
     this.markCalled({ alreadyCalled: this.game.alreadyCalled });
   }
 
-  setUpClickable() {
-    if (!this.gridArea.dataset.evtBound) {
-      const clickHandler = (e) => {
-        // console.log("target", e?.target?.closest("td:not(.blank-cell)"));
-        const target = e?.target?.closest("td:not(.blank-cell)");
-        if (target) {
-          const { planet, sign } = target.dataset;
-          const pick = {
-            planet,
-            sign,
-          };
-          console.log(`in grid, abut to pick`, pick);
-          console.log("trigger element was ", target);
-          this.game.pick(pick);
-          // this.game.socket.send(
-          //   JSON.stringify({
-          //     type: "forced-pick",
-          //     data: pick,
-          //     controllerId: this.game._id,
-          //   })
-          // );
-        }
-      };
-      this.gridArea.addEventListener("click", clickHandler);
-    }
-    this.gridArea.dataset.evtBound = true;
-  }
+  
 
-  setUpHoverGuides(
-    grid = this.gridArea,
-    hoverClass = this.classes.hoveringClass,
-  ) {
-    if (!isElement(grid)) {
-      throw new Error(
-        `You must provide a DOM node to insert the grid in. Received ${grid}`,
-      );
-    }
-
-    grid.addEventListener("mouseover", (e) => {
-      const oldEls = document.querySelectorAll(`.${hoverClass}`);
-      for (const el of oldEls) {
-        el.classList.remove(hoverClass);
-      }
-      // console.log("target", e?.target?.closest("td:not(.blank-cell)"));
-      const target = e?.target?.closest("td:not(.blank-cell)");
-      if (target) {
-        const {
-          dataset: { planet, sign },
-        } = target;
-        // // console.log("p", planet, "s", sign);
-
-        const planetCells = document.querySelectorAll(`.${planet}`);
-        for (const cell of planetCells) {
-          cell.classList.add(hoverClass);
-        }
-
-        const signCells = document.querySelectorAll(`.${sign}`);
-        for (const cell of signCells) {
-          cell.classList.add(hoverClass);
-        }
-      }
-    });
-  }
+  
 
   markCalled() {
     // if (gameData == null) {
@@ -292,6 +172,7 @@ class BingoDisplayGrid {
     //     `Expected an game data in BingoGridDisplay.markCalled; instead received ${gameData} (type: ${typeof gameData})`
     //   );
     // }
+    // debugger;
     console.log("in grid markCalled");
     const { alreadyCalled: called } = this.game;
     if (!called.length) {
@@ -301,43 +182,8 @@ class BingoDisplayGrid {
       }
       return;
     }
-    const { gridArea: grid } = this;
-    const { calledClass, lastCalledClass } = this.classes;
-    const lastPick = grid.querySelector(`.${lastCalledClass}`);
-    if (lastPick) {
-      lastPick.classList.remove(lastCalledClass);
-    }
-    for (const [i, { planet, sign, callPosition }] of called.entries()) {
-      const item = grid.querySelector(`.${planet}.${sign}`);
-      // item.textContent = callPosition;
-      item.classList.add(calledClass);
-      const isLastPicked = i === called.length - 1;
-      if (isLastPicked) {
-        // item.classList.add(lastCalledClass, "open");
-        item.classList.add(lastCalledClass);
-      }
-
-      const text =
-        planet === "Ascendant" || planet === "Descendant"
-          ? `${sign} ${planet}`
-          : `${planet} in ${sign}`;
-      const HTML = `
-
-        <h2 class="title">${text}</h2>
-      `;
-
-      item.innerHTML = HTML;
-      if (this.settings.features.showModal) {
-        const contentDiv = this.modal.el.querySelector(".modal-content");
-        contentDiv.innerHTML = HTML;
-        this.modal.open();
-
-        setTimeout(() => {
-          // item.classList.remove("open");
-          this.modal.close();
-        }, this.settings.showPickedTime);
-      }
-    }
+    
+    
     if (this.settings.features.showPhrases) {
       const phrase = document.createElement("p");
       const prevCallEl = document.createElement("p");
@@ -371,4 +217,4 @@ class BingoDisplayGrid {
   // }
 }
 
-export default BingoDisplayGrid;
+export default SimpleGenerator;

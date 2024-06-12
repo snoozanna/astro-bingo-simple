@@ -229,7 +229,7 @@ class PlayerListDisplay {
                 })`,
               );
             }
-            player.renderChart({ mountNode: mount, recreate: true });
+            player.renderSmallChart({ mountNode: mount, recreate: true });
             setTimeout(() => {
               mount.scrollIntoView({
                 behavior: "smooth",
