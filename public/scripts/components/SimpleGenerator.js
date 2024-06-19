@@ -192,7 +192,7 @@ class SimpleGenerator {
         const prevPlanet = called[called.length - 2].planet;
         const prevSign = called[called.length - 2].sign;
         let prevCallText =
-          prevPlanet === "Ascendant" || prevSign === "Descendant"
+          prevPlanet === "Rising" || prevSign === "Descendant"
             ? `Previous call = ${prevSign} ${prevPlanet}`
             : `Previous call = ${prevPlanet} in ${prevSign}`;
         prevCallEl.textContent = prevCallText;

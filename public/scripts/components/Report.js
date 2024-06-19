@@ -33,7 +33,7 @@ class Report {
     const playerAscs = [];
     playerSuns.push(game.players.map((player) => player.Sun.sign));
     playerMoons.push(game.players.map((player) => player.Moon.sign));
-    playerAscs.push(game.players.map((player) => player.Ascendant.sign));
+    playerAscs.push(game.players.map((player) => player.Rising.sign));
 
     console.log("playerSuns", playerSuns);
 

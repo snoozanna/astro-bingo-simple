@@ -23,7 +23,7 @@
     height: 100%;
     margin-top: 0;
     top: 0;
-    padding: 0;
+    padding: 0!important;
     margin-top: -60px;
     max-height: 100%;
   }
@@ -42,12 +42,18 @@
   }
 
   .chart-heading {
-    margin-top: 0;
+    margin-top: -20px;
     margin-bottom: 10px;
     font-size: 4rem;
   }
 
   .birthday {
     margin-top: 10px;
+    font-size: 1.5rem;
+  }
+  .fig-logo{
+    display: inherit;
+    max-width: 150px;
+    margin-top: -70px;
   }
 }

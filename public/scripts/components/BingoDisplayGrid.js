@@ -1,4 +1,5 @@
 import BirthChart from "../classes/BirthChart.js";
+import SmallBirthChart from "../classes/SmallBirthChart.js";
 import AstrologyBingoGameController from "../classes/AstrologyBingoGameController.js";
 import { isElement } from "../utilities.js";
 
@@ -142,7 +143,7 @@ class BingoDisplayGrid {
     tr.append(td);
 
     // Now insert one <th> per planet
-    for (const planet of BirthChart.planets) {
+    for (const planet of SmallBirthChart.reducedPlanets) {
       const th = document.createElement("th");
       th.textContent = planet;
       th.dataset.planet = planet;
@@ -165,7 +166,7 @@ class BingoDisplayGrid {
       rowHeader.dataset.sign = sign;
       rowHeader.classList.add(sign);
       row.append(rowHeader);
-      for (const planet of BirthChart.planets) {
+      for (const planet of SmallBirthChart.reducedPlanets) {
         const cell = document.createElement("td");
         cell.dataset.planet = planet;
         cell.dataset.sign = sign;
@@ -318,7 +319,7 @@ class BingoDisplayGrid {
       }
 
       const text =
-        planet === "Ascendant" || planet === "Descendant"
+        planet === "Rising" || planet === "Descendant"
           ? `${sign} ${planet}`
           : `${planet} in ${sign}`;
       const HTML = `
@@ -346,7 +347,7 @@ class BingoDisplayGrid {
         const prevPlanet = called[called.length - 2].planet;
         const prevSign = called[called.length - 2].sign;
         let prevCallText =
-          prevPlanet === "Ascendant" || prevSign === "Descendant"
+          prevPlanet === "Rising" || prevSign === "Descendant"
             ? `Previous call = ${prevSign} ${prevPlanet}`
             : `Previous call = ${prevPlanet} in ${prevSign}`;
         prevCallEl.textContent = prevCallText;

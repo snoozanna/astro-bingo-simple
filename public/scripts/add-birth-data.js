@@ -246,8 +246,8 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     let chartData = await response.json();
     chartData = JSON.parse(chartData); // twice because stupid python
     // console.log("chartData", chartData);
-    chartData.Ascendant = chartData.Asc;
-    chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
+    chartData.Rising = chartData.Asc;
+    chartData.Descendant = BirthChart.descDict[chartData.Rising];
     delete chartData.Asc;
 
     chartData.ownerName = `${firstname} ${lastname}`;

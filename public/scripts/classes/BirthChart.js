@@ -22,7 +22,7 @@ class BirthChart {
     Uranus,
     Neptune,
     Pluto,
-    Ascendant,
+    Rising,
     Descendant,
     Moon,
     _id = uuidv4(),
@@ -163,19 +163,19 @@ class BirthChart {
           }
         : Pluto;
 
-    this.Ascendant =
-      typeof Ascendant === "string"
+    this.Rising =
+      typeof Rising === "string"
         ? {
-            sign: Ascendant,
-            icon: BirthChart.getIconSVG(Ascendant),
+            sign: Rising,
+            icon: BirthChart.getIconSVG(Rising),
             location: { x: 300, y: -65 },
-            word: BirthChart.getSignWordSVG(Ascendant),
+            word: BirthChart.getSignWordSVG(Rising),
             wordLocation: { x: 90, y: 40 },
             viewBox: "-50 60 600 600",
             textAnchor: "start",
             called: false,
           }
-        : Ascendant;
+        : Rising;
 
     this.Descendant =
       typeof Descendant === "string"
@@ -223,7 +223,7 @@ class BirthChart {
     return `
     Sun: ${this.Sun.sign}
     Moon: ${this.Moon.sign}
-    Ascendant: ${this.Ascendant.sign}
+    Rising: ${this.Rising.sign}
     Mercury: ${this.Mercury.sign}
     Venus: ${this.Venus.sign}
     Mars: ${this.Mars.sign}
@@ -585,7 +585,7 @@ class BirthChart {
   static planets = Object.freeze([
     "Sun",
     "Moon",
-    "Ascendant",
+    "Rising",
     "Mercury",
     "Venus",
     "Mars",

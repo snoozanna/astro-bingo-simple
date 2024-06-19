@@ -1,9 +1,10 @@
 import BirthChart from "../classes/BirthChart.js";
+import SmallBirthChart from "../classes/SmallBirthChart.js";
 import Player from "../classes/Player.js";
 import AstrologyBingoGameController from "../classes/AstrologyBingoGameController.js";
 import { isElement } from "../utilities.js";
 
-const { planets } = BirthChart;
+const { reducedPlanets } = SmallBirthChart;
 
 // /****************************************************************
 //  * Player list Component
@@ -165,7 +166,7 @@ class PlayerListDisplay {
         // Icons display
         const iconsDisplay = document.createElement("ul");
         iconsDisplay.classList.add("icons-list");
-        for (const planet of planets) {
+        for (const planet of reducedPlanets) {
           const iconListItem = document.createElement("li");
           iconListItem.classList.add(
             "icon-item",

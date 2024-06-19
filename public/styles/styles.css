@@ -190,7 +190,7 @@ path {
   transform: rotate(71deg);
 }
 
-.inner-word.ascendant {
+.inner-word.rising {
   transform: rotate(15deg);
 }
 
@@ -262,7 +262,7 @@ g.transparent > line {
   transform: rotate(0deg);
 }
 
-.simple-word.inner-word.ascendant {
+.simple-word.inner-word.rising {
   transform: rotate(0deg);
 }
 
@@ -315,7 +315,7 @@ g.transparent > line {
   background-color: rgb(245, 228, 202);
 }
 
-.icon-item.icon-ascendant {
+.icon-item.icon-rising {
   order: 10;
   background-color: rgb(245, 228, 202);
 }
@@ -328,4 +328,10 @@ g.transparent > line {
 .icon-item.icon-moon {
   order: 12;
   background-color: rgb(245, 228, 202);
+}
+
+
+.fig-logo{
+
+ max-width: 100px;
 }

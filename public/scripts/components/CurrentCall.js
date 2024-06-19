@@ -40,16 +40,16 @@ class CurrentCall {
   }
 
   addControls() {
-    if (!this.controls.querySelector("#reset")) {
-      const button = document.createElement("button");
-      button.id = "reset";
-      button.classList.add("btn", "danger");
-      button.textContent = "Reset game";
-      button.addEventListener("click", (e) => {
-        this.game.reset();
-      });
-      this.controls.append(button);
-    }
+    // if (!this.controls.querySelector("#reset")) {
+    //   const button = document.createElement("button");
+    //   button.id = "reset";
+    //   button.classList.add("btn", "danger");
+    //   button.textContent = "Reset game";
+    //   button.addEventListener("click", (e) => {
+    //     this.game.reset();
+    //   });
+    //   this.controls.append(button);
+    // }
   }
 
   render(overrides = {}) {
@@ -123,14 +123,14 @@ class CurrentCall {
     if (alreadyCalled.length > 1) {
       let prevCall = alreadyCalled[alreadyCalled.length - 2];
       let prevCallText =
-        prevCall.planet === "Ascendant" || prevCall.planet === "Descendant"
+        prevCall.planet === "Rising" || prevCall.planet === "Descendant"
           ? `${prevCall.sign} ${prevCall.planet}`
           : `${prevCall.planet} in ${prevCall.sign}`;
       prevCallElem.innerHTML = ` <h2 class="prev-call">${prevCallText}</h2>`;
     }
 
     let lastCallText =
-      lastCall.planet === "Ascendant" || lastCall.planet === "Descendant"
+      lastCall.planet === "Rising" || lastCall.planet === "Descendant"
         ? `${lastCall.sign} ${lastCall.planet}`
         : `${lastCall.planet} in ${lastCall.sign}`;
 

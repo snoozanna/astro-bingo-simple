@@ -22,7 +22,7 @@ class SmallBirthChart {
     Uranus,
     Neptune,
     Pluto,
-    Ascendant,
+    Rising,
     Descendant,
     Moon,
     _id = uuidv4(),
@@ -51,10 +51,10 @@ class SmallBirthChart {
             word: SmallBirthChart.getSignWordSVG(Sun),
             wordLocation: { x: 450, y: -260 },
             // simpleWordLocation: { x: 140, y: 25 },  
-            simpleWordLocation: { x: 165, y: -60 },  
+            simpleWordLocation: { x: 220, y: -40 },  
             viewBox: "-500 60 600 600",
             // simpleViewBox: "-500 60 600 600",
-            simpleViewBox:"0 0 1300 1200",
+            simpleViewBox:"0 0 100 100",
             textAnchor: "center",
             called: false,
           }
@@ -169,24 +169,24 @@ class SmallBirthChart {
           }
         : Pluto;
 
-    this.Ascendant =
-      typeof Ascendant === "string"
+    this.Rising =
+      typeof Rising === "string"
         ? {
-            sign: Ascendant,
-            icon: SmallBirthChart.getIconSVG(Ascendant),
+            sign: Rising,
+            icon: SmallBirthChart.getIconSVG(Rising),
             location: { x: 300, y: -65 },
             // simpleLocation: {x:460, y:60},
             simpleLocation: {x:460, y:120},
-            word: SmallBirthChart.getSignWordSVG(Ascendant),
+            word: SmallBirthChart.getSignWordSVG(Rising),
             wordLocation: { x: 90, y: 40 },
-            simpleWordLocation: { x: 380, y: 400 },
+            simpleWordLocation: { x: 410, y: 450 },
             viewBox: "-50 60 600 600",
             // simpleViewBox: "-50 60 600 600",
-            simpleViewBox: "0 0 1300 1200",
+            simpleViewBox: "0 0 100 100",
             textAnchor: "center",
             called: false,
           }
-        : Ascendant;
+        : Rising;
 
     this.Descendant =
       typeof Descendant === "string"
@@ -211,10 +211,10 @@ class SmallBirthChart {
             word: SmallBirthChart.getSignWordSVG(Moon),
             wordLocation: { x: 315, y: -250 },
             // simpleWordLocation: { x: 650, y: 20 },
-            simpleWordLocation: { x: 540, y: -60 },
+            simpleWordLocation: { x: 580, y: -40 },
             // simpleViewBox: "0 60 600 600",
-            simpleViewBox:"0 0 1300 1200",
-            viewBox: "-100 60 600 600",
+            simpleViewBox:"0 0 100 100",
+            viewBox: "0 0 100 100",
             textAnchor: "center",
             called: false,
           }
@@ -239,7 +239,7 @@ class SmallBirthChart {
     return `
     Sun: ${this.Sun.sign}
     Moon: ${this.Moon.sign}
-    Ascendant: ${this.Ascendant.sign}
+    Rising: ${this.Rising.sign}
     Mercury: ${this.Mercury.sign}
     Venus: ${this.Venus.sign}
     Mars: ${this.Mars.sign}
@@ -522,27 +522,37 @@ class SmallBirthChart {
       controls.append(printButton, transButton);
       mountNode.append(controls);
       mountNode.append(this.image);
+
+      if (showBirthday) {
+        const birthdayDisplay = document.createElement("ul");
+        birthdayDisplay.classList.add("birthday");
+        const dateDisplay = document.createElement("li");
+        dateDisplay.textContent = `${this.birthday}`;
+        // const timeDisplay = document.createElement("li");
+        // timeDisplay.textContent = `Time: ${this.time.slice(
+        //   0,
+        //   2,
+        // )}:${this.time.slice(2)}`;
+        // const locationDisplay = document.createElement("li");
+        // locationDisplay.textContent = `Lat: ${this.latitude.toFixed(
+        //   2,
+        // )}, Long: ${this.longitude.toFixed(2)}`;
+        // console.log(dateDisplay, timeDisplay);
+        // birthdayDisplay.append(dateDisplay, timeDisplay, locationDisplay);
+        birthdayDisplay.append(dateDisplay);
+        // heading.append(birthdayDisplay);
+        // mountNode.append(birthdayDisplay);
+        controls.append(birthdayDisplay)
+
+        // add logo 
+        const logo = document.createElement("img");
+        logo.src="assets/img/ab-fig-logo.png"
+        logo.classList.add("fig-logo");
+        mountNode.append(logo)
+      }
     }
 
-    if (showBirthday) {
-      const birthdayDisplay = document.createElement("ul");
-      birthdayDisplay.classList.add("birthday");
-      const dateDisplay = document.createElement("li");
-      dateDisplay.textContent = `Birthday: ${this.birthday}`;
-      const timeDisplay = document.createElement("li");
-      timeDisplay.textContent = `Time: ${this.time.slice(
-        0,
-        2,
-      )}:${this.time.slice(2)}`;
-      const locationDisplay = document.createElement("li");
-      locationDisplay.textContent = `Lat: ${this.latitude.toFixed(
-        2,
-      )}, Long: ${this.longitude.toFixed(2)}`;
-      console.log(dateDisplay, timeDisplay);
-      birthdayDisplay.append(dateDisplay, timeDisplay, locationDisplay);
-      // heading.append(birthdayDisplay);
-      mountNode.append(birthdayDisplay);
-    }
+   
   }
 
 
@@ -632,8 +642,8 @@ class SmallBirthChart {
     chartImg.innerHTML = `<style type="text/css">
     .st0{display:none;}
     .st1{display:inline;}
-    .st2{clip-path:url(#SVGID_00000100351553513202362430000011085523332063403666_);fill:none;stroke:#000000;stroke-width:1.914;}
-    .st3{clip-path:url(#SVGID_00000100351553513202362430000011085523332063403666_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st2{clip-path:url(#SVGID_00000037656786100140003510000001572736368642539422_);fill:none;stroke:#000000;stroke-width:1.914;}
+    .st3{clip-path:url(#SVGID_00000037656786100140003510000001572736368642539422_);fill:none;stroke:#1D1D1B;stroke-width:6;}
     .st4{font-family:'WolpePegasus-Bold';}
     .st5{font-size:27.4755px;}
     .st6{font-size:27.4756px;}
@@ -647,91 +657,112 @@ class SmallBirthChart {
     .st14{font-size:28.621px;}
     .st15{font-size:28.6212px;}
     .st16{font-size:28.6211px;}
-    .st17{clip-path:url(#SVGID_00000075148188247063918980000009215395498091680391_);fill:none;stroke:#000000;stroke-width:0.957;}
+    .st17{clip-path:url(#SVGID_00000004505701339122421830000006022338064091639211_);fill:none;stroke:#000000;stroke-width:0.957;}
     .st18{font-size:26.4048px;}
     .st19{font-size:26.4049px;}
     .st20{font-size:26.405px;}
     .st21{display:inline;fill:none;stroke:#1D1D1B;stroke-width:6;}
     .st22{display:inline;fill:none;stroke:#000000;stroke-width:0.334;}
     .st23{display:inline;fill:none;stroke:#1D1D1B;stroke-width:2.229;}
-    .st24{clip-path:url(#SVGID_00000172436913182778570240000010266714775847843720_);fill:#1D1D1B;}
-    .st25{clip-path:url(#SVGID_00000011737094148643234140000012150317793253590198_);fill:none;stroke:#000000;stroke-width:1.914;}
-    .st26{clip-path:url(#SVGID_00000011737094148643234140000012150317793253590198_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st24{clip-path:url(#SVGID_00000073696693287343881260000008403154021918221247_);fill:#1D1D1B;}
+    .st25{clip-path:url(#SVGID_00000041259811347755039300000000086416704247116684_);fill:none;stroke:#000000;stroke-width:1.914;}
+    .st26{clip-path:url(#SVGID_00000041259811347755039300000000086416704247116684_);fill:none;stroke:#1D1D1B;stroke-width:6;}
     .st27{font-family:'MyriadPro-Regular';}
-    .st28{font-size:34.2248px;}
-    .st29{font-size:34.2247px;}
-    .st30{font-size:34.2249px;}
-    .st31{font-family:'Krungthep';}
-    .st32{font-size:50.2643px;}
-    .st33{font-size:50.264px;}
-    .st34{font-size:50.2641px;}
-    .st35{font-size:50.2642px;}
-    .st36{font-size:34.2246px;}
-    .st37{font-size:32.8909px;}
-    .st38{font-size:32.8911px;}
-    .st39{font-size:32.8912px;}
-    .st40{font-size:32.891px;}
-    .st41{font-size:32.8913px;}
-    .st42{clip-path:url(#SVGID_00000052101837172696896400000000415067239398451874_);fill:none;stroke:#1D1D1B;stroke-width:6;}
-    .st43{fill:none;stroke:#1D1D1B;stroke-width:2.229;}
-    .st44{fill:none;stroke:#1D1D1B;stroke-width:6;}
-    .st45{clip-path:url(#SVGID_00000051367320766241576800000000886202729326064799_);fill:#1D1D1B;}
-    .st46{clip-path:url(#SVGID_00000161617506401537865250000000192111083746538418_);fill:#FFFFFF;}
-    .st47{clip-path:url(#SVGID_00000161617506401537865250000000192111083746538418_);fill:none;stroke:#1D1D1B;stroke-width:2;}
-    .st48{clip-path:url(#SVGID_00000043440889149034129790000002883831554844956839_);fill:none;stroke:#000000;stroke-width:1.914;}
-    .st49{clip-path:url(#SVGID_00000043440889149034129790000002883831554844956839_);fill:none;stroke:#1D1D1B;stroke-width:6;}
-    .st50{font-size:34.4546px;}
-    .st51{font-size:34.4547px;}
-    .st52{font-size:34.4548px;}
-    .st53{font-size:34.4545px;}
-    .st54{font-size:33.1119px;}
-    .st55{font-size:33.112px;}
-    .st56{font-size:33.1121px;}
-    .st57{font-size:33.1122px;}
-    .st58{clip-path:url(#SVGID_00000016074037663266512240000016415564878966397608_);fill:none;stroke:#1D1D1B;stroke-width:6;}
-    .st59{clip-path:url(#SVGID_00000016074037663266512240000016415564878966397608_);fill:none;stroke:#000000;stroke-width:0.334;}
-    .st60{clip-path:url(#SVGID_00000145744751696739236410000003912424125442246311_);fill:#1D1D1B;}
-    .st61{clip-path:url(#SVGID_00000021098843490093688550000002752302799363398533_);fill:#FFFFFF;}
-    .st62{clip-path:url(#SVGID_00000021098843490093688550000002752302799363398533_);fill:none;stroke:#1D1D1B;stroke-width:2;}
-    .st63{opacity:0.61;}
-    .st64{display:inline;fill:#00FFFF;}
-    .st65{display:inline;fill:#FF00FF;}
-    .st66{display:inline;fill:#F15A24;}
-    .st67{display:inline;opacity:0.4;}
-    .st68{fill:#00FFFF;}
-    .st69{fill:#FF00FF;}
-    .st70{fill:#F15A24;}
-    .st71{clip-path:url(#SVGID_00000061439330513568811210000009567611076210820534_);fill:none;stroke:#000000;stroke-width:1.914;}
-    .st72{clip-path:url(#SVGID_00000061439330513568811210000009567611076210820534_);fill:none;stroke:#1D1D1B;stroke-width:6;}
-    .st73{font-size:34.5538px;}
-    .st74{font-size:34.5537px;}
-    .st75{font-size:34.5539px;}
-    .st76{font-size:34.5536px;}
-    .st77{clip-path:url(#SVGID_00000016044276270175176250000012504910464013415596_);}
-    .st78{font-size:50.7471px;}
-    .st79{font-size:50.7472px;}
-    .st80{font-size:50.7473px;}
-    .st81{clip-path:url(#SVGID_00000055679277512876459980000016020885798234923947_);}
-    .st82{font-size:50.7474px;}
-    .st83{font-size:33.2071px;}
-    .st84{font-size:33.2074px;}
-    .st85{font-size:33.2073px;}
-    .st86{font-size:33.2072px;}
-    .st87{clip-path:url(#SVGID_00000021841424220690861860000012824168450254096259_);fill:none;stroke:#1D1D1B;stroke-width:6;}
-    .st88{clip-path:url(#SVGID_00000098216738621731297570000017124679104732703378_);fill:#1D1D1B;}
+    .st28{font-size:34.6087px;}
+    .st29{font-size:34.6085px;}
+    .st30{font-size:34.6086px;}
+    .st31{font-size:34.6088px;}
+    .st32{font-family:'Krungthep';}
+    .st33{font-size:50.8279px;}
+    .st34{font-size:50.8276px;}
+    .st35{font-size:50.8277px;}
+    .st36{clip-path:url(#SVGID_00000018235860586251505290000016085011486087242171_);}
+    .st37{font-size:50.8278px;}
+    .st38{font-size:34.6084px;}
+    .st39{clip-path:url(#SVGID_00000093138378155905835120000004668857033131085450_);}
+    .st40{font-size:33.26px;}
+    .st41{font-size:33.2598px;}
+    .st42{font-size:33.2599px;}
+    .st43{font-size:33.2601px;}
+    .st44{clip-path:url(#SVGID_00000008147294518150524780000013504993411149274799_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st45{clip-path:url(#SVGID_00000168806798439328078990000014731508422086537896_);fill:#1D1D1B;}
+    .st46{clip-path:url(#SVGID_00000171000227136509534460000011495396944371874710_);fill:#FFFFFF;}
+    .st47{clip-path:url(#SVGID_00000171000227136509534460000011495396944371874710_);fill:none;stroke:#1D1D1B;stroke-width:2;}
+    .st48{clip-path:url(#SVGID_00000142136530713032408760000004050828173464933505_);fill:none;stroke:#000000;stroke-width:1.914;}
+    .st49{clip-path:url(#SVGID_00000142136530713032408760000004050828173464933505_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st50{font-size:34.5031px;}
+    .st51{font-size:34.503px;}
+    .st52{font-size:34.5032px;}
+    .st53{font-size:34.5029px;}
+    .st54{font-size:50.6728px;}
+    .st55{font-size:50.6729px;}
+    .st56{font-size:50.6726px;}
+    .st57{font-size:50.6727px;}
+    .st58{font-size:33.1583px;}
+    .st59{font-size:33.1585px;}
+    .st60{font-size:33.1587px;}
+    .st61{font-size:33.1584px;}
+    .st62{font-size:33.1586px;}
+    .st63{clip-path:url(#SVGID_00000141441186519395010630000014577422311960663460_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st64{fill:none;stroke:#1D1D1B;stroke-width:2.229;}
+    .st65{fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st66{clip-path:url(#SVGID_00000021094458450483725950000013926327772493199276_);fill:#1D1D1B;}
+    .st67{clip-path:url(#SVGID_00000091715024291792545940000002602600956015941557_);fill:#FFFFFF;}
+    .st68{clip-path:url(#SVGID_00000091715024291792545940000002602600956015941557_);fill:none;stroke:#1D1D1B;stroke-width:2;}
+    .st69{clip-path:url(#SVGID_00000069396792270784861210000007802926970032501148_);fill:none;stroke:#000000;stroke-width:1.914;}
+    .st70{clip-path:url(#SVGID_00000069396792270784861210000007802926970032501148_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st71{font-size:34.4546px;}
+    .st72{font-size:34.4547px;}
+    .st73{font-size:34.4548px;}
+    .st74{font-size:34.4545px;}
+    .st75{font-size:33.1119px;}
+    .st76{font-size:33.112px;}
+    .st77{font-size:33.1121px;}
+    .st78{font-size:33.1122px;}
+    .st79{clip-path:url(#SVGID_00000052068959566192474430000011765458625344228797_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st80{clip-path:url(#SVGID_00000052068959566192474430000011765458625344228797_);fill:none;stroke:#000000;stroke-width:0.334;}
+    .st81{clip-path:url(#SVGID_00000040550413787254162520000010970763072501793181_);fill:#1D1D1B;}
+    .st82{clip-path:url(#SVGID_00000083089949462486269770000017542325660780946076_);fill:#FFFFFF;}
+    .st83{clip-path:url(#SVGID_00000083089949462486269770000017542325660780946076_);fill:none;stroke:#1D1D1B;stroke-width:2;}
+    .st84{opacity:0.61;}
+    .st85{display:inline;fill:#00FFFF;}
+    .st86{display:inline;fill:#FF00FF;}
+    .st87{display:inline;fill:#F15A24;}
+    .st88{display:inline;opacity:0.4;}
+    .st89{fill:#00FFFF;}
+    .st90{fill:#FF00FF;}
+    .st91{fill:#F15A24;}
+    .st92{clip-path:url(#SVGID_00000050630883887454414800000009701165346580611463_);fill:none;stroke:#000000;stroke-width:1.914;}
+    .st93{clip-path:url(#SVGID_00000050630883887454414800000009701165346580611463_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st94{font-size:34.5538px;}
+    .st95{font-size:34.5537px;}
+    .st96{font-size:34.5539px;}
+    .st97{font-size:34.5536px;}
+    .st98{clip-path:url(#SVGID_00000119093467387691679010000008120341302457343628_);}
+    .st99{font-size:50.7471px;}
+    .st100{font-size:50.7472px;}
+    .st101{font-size:50.7473px;}
+    .st102{clip-path:url(#SVGID_00000005971347870416769100000016019863958441193601_);}
+    .st103{font-size:33.2071px;}
+    .st104{font-size:33.2074px;}
+    .st105{font-size:33.2073px;}
+    .st106{font-size:33.2072px;}
+    .st107{font-size:50.7474px;}
+    .st108{clip-path:url(#SVGID_00000086678961816708257590000016846827958684772255_);fill:none;stroke:#1D1D1B;stroke-width:6;}
+    .st109{clip-path:url(#SVGID_00000174591202559005021360000017363910490904994710_);fill:#1D1D1B;}
   </style>
   <g id="Layer_1" class="st0">
     <g class="st1">
       <defs>
         <rect id="SVGID_1_" x="18" width="981.74" height="981.74"/>
       </defs>
-      <clipPath id="SVGID_00000026860563703678255830000006063287292728501142_">
+      <clipPath id="SVGID_00000154388985496787980110000012516383074720561307_">
         <use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
       </clipPath>
       
-        <circle style="clip-path:url(#SVGID_00000026860563703678255830000006063287292728501142_);fill:none;stroke:#000000;stroke-width:1.914;" cx="508.54" cy="484.77" r="395.3"/>
+        <circle style="clip-path:url(#SVGID_00000154388985496787980110000012516383074720561307_);fill:none;stroke:#000000;stroke-width:1.914;" cx="508.54" cy="484.77" r="395.3"/>
       
-        <ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -195.4977 502.6071)" style="clip-path:url(#SVGID_00000026860563703678255830000006063287292728501142_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="508.95" cy="487.29" rx="328.23" ry="328.23"/>
+        <ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -195.4977 502.6071)" style="clip-path:url(#SVGID_00000154388985496787980110000012516383074720561307_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="508.95" cy="487.29" rx="328.23" ry="328.23"/>
     </g>
     <text transform="matrix(0.1262 0.992 -0.992 0.1262 136.9465 523.4805)" class="st1 st4 st5">P</text>
     <text transform="matrix(0.163 0.9866 -0.9866 0.163 139.0504 539.9932)" class="st1 st4 st6">l</text>
@@ -906,13 +937,13 @@ class SmallBirthChart {
     <text transform="matrix(-5.400000e-04 -1 1 -5.400000e-04 932.1633 526.6033)" class="st1 st10 st16"> </text>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000015345914184348925720000017148219230627233192_" x="18" width="981.74" height="981.74"/>
+        <rect id="SVGID_00000147220845405550833750000000251427261012950917_" x="18" width="981.74" height="981.74"/>
       </defs>
-      <clipPath id="SVGID_00000131350822646945738660000011933080450263698326_">
-        <use xlink:href="#SVGID_00000015345914184348925720000017148219230627233192_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000174601247235320467070000013542756831928940194_">
+        <use xlink:href="#SVGID_00000147220845405550833750000000251427261012950917_"  style="overflow:visible;"/>
       </clipPath>
       
-        <circle style="clip-path:url(#SVGID_00000131350822646945738660000011933080450263698326_);fill:none;stroke:#000000;stroke-width:0.957;" cx="508.54" cy="484.14" r="432.17"/>
+        <circle style="clip-path:url(#SVGID_00000174601247235320467070000013542756831928940194_);fill:none;stroke:#000000;stroke-width:0.957;" cx="508.54" cy="484.14" r="432.17"/>
     </g>
     <text transform="matrix(0.0891 -0.996 0.996 0.0891 150.905 467.0757)" class="st1 st4 st18">A</text>
     <text transform="matrix(0.1264 -0.992 0.992 0.1264 152.7045 448.6627)" class="st1 st4 st18">s</text>
@@ -1004,19 +1035,19 @@ class SmallBirthChart {
     <line class="st21" x1="126.74" y1="686.47" x2="510.35" y2="486.78"/>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000031178164941242170530000014126063916026454406_" x="18" width="981.74" height="981.74"/>
+        <rect id="SVGID_00000071518652406034155630000000012551748626596796_" x="18" width="981.74" height="981.74"/>
       </defs>
-      <clipPath id="SVGID_00000159468977339288624540000004267910539245326270_">
-        <use xlink:href="#SVGID_00000031178164941242170530000014126063916026454406_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000154417307971739825180000012512256548237477508_">
+        <use xlink:href="#SVGID_00000071518652406034155630000000012551748626596796_"  style="overflow:visible;"/>
       </clipPath>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M638.25,161.74
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M638.25,161.74
         c8.91,0.03,16.15-7.1,16.31-15.97c0.17-9.28-7.27-16.63-16.3-16.61c-8.96,0.01-16.13,7.16-16.28,16.01
         C621.83,154.53,629.41,161.77,638.25,161.74 M638.3,126.01c10.82,0,19.57,8.85,19.53,19.63c-0.04,10.74-8.82,19.54-19.69,19.48
         c-10.69-0.05-19.41-8.82-19.43-19.54C618.7,134.79,627.48,125.97,638.3,126.01"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M638.28,141.11
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M638.28,141.11
         c2.38,0,4.34,1.94,4.36,4.31c0.01,2.4-1.97,4.41-4.36,4.38c-2.42-0.02-4.33-1.92-4.35-4.35
         C633.89,143.07,635.88,141.11,638.28,141.11"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M445.59,111.57
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M445.59,111.57
         c6.88,3.57,10.59,8.73,10.92,15.68c-0.08,6.96-3.61,12.25-10.3,16.02c5.96,0.29,12.95-2.17,16.82-8.04
         c3.7-5.61,3.15-12.65-1.45-17.63C457.51,113.19,452.13,111.27,445.59,111.57 M447.86,145.56c-2.46,0.03-4.48-0.19-6.46-0.67
         c-0.62-0.15-1-0.55-1.03-1.06c-0.03-0.5,0.32-0.96,0.93-1.13c1.98-0.59,3.82-1.42,5.46-2.54c3.17-2.15,5.31-4.91,6.43-8.26
@@ -1024,7 +1055,7 @@ class SmallBirthChart {
         c-0.07-0.5,0.22-1.01,0.76-1.17c0.78-0.23,1.58-0.43,2.39-0.59c1.32-0.26,2.67-0.39,4.02-0.39c4.88-0.01,9.28,1.24,13.12,3.87
         c3.82,2.62,6.28,6.01,7.41,10.12c0.46,1.69,0.61,3.41,0.49,5.14c-0.26,3.89-1.81,7.35-4.62,10.39c-2.58,2.79-5.86,4.74-9.77,5.88
         C451.61,145.23,449.56,145.52,447.86,145.56"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M810.96,290.65
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M810.96,290.65
         c4.21,0.03,7.74-3.36,7.78-7.69c0.04-4.38-3.49-7.82-7.75-7.83c-4.28-0.01-7.61,3.38-7.78,7.39
         C803,287.14,806.75,290.69,810.96,290.65 M812.19,298.83v1.84c0,0.51-0.41,0.92-0.92,0.92h-0.69c-0.44,0-0.8-0.36-0.8-0.8v-1.95
         c0-0.03-0.03-0.06-0.06-0.06h-1.94c-0.47,0-0.86-0.38-0.86-0.86v-0.6c0-0.54,0.44-0.98,0.98-0.98h1.79c0.03,0,0.06-0.03,0.06-0.06
@@ -1035,21 +1066,21 @@ class SmallBirthChart {
         c4.32,2.71,6.17,6.52,5.12,11.62c0,0,0,0,0,0.01c-1.28,4.33-4.2,6.8-8.61,7.62c-0.03,0-0.05,0.03-0.05,0.06v3.15
         c0,0.03,0.03,0.06,0.06,0.06h1.65c0.6,0,1.09,0.49,1.09,1.09v0.24c0,0.61-0.5,1.11-1.11,1.11h-1.65
         C812.21,298.77,812.19,298.79,812.19,298.83"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M880.9,437.97
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M880.9,437.97
         c0.01-5.78-4.64-10.47-10.4-10.48c-5.86-0.01-10.37,4.69-10.5,10.18c-0.14,5.98,4.69,10.65,10.32,10.72
         C876.21,448.45,880.94,443.65,880.9,437.97 M864.15,460.16v-2.93c0-0.2,0.16-0.36,0.36-0.36h3.89c0.2,0,0.36-0.16,0.36-0.36v-3.93
         c0-0.54-0.38-1-0.91-1.11c-7.4-1.44-11.8-8.35-11.09-14.92c0.79-7.3,6.99-12.44,13.84-12.36c6.95,0.08,12.63,5.29,13.51,11.91
         c0.99,7.49-4.17,14.17-11.3,15.41c-0.42,0.07-0.72,0.45-0.72,0.88v4.09c0,0.2,0.16,0.36,0.36,0.36h3.89c0.2,0,0.36,0.16,0.36,0.36
         v2.94c-0.11,0-0.89,0.02-1.01,0.02c-1.32,0-1.98,0-3.3-0.01c-0.24,0-0.33,0.06-0.33,0.32c0.01,1.42,0.01,2.49,0.01,3.92
         c0,0.11,0,0.57,0,0.71c0.01,0.44-3.3,0.4-3.3,0c0-0.12,0-0.73,0-0.83c0-1.42-0.01-2.34,0.01-3.76c0-0.29-0.1-0.35-0.36-0.35"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M864.25,551.82
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M864.25,551.82
         c6.01,0,10.75-4.8,10.73-10.89c-0.02-5.68-4.87-10.57-10.7-10.57c-5.92,0-10.73,4.8-10.76,10.66
         C853.48,547.02,858.37,551.86,864.25,551.82 M880.08,522.86H875v-3.33h10.81v10.79h-3.32v-4.97c-2.37,2.37-4.73,4.73-7.11,7.11
         c0.19,0.27,0.43,0.59,0.65,0.93c1.25,1.89,2.01,3.97,2.22,6.22c0.39,4.05-0.73,7.65-3.39,10.74c-2.14,2.48-4.84,4.04-8.05,4.6
         c-4.37,0.76-8.31-0.27-11.72-3.15c-2.45-2.07-4.02-4.71-4.64-7.86c-0.83-4.21,0.05-8.07,2.68-11.48c2.06-2.67,4.77-4.38,8.06-5.09
         c4.19-0.9,8.03-0.04,11.5,2.48c0.15,0.11,0.25,0.19,0.43,0.01c2.25-2.27,4.51-4.52,6.76-6.78
         C879.94,523.03,879.98,522.98,880.08,522.86"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M787.38,712.18
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M787.38,712.18
         l0.01-0.85c0.01-0.54,0.46-0.96,0.99-0.95c0.17,0,0.34,0,0.51,0c1.95-0.07,3.7-0.71,5.23-1.89c2.33-1.79,3.77-4.16,4.62-6.9
         c0.46-1.5,0.68-3.07,0.52-4.63c-0.15-1.39-0.57-2.68-1.63-3.71c-0.95-0.93-2.12-1.33-3.44-1.35c-2.23-0.03-4.62,1.91-5.1,3.92
         c-0.2,0.82-0.13,1.62,0.15,2.41c0.07,0.2,0.18,0.39,0.33,0.53c0.3,0.3,0.45,0.73,0.45,1.16l-0.01,0.81
@@ -1060,7 +1091,7 @@ class SmallBirthChart {
         c0,0.07,0.05,0.12,0.12,0.12l2.64,0.05c0.42,0.01,0.75,0.35,0.74,0.77c-0.02,1.07-0.9,1.92-1.97,1.9l-1.46-0.03
         c-0.07,0-0.12,0.05-0.12,0.12l-0.09,4.94c-0.01,0.64-0.54,1.16-1.19,1.14l-0.45-0.01c-0.6-0.01-1.07-0.5-1.06-1.1l0.09-5.02
         c0-0.07-0.05-0.12-0.12-0.12l-16.37-0.29C787.77,713.1,787.37,712.68,787.38,712.18"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M644.63,832
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M644.63,832
         l-2.23,0.04c-0.18,0-0.34-0.14-0.34-0.33l-0.33-19.01c0-0.18-0.16-0.33-0.34-0.33l-2.27,0.04c-0.19,0-0.34-0.14-0.34-0.33
         l-0.03-1.92c0-0.19,0.14-0.34,0.33-0.34l2.25-0.04c0.18,0,0.33-0.16,0.33-0.34l-0.04-2.15c0-0.18,0.14-0.33,0.33-0.34l1.92-0.03
         c0.18,0,0.34,0.14,0.34,0.33l0.04,2.13c0,0.18,0.16,0.33,0.34,0.33l4.18-0.07c0.19,0,0.34,0.14,0.34,0.33l0.03,1.94
@@ -1072,7 +1103,7 @@ class SmallBirthChart {
         c0.13-1.9,0.98-3.47,2.17-4.88c0.74-0.87,1.53-1.69,2.08-2.71c0.77-1.44,1.3-2.96,1.48-4.59c0.2-1.76-0.02-3.45-0.91-5
         c-0.56-0.97-1.37-1.66-2.52-1.78c-0.93-0.1-1.85,0.05-2.74,0.37c-1.72,0.62-2.92,1.82-3.86,3.34c-0.25,0.41-0.33,0.82-0.31,1.29
         c0.07,3.32,0.12,6.65,0.18,9.97C644.64,831.83,644.63,831.91,644.63,832"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M452.11,858.59
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M452.11,858.59
         c1.7-0.03,3.02-1.4,2.98-3.09c-0.03-1.69-1.41-3-3.11-2.97c-1.66,0.03-2.99,1.42-2.95,3.11
         C449.07,857.3,450.44,858.62,452.11,858.59 M450.31,841.95l-3.02,0.05c-0.07,0-0.13,0.05-0.14,0.12
         c-0.56,3.13-2.18,5.53-4.97,7.13c-1.23,0.71-2.56,1.09-3.97,1.22c-0.35,0.03-0.66-0.24-0.66-0.6l-0.03-1.83
@@ -1086,7 +1117,7 @@ class SmallBirthChart {
         c-1.83-1.52-2.94-3.45-3.41-5.77c-0.01-0.07-0.07-0.12-0.14-0.12l-3.04,0.05c0,0.08,0,0.16,0,0.24c0.04,2.44,0.09,4.87,0.12,7.31
         c0,0.19,0.07,0.26,0.25,0.31c2.43,0.74,3.91,2.37,4.34,4.86c0.55,3.2-1.56,6.23-4.71,6.89c-3.37,0.7-6.63-1.48-7.24-4.83
         c-0.55-3.02,1.51-6.05,4.44-6.95"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M287.71,782.17
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M287.71,782.17
         c-0.97-0.12-1.92-0.19-2.84-0.36c-1.43-0.26-2.76-0.81-3.9-1.81c-1.28-1.13-2.05-2.6-2.53-4.27c-0.58-1.99-0.76-4.04-0.73-6.11
         c0.02-1.66,0.14-3.31,0.22-4.97c0.01-0.28,0.04-0.57,0.07-0.92l-1.42,1.18c-0.24,0.2-0.6,0.16-0.79-0.1l-0.89-1.21
         c-0.2-0.27-0.15-0.65,0.1-0.86l4.25-3.56c0.33-0.28,0.81-0.21,1.06,0.15l3.32,4.67c0.18,0.25,0.13,0.6-0.1,0.79l-1.18,0.95
@@ -1104,7 +1135,7 @@ class SmallBirthChart {
         c0,0.31-0.23,0.57-0.53,0.58l-4.24,0.07c0,0.15,0,0.26,0.01,0.38c0.03,1.53,0.04,2.89,0.08,4.42c0,0.23-0.21,0.48-0.43,0.48
         c-0.68,0-1.03,0-1.7,0.03c-0.22,0.01-0.46-0.23-0.46-0.5c-0.01-1.54-0.05-2.88-0.08-4.42c0-0.1,0-0.2,0-0.33l-4.08,0.07
         c-0.4,0.01-0.72-0.33-0.73-0.75l-0.02-1.23c-0.01-0.41,0.3-0.75,0.69-0.76l4.08-0.07L287.71,782.17z"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M175.21,626.65h-5.35
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M175.21,626.65h-5.35
         c-0.96-0.04-0.96-0.04-0.93,0.94v6.41c-0.18,0-0.32,0-0.47,0c-0.78,0-1.56,0-2.33,0c-0.45,0-0.45,0-0.45-0.43
         c0-2.17,0-4.35,0-6.52v-0.4h-6.28c-0.52,0-0.93-0.42-0.93-0.94v-1.33c0-0.52,0.42-0.94,0.93-0.94h6.26
         c0.07-0.02,0.05-0.28,0.05-0.37c0-2.09-0.03-4.14-0.03-6.24c0-0.27-0.07-0.34-0.35-0.38c-3.05-0.43-5.74-1.66-8.02-3.75
@@ -1113,16 +1144,16 @@ class SmallBirthChart {
         c0.04-0.49,0.44-0.87,0.93-0.87h1.32c0.54,0,0.97,0.47,0.93,1.01c-0.23,3.41-1.47,6.42-3.77,9.02c-2.35,2.65-5.27,4.24-8.71,4.83
         c-0.44,0.08-0.75,0.47-0.75,0.91v5.16c-0.01,1.03-0.01,0.94,0.93,0.94h5.32c0.52,0,0.93,0.42,0.93,0.94v1.35
         C176.14,626.23,175.73,626.65,175.21,626.65"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M167.38,607.66
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M167.38,607.66
         c3.33,0.04,6.16-2.74,6.16-6.18c0-3.39-2.64-6.23-6.16-6.23c-3.5,0-6.13,2.81-6.15,6.2C161.23,604.94,164.09,607.69,167.38,607.66
          M158.01,601.47c0.03-5.38,4.35-9.46,9.35-9.47c5.01-0.02,9.43,4.07,9.4,9.52c-0.03,5.21-4.13,9.4-9.37,9.4
         C162.16,610.92,158.07,606.72,158.01,601.47"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M177,348.09v-24.71
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M177,348.09v-24.71
         c0-0.52-0.6-0.78-0.95-0.41l-9.64,10.06c-0.2,0.21-0.53,0.23-0.75,0.03l-0.7-0.63c-0.25-0.22-0.26-0.61-0.03-0.85l12.66-13.36
         c0.22-0.23,0.57-0.23,0.79,0l12.69,13.38c0.23,0.24,0.21,0.63-0.03,0.85l-0.67,0.6c-0.22,0.2-0.55,0.18-0.76-0.03
         c-3.2-3.36-6.39-6.7-9.6-10.07c-0.35-0.36-0.95-0.11-0.95,0.41l0,0.78c0,8.65,0,15.24,0,23.97c0,0.32-0.25,0.58-0.56,0.58h-0.94
         C177.24,348.68,177,348.41,177,348.09"/>
-      <path style="clip-path:url(#SVGID_00000159468977339288624540000004267910539245326270_);fill:#1D1D1B;" d="M299.36,173.38v24.71
+      <path style="clip-path:url(#SVGID_00000154417307971739825180000012512256548237477508_);fill:#1D1D1B;" d="M299.36,173.38v24.71
         c0,0.52,0.6,0.78,0.95,0.41l9.64-10.06c0.2-0.21,0.53-0.23,0.75-0.03l0.7,0.63c0.25,0.22,0.26,0.61,0.03,0.85l-12.66,13.36
         c-0.22,0.23-0.57,0.23-0.79,0l-12.69-13.38c-0.23-0.24-0.21-0.63,0.03-0.85l0.67-0.6c0.22-0.2,0.55-0.18,0.76,0.03
         c3.2,3.36,6.39,6.7,9.6,10.07c0.35,0.37,0.95,0.11,0.95-0.41l0-0.78c0-8.65,0-15.24,0-23.97c0-0.32,0.25-0.58,0.56-0.58h0.94
@@ -1133,425 +1164,703 @@ class SmallBirthChart {
     <line class="st22" x1="509.89" y1="487.73" x2="859.84" y2="305.56"/>
     <line class="st22" x1="510.78" y1="489.42" x2="860.72" y2="307.25"/>
   </g>
-  <g id="Layer_4">
-    <g>
+  <g id="Layer_4" class="st0">
+    <g class="st1">
       <defs>
-        <rect id="SVGID_00000154426131139642004870000009309310026189495455_" x="-30.47" y="7.36" width="1058.47" height="1255.74"/>
+        <rect id="SVGID_00000060016824378789912330000015339230515644832181_" x="-1.72" y="-0.45" width="1001.45" height="1001.45"/>
       </defs>
-      <clipPath id="SVGID_00000065762807144850247410000017864797165940661893_">
-        <use xlink:href="#SVGID_00000154426131139642004870000009309310026189495455_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000011030237483617759570000005535434518898900158_">
+        <use xlink:href="#SVGID_00000060016824378789912330000015339230515644832181_"  style="overflow:visible;"/>
       </clipPath>
       
-        <circle style="clip-path:url(#SVGID_00000065762807144850247410000017864797165940661893_);fill:none;stroke:#000000;stroke-width:1.914;" cx="498.76" cy="502.57" r="492.44"/>
+        <circle style="clip-path:url(#SVGID_00000011030237483617759570000005535434518898900158_);fill:none;stroke:#000000;stroke-width:1.914;" cx="499.01" cy="500.27" r="497.92"/>
       
-        <circle style="clip-path:url(#SVGID_00000065762807144850247410000017864797165940661893_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="499.28" cy="505.71" r="408.89"/>
+        <circle style="clip-path:url(#SVGID_00000011030237483617759570000005535434518898900158_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="499.53" cy="503.45" r="413.44"/>
     </g>
-    <text transform="matrix(0.1138 0.9935 -0.9935 0.1138 35.8817 544.792)" class="st27 st28"> </text>
-    <text transform="matrix(0.2236 0.9747 -0.9747 0.2236 34.2267 552.4784)" class="st27 st29"> </text>
-    <text transform="matrix(0.3292 0.9443 -0.9443 0.3292 58.3776 652.3596)" class="st27 st28"> </text>
-    <text transform="matrix(0.352 0.936 -0.936 0.352 60.7501 659.2174)" class="st27 st29"> </text>
-    <text transform="matrix(0.3633 0.9317 -0.9317 0.3633 63.2832 666.0147)" class="st27 st30"> </text>
-    <text transform="matrix(0.3745 0.9272 -0.9272 0.3745 65.919 672.7755)" class="st27 st29"> </text>
-    <text transform="matrix(0.3857 0.9226 -0.9226 0.3857 68.6508 679.4987)" class="st27 st30"> </text>
-    <text transform="matrix(0.4078 0.9131 -0.9131 0.4078 71.4553 686.1887)" class="st27 st30"> </text>
-    <text transform="matrix(0.4188 0.9081 -0.9081 0.4188 74.4064 692.819)" class="st27 st30"> </text>
-    <text transform="matrix(0.4297 0.903 -0.903 0.4297 77.4564 699.4003)" class="st27 st30"> </text>
-    <text transform="matrix(0.4513 0.8924 -0.8924 0.4513 80.5661 705.9561)" class="st27 st29"> </text>
-    <text transform="matrix(0.4619 0.8869 -0.8869 0.4619 83.8236 712.4406)" class="st27 st28"> </text>
-    <text transform="matrix(0.4725 0.8813 -0.8813 0.4725 87.1761 718.8775)" class="st27 st28"> </text>
-    <text transform="matrix(0.483 0.8756 -0.8756 0.483 90.6293 725.2578)" class="st27 st28"> </text>
-    <text transform="matrix(0.5038 0.8638 -0.8638 0.5038 94.1528 731.6038)" class="st27 st28"> </text>
-    <text transform="matrix(0.5141 0.8577 -0.8577 0.5141 97.7973 737.8727)" class="st27 st28"> </text>
-    <text transform="matrix(0.5243 0.8515 -0.8515 0.5243 101.5469 744.0866)" class="st27 st29"> </text>
-    <text transform="matrix(0.5445 0.8387 -0.8387 0.5445 105.3508 750.2654)" class="st27 st28"> </text>
-    <text transform="matrix(0.5545 0.8322 -0.8322 0.5545 109.2947 756.3572)" class="st27 st30"> </text>
-    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 113.3287 762.3911)" class="st27 st29"> </text>
-    <text transform="matrix(0.5839 0.8118 -0.8118 0.5839 117.4129 762.3832)" class="st27 st30"> </text>
-    <text transform="matrix(0.5935 0.8048 -0.8048 0.5935 121.6388 768.2858)" class="st27 st28"> </text>
-    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 125.9447 774.1234)" class="st27 st28"> </text>
-    <text transform="matrix(0.6126 0.7904 -0.7904 0.6126 130.3393 779.8958)" class="st27 st29"> </text>
-    <text transform="matrix(0.6312 0.7756 -0.7756 0.6312 134.801 785.6204)" class="st27 st29"> </text>
-    <text transform="matrix(0.6404 0.768 -0.768 0.6404 139.3765 791.2483)" class="st27 st30"> </text>
-    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 144.0361 796.8143)" class="st27 st29"> </text>
-    <text transform="matrix(0.6675 0.7446 -0.7446 0.6675 148.7498 802.3256)" class="st27 st30"> </text>
-    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 153.5882 807.7364)" class="st27 st29"> </text>
-    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 158.5059 813.0726)" class="st27 st29"> </text>
-    <text transform="matrix(0.7024 0.7118 -0.7118 0.7024 163.469 818.3628)" class="st27 st28"> </text>
-    <text transform="matrix(0.7108 0.7034 -0.7034 0.7108 168.5513 823.5424)" class="st27 st29"> </text>
-    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 173.714 828.6476)" class="st27 st28"> </text>
-    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 178.9485 833.6728)" class="st27 st29"> </text>
-    <text transform="matrix(0.7437 0.6685 -0.6685 0.7437 184.2373 838.637)" class="st27 st28"> </text>
-    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 189.6293 843.4866)" class="st27 st28"> </text>
-    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 195.096 848.2606)" class="st27 st29"> </text>
-    <text transform="matrix(0.7751 0.6319 -0.6319 0.7751 200.6072 852.9805)" class="st27 st29"> </text>
-    <text transform="matrix(0.7827 0.6225 -0.6225 0.7827 206.2231 857.5695)" class="st27 st28"> </text>
-    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 211.9075 862.0848)" class="st27 st28"> </text>
-    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 217.6335 866.5424)" class="st27 st28"> </text>
-    <text transform="matrix(0.8119 0.5838 -0.5838 0.8119 223.4598 870.867)" class="st27 st28"> </text>
-    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 229.3503 875.1035)" class="st27 st28"> </text>
-    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 235.3011 879.251)" class="st27 st30"> </text>
-    <text transform="matrix(0.8393 0.5436 -0.5436 0.8393 241.3008 883.3438)" class="st27 st30"> </text>
-    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 247.3837 887.2939)" class="st27 st30"> </text>
-    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 253.5266 891.1545)" class="st27 st28"> </text>
-    <text transform="matrix(0.865 0.5018 -0.5018 0.865 259.7066 894.9626)" class="st27 st28"> </text>
-    <text transform="matrix(0.8711 0.4912 -0.4912 0.8711 265.9711 898.6215)" class="st27 st29"> </text>
-    <text transform="matrix(0.877 0.4804 -0.4804 0.877 272.2909 902.1904)" class="st27 st30"> </text>
-    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 278.6604 905.6577)" class="st27 st30"> </text>
-    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 285.0664 909.0651)" class="st27 st28"> </text>
-    <text transform="matrix(0.8997 0.4365 -0.4365 0.8997 291.5497 912.3298)" class="st27 st30"> </text>
-    <text transform="matrix(0.905 0.4253 -0.4253 0.905 298.0786 915.491)" class="st27 st28"> </text>
-    <text transform="matrix(1.3202 0.5229 -0.3682 0.9297 301.2185 927.2076)" class="st31 st32">A</text>
-    <text transform="matrix(1.366 0.388 -0.2732 0.962 346.3177 944.9777)" class="st31 st33">S</text>
-    <text transform="matrix(1.3949 0.2658 -0.1872 0.9823 387.1223 956.705)" class="st31 st34">C</text>
-    <text transform="matrix(1.4146 0.1234 -0.0869 0.9962 434.7745 965.6329)" class="st31 st34">E</text>
-    <text transform="matrix(1.4199 -0.0198 0.0139 0.9999 477.1728 969.7745)" class="st31 st34">N</text>
-    <text transform="matrix(1.4108 -0.1616 0.1138 0.9935 531.5984 968.7627)" class="st31 st35">D</text>
-    <text transform="matrix(1.3841 -0.3175 0.2236 0.9747 579.8458 963.0926)" class="st31 st33">A</text>
-    <text transform="matrix(1.3409 -0.4674 0.3292 0.9443 627.2564 952.467)" class="st31 st35">N</text>
-    <text transform="matrix(1.2895 -0.5947 0.4188 0.9081 678.5131 934.2517)" class="st31 st32">T</text>
-    <text transform="matrix(1.2434 -0.6859 0.483 0.8756 711.5174 919.0577)" class="st31 st33"> </text>
-    <text transform="matrix(1.191 -0.7732 0.5445 0.8387 747.1387 898.884)" class="st31 st34"> </text>
-    <text transform="matrix(1.1626 -0.8153 0.5742 0.8187 762.0455 889.2625)" class="st31 st33"> </text>
-    <text transform="matrix(0.8048 -0.5935 0.5935 0.8048 771.2969 872.1088)" class="st27 st28"> </text>
-    <text transform="matrix(0.7977 -0.6031 0.6031 0.7977 777.1302 867.7941)" class="st27 st28"> </text>
-    <text transform="matrix(0.7831 -0.6219 0.6219 0.7831 782.9243 863.4224)" class="st27 st29"> </text>
-    <text transform="matrix(0.7756 -0.6312 0.6312 0.7756 788.6174 858.9229)" class="st27 st29"> </text>
-    <text transform="matrix(0.768 -0.6404 0.6404 0.768 794.2417 854.3409)" class="st27 st30"> </text>
-    <text transform="matrix(0.7525 -0.6586 0.6586 0.7525 799.8259 849.7073)" class="st27 st36"> </text>
-    <text transform="matrix(0.7446 -0.6675 0.6675 0.7446 805.3012 844.9451)" class="st27 st30"> </text>
-    <text transform="matrix(0.7366 -0.6764 0.6764 0.7366 810.7066 840.1063)" class="st27 st29"> </text>
-    <text transform="matrix(0.7202 -0.6938 0.6938 0.7202 816.0767 835.2236)" class="st27 st28"> </text>
-    <text transform="matrix(0.1055 -1.4161 0.9972 0.0743 61.7745 484.4378)" class="st31 st34"> </text>
-    <text transform="matrix(0.1592 -1.4111 0.9937 0.1121 63.1274 467.389)" class="st31 st35"> </text>
-    <text transform="matrix(0.2127 -1.404 0.9887 0.1498 65.1437 444.4076)" class="st31 st33"> </text>
-    <text transform="matrix(0.2834 -1.3914 0.9799 0.1996 67.6755 427.6099)" class="st31 st33"> </text>
-    <text transform="matrix(0.3707 -1.3708 0.9653 0.2611 70.5184 410.9397)" class="st31 st34">S</text>
-    <text transform="matrix(0.5063 -1.3267 0.9343 0.3566 80.8296 371.416)" class="st31 st35">U</text>
-    <text transform="matrix(0.6513 -1.2618 0.8886 0.4586 97.1283 327.6866)" class="st31 st34">N</text>
-    <text transform="matrix(0.6033 -0.7975 0.7975 0.6033 112.3157 274.8757)" class="st27 st37"> </text>
-    <text transform="matrix(0.768 -0.6404 0.6404 0.768 172.97 194.453)" class="st27 st38"> </text>
-    <text transform="matrix(0.8924 -0.4513 0.4513 0.8924 253.5509 127.6846)" class="st27 st39"> </text>
-    <text transform="matrix(0.9443 -0.3292 0.3292 0.9443 347.9508 83.6485)" class="st27 st39"> </text>
-    <text transform="matrix(0.9482 -0.3177 0.3177 0.9482 354.53 81.344)" class="st27 st40"> </text>
-    <text transform="matrix(0.952 -0.3061 0.3061 0.952 361.1475 79.1433)" class="st27 st40"> </text>
-    <text transform="matrix(0.9592 -0.2828 0.2828 0.9592 367.7854 77.0055)" class="st27 st38"> </text>
-    <text transform="matrix(0.9626 -0.2711 0.2711 0.9626 374.469 75.019)" class="st27 st40"> </text>
-    <text transform="matrix(0.9658 -0.2593 0.2593 0.9658 381.1822 73.1311)" class="st27 st38"> </text>
-    <text transform="matrix(0.9689 -0.2474 0.2474 0.9689 387.9215 71.345)" class="st27 st38"> </text>
-    <text transform="matrix(0.9747 -0.2236 0.2236 0.9747 394.6833 69.6373)" class="st27 st39"> </text>
-    <text transform="matrix(0.9774 -0.2115 0.2115 0.9774 401.4786 68.0707)" class="st27 st38"> </text>
-    <text transform="matrix(0.9799 -0.1995 0.1995 0.9799 408.2956 66.6065)" class="st27 st39"> </text>
-    <text transform="matrix(0.9845 -0.1752 0.1752 0.9845 415.1322 65.2119)" class="st27 st40"> </text>
-    <text transform="matrix(0.9866 -0.163 0.163 0.9866 421.9886 63.9681)" class="st27 st40"> </text>
-    <text transform="matrix(0.9886 -0.1508 0.1508 0.9886 428.87 62.8311)" class="st27 st40"> </text>
-    <text transform="matrix(0.9904 -0.1385 0.1385 0.9904 435.7681 61.8005)" class="st27 st38"> </text>
-    <text transform="matrix(0.9935 -0.1138 0.1138 0.9935 442.6747 60.8351)" class="st27 st39"> </text>
-    <text transform="matrix(0.9948 -0.1014 0.1014 0.9948 449.5975 60.0261)" class="st27 st38"> </text>
-    <text transform="matrix(0.996 -0.089 0.089 0.996 456.5337 59.3202)" class="st27 st38"> </text>
-    <text transform="matrix(0.9971 -0.0766 0.0766 0.9971 463.4844 58.7257)" class="st27 st41"> </text>
-    <text transform="matrix(0.9987 -0.0516 0.0516 0.9987 470.4408 58.2031)" class="st27 st39"> </text>
-    <text transform="matrix(0.9992 -0.039 0.039 0.9992 477.4006 57.8263)" class="st27 st40"> </text>
-    <text transform="matrix(0.9996 -0.0265 0.0265 0.9996 484.3687 57.5568)" class="st27 st38"> </text>
-    <text transform="matrix(0.9999 -0.0139 0.0139 0.9999 491.3381 57.3959)" class="st27 st39"> </text>
-    <text transform="matrix(0.9999 0.0113 -0.0113 0.9999 498.3123 57.3043)" class="st27 st39"> </text>
-    <text transform="matrix(0.9997 0.0239 -0.0239 0.9997 505.2848 57.3667)" class="st27 st40"> </text>
-    <text transform="matrix(0.9993 0.0365 -0.0365 0.9993 512.2563 57.5364)" class="st27 st40"> </text>
-    <text transform="matrix(0.9988 0.0491 -0.0491 0.9988 519.225 57.8091)" class="st27 st38"> </text>
-    <text transform="matrix(0.9972 0.0743 -0.0743 0.9972 526.1913 58.1507)" class="st27 st38"> </text>
-    <text transform="matrix(0.9962 0.0869 -0.0869 0.9962 533.1471 58.648)" class="st27 st38"> </text>
-    <text transform="matrix(0.995 0.0995 -0.0995 0.995 540.09 59.2517)" class="st27 st38"> </text>
-    <text transform="matrix(0.9937 0.1121 -0.1121 0.9937 547.0272 59.953)" class="st27 st38"> </text>
-    <text transform="matrix(0.9922 0.1247 -0.1247 0.9922 553.9542 60.7645)" class="st27 st39"> </text>
-    <text transform="matrix(0.9887 0.1498 -0.1498 0.9887 560.8721 61.6407)" class="st27 st38"> </text>
-    <text transform="matrix(0.9867 0.1623 -0.1623 0.9867 567.7675 62.6715)" class="st27 st40"> </text>
-    <text transform="matrix(0.9846 0.1747 -0.1747 0.9846 574.6516 63.8044)" class="st27 st38"> </text>
-    <text transform="matrix(0.9823 0.1872 -0.1872 0.9823 581.5144 65.0371)" class="st27 st38"> </text>
-    <text transform="matrix(0.9773 0.212 -0.212 0.9773 588.3668 66.3318)" class="st27 st40"> </text>
-    <text transform="matrix(0.9745 0.2243 -0.2243 0.9745 595.1879 67.7873)" class="st27 st39"> </text>
-    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 601.982 69.3436)" class="st27 st38"> </text>
-    <text transform="matrix(0.9685 0.2489 -0.2489 0.9685 608.756 70.9995)" class="st27 st38"> </text>
-    <text transform="matrix(0.9653 0.2611 -0.2611 0.9653 615.5056 72.7624)" class="st27 st39"> </text>
-    <text transform="matrix(0.9584 0.2853 -0.2853 0.9584 622.2317 74.5886)" class="st27 st39"> </text>
-    <text transform="matrix(0.9548 0.2973 -0.2973 0.9548 628.9202 76.5678)" class="st27 st40"> </text>
-    <text transform="matrix(0.951 0.3093 -0.3093 0.951 635.5753 78.6427)" class="st27 st40"> </text>
-    <text transform="matrix(0.947 0.3212 -0.3212 0.947 642.2026 80.8219)" class="st27 st39"> </text>
-    <text transform="matrix(0.9387 0.3449 -0.3449 0.9387 648.8044 83.0729)" class="st27 st40"> </text>
-    <text transform="matrix(0.9343 0.3566 -0.3566 0.9343 655.351 85.4639)" class="st27 st38"> </text>
-    <text transform="matrix(0.9297 0.3682 -0.3682 0.9297 661.8644 87.9523)" class="st27 st40"> </text>
-    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 668.3383 90.5438)" class="st27 st38"> </text>
-    <text transform="matrix(0.9153 0.4027 -0.4027 0.9153 674.7844 93.2064)" class="st27 st38"> </text>
-    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 681.1743 96.0025)" class="st27 st38"> </text>
-    <text transform="matrix(0.905 0.4253 -0.4253 0.905 687.5143 98.8965)" class="st27 st40"> </text>
-    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 693.8337 101.849)" class="st27 st39"> </text>
-    <text transform="matrix(0.8886 0.4586 -0.4586 0.8886 700.0784 104.9526)" class="st27 st38"> </text>
-    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 706.2782 108.1512)" class="st27 st38"> </text>
-    <text transform="matrix(0.877 0.4804 -0.4804 0.877 712.4256 111.4358)" class="st27 st38"> </text>
-    <text transform="matrix(0.865 0.5018 -0.5018 0.865 718.5453 114.7834)" class="st27 st39"> </text>
-    <text transform="matrix(0.8587 0.5124 -0.5124 0.8587 724.582 118.2685)" class="st27 st38"> </text>
-    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 730.5688 121.8445)" class="st27 st40"> </text>
-    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 736.4997 125.5063)" class="st27 st40"> </text>
-    <text transform="matrix(0.8327 0.5538 -0.5538 0.8327 742.3929 129.2427)" class="st27 st38"> </text>
-    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 748.2038 133.0945)" class="st27 st39"> </text>
-    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 753.955 137.036)" class="st27 st40"> </text>
-    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 759.6657 141.0405)" class="st27 st39"> </text>
-    <text transform="matrix(0.7975 0.6033 -0.6033 0.7975 765.2896 145.1653)" class="st27 st37"> </text>
-    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 770.8468 149.3757)" class="st27 st38"> </text>
-    <text transform="matrix(0.7827 0.6225 -0.6225 0.7827 776.3431 153.6625)" class="st27 st38"> </text>
-    <text transform="matrix(0.7674 0.6412 -0.6412 0.7674 781.7891 158.0186)" class="st27 st39"> </text>
-    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 787.1429 162.4857)" class="st27 st38"> </text>
-    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 792.431 167.0326)" class="st27 st40"> </text>
-    <text transform="matrix(0.7357 0.6773 -0.6773 0.7357 797.668 171.6342)" class="st27 st40"> </text>
-    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 802.8074 176.3499)" class="st27 st41"> </text>
-    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 807.8741 181.1371)" class="st27 st38"> </text>
-    <text transform="matrix(0.7024 0.7118 -0.7118 0.7024 812.8977 185.9749)" class="st27 st39"> </text>
-    <text transform="matrix(0.6938 0.7202 -0.7202 0.6938 817.8133 190.9279)" class="st27 st38"> </text>
-    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 822.6466 195.9521)" class="st27 st40"> </text>
-    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 827.4112 201.0435)" class="st27 st40"> </text>
-    <text transform="matrix(0.6586 0.7525 -0.7525 0.6586 832.1149 206.1895)" class="st27 st40"> </text>
-    <text transform="matrix(0.8428 1.1428 -0.8048 0.5935 830.8104 215.749)" class="st31 st34">M</text>
-    <text transform="matrix(0.6859 1.2434 -0.8756 0.483 871.8801 272.7682)" class="st31 st33">O</text>
-    <text transform="matrix(0.5477 1.3101 -0.9226 0.3857 894.427 313.6395)" class="st31 st34">O</text>
-    <text transform="matrix(0.4016 1.362 -0.9592 0.2828 912.5266 356.6525)" class="st31 st33">N</text>
-    <text transform="matrix(0.1385 0.9904 -0.9904 0.1385 936.626 405.532)" class="st27 st38"> </text>
-    <g>
+    <text transform="matrix(0.1138 0.9935 -0.9935 0.1138 30.9999 548.9846)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.2236 0.9747 -0.9747 0.2236 29.2711 556.8225)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.3292 0.9443 -0.9443 0.3292 53.7148 651.675)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.352 0.936 -0.936 0.352 56.1371 658.6418)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.3633 0.9317 -0.9317 0.3633 58.6778 665.4987)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.3745 0.9272 -0.9272 0.3745 61.3683 672.3351)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.3857 0.9226 -0.9226 0.3857 64.1032 679.1645)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.4078 0.913 -0.913 0.4078 66.9068 685.9133)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.4188 0.9081 -0.9081 0.4188 69.9835 692.6664)" class="st1 st27 st31"> </text>
+    <text transform="matrix(0.4297 0.903 -0.903 0.4297 72.9457 699.2606)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.4513 0.8924 -0.8924 0.4513 76.1322 705.9754)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.4619 0.8869 -0.8869 0.4619 79.4328 712.4703)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.4725 0.8813 -0.8813 0.4725 82.8306 718.9931)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.483 0.8756 -0.8756 0.483 86.3586 725.4275)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.5039 0.8638 -0.8638 0.5039 89.8858 731.8434)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.5141 0.8577 -0.8577 0.5141 93.6123 738.2159)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.5243 0.8515 -0.8515 0.5243 97.3513 744.5043)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.5445 0.8388 -0.8388 0.5445 101.2331 750.7342)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.5545 0.8322 -0.8322 0.5545 105.1847 756.8931)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 109.333 762.9977)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.5839 0.8118 -0.8118 0.5839 113.424 769.0931)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.5935 0.8048 -0.8048 0.5935 117.7157 775.0496)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 122.0494 780.8661)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.6126 0.7904 -0.7904 0.6126 126.5123 786.7994)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.6312 0.7756 -0.7756 0.6312 130.9907 792.5886)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.6404 0.768 -0.768 0.6404 135.6349 798.2391)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 140.2874 803.9128)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.6675 0.7446 -0.7446 0.6675 145.1032 809.4095)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 149.9377 814.9349)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 154.9454 820.3091)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.7023 0.7118 -0.7118 0.7023 159.9432 825.6638)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.7108 0.7034 -0.7034 0.7108 165.0747 830.8803)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 170.3861 836.0807)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 175.6121 841.1567)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.7438 0.6685 -0.6685 0.7438 181.0013 846.1501)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 186.3828 851.0901)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 191.9345 855.9304)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.7751 0.6319 -0.6319 0.7751 197.5451 860.606)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.7827 0.6224 -0.6224 0.7827 203.2568 865.2609)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 209.0062 869.8173)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 214.767 874.3724)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.8119 0.5838 -0.5838 0.8119 220.6671 878.7965)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 226.6097 883.0301)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 232.5649 887.2218)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.8393 0.5436 -0.5436 0.8393 238.6859 891.4108)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 244.8463 895.381)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 251.0733 899.2508)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.865 0.5018 -0.5018 0.865 257.3235 903.0583)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.8711 0.4912 -0.4912 0.8711 263.6127 906.8325)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.877 0.4804 -0.4804 0.877 270.0463 910.394)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 276.4152 913.9503)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 282.915 917.3177)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.8997 0.4365 -0.4365 0.8997 289.4525 920.623)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.905 0.4253 -0.4253 0.905 296.0329 923.851)" class="st1 st27 st30"> </text>
+    <text transform="matrix(1.3202 0.5229 -0.3682 0.9297 299.278 935.7617)" class="st1 st32 st33">A</text>
+    <text transform="matrix(1.366 0.388 -0.2732 0.962 344.7986 953.7113)" class="st1 st32 st34">S</text>
+    <text transform="matrix(1.3949 0.2658 -0.1872 0.9823 386.0622 965.476)" class="st1 st32 st35">C</text>
+    <g class="st1">
       <defs>
-        <rect id="SVGID_00000134223682536254971370000009236131936394853818_" x="-30.47" y="7.36" width="1058.47" height="1255.74"/>
+        <rect id="SVGID_00000004526807132887448210000008529295496786377117_" x="-1.72" y="-0.45" width="1001.45" height="1001.45"/>
       </defs>
-      <clipPath id="SVGID_00000132781560827402557560000002641815592123103639_">
-        <use xlink:href="#SVGID_00000134223682536254971370000009236131936394853818_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000072975727925821425840000018273790694658004135_">
+        <use xlink:href="#SVGID_00000004526807132887448210000008529295496786377117_"  style="overflow:visible;"/>
+      </clipPath>
+      <g style="clip-path:url(#SVGID_00000072975727925821425840000018273790694658004135_);">
+        <text transform="matrix(1.4146 0.1234 -0.0869 0.9962 434.3389 974.574)" class="st32 st37">E</text>
+      </g>
+      <g style="clip-path:url(#SVGID_00000072975727925821425840000018273790694658004135_);">
+        <text transform="matrix(1.4199 -0.0198 0.0139 0.9999 477.1701 978.7079)" class="st32 st37">N</text>
+      </g>
+      <g style="clip-path:url(#SVGID_00000072975727925821425840000018273790694658004135_);">
+        <text transform="matrix(1.4108 -0.1616 0.1138 0.9935 532.2158 977.6804)" class="st32 st33">D</text>
+      </g>
+    </g>
+    <text transform="matrix(1.3841 -0.3175 0.2236 0.9747 581.0215 971.9736)" class="st1 st32 st35">A</text>
+    <text transform="matrix(1.3408 -0.4674 0.3292 0.9443 628.941 961.1873)" class="st1 st32 st33">N</text>
+    <text transform="matrix(1.2895 -0.5947 0.4188 0.9081 680.7239 942.8765)" class="st1 st32 st33">T</text>
+    <text transform="matrix(1.2434 -0.6859 0.483 0.8756 714.1036 927.5033)" class="st1 st32 st35"> </text>
+    <text transform="matrix(1.191 -0.7732 0.5445 0.8388 750.1042 907.119)" class="st1 st32 st37"> </text>
+    <text transform="matrix(1.1626 -0.8153 0.5742 0.8187 765.2147 897.3544)" class="st1 st32 st35"> </text>
+    <text transform="matrix(0.8048 -0.5935 0.5935 0.8048 774.6135 880.0285)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.7977 -0.6031 0.6031 0.7977 780.4846 875.5737)" class="st1 st27 st30"> </text>
+    <text transform="matrix(0.7831 -0.6219 0.6219 0.7831 786.3441 871.2663)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.7756 -0.6312 0.6312 0.7756 792.0922 866.7119)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.768 -0.6404 0.6404 0.768 797.7949 862.0287)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.7525 -0.6586 0.6586 0.7525 803.3917 857.3629)" class="st1 st27 st38"> </text>
+    <text transform="matrix(0.7446 -0.6675 0.6675 0.7446 808.9587 852.501)" class="st1 st27 st28"> </text>
+    <text transform="matrix(0.7366 -0.6764 0.6764 0.7366 814.3691 847.6666)" class="st1 st27 st29"> </text>
+    <text transform="matrix(0.7202 -0.6938 0.6938 0.7202 819.8364 842.7468)" class="st1 st27 st30"> </text>
+    <g class="st1">
+      <defs>
+        <rect id="SVGID_00000114067078242557977080000002679229276547892155_" x="-1.72" y="-0.45" width="1001.45" height="1001.45"/>
+      </defs>
+      <clipPath id="SVGID_00000032643569271498170880000004449983823514549912_">
+        <use xlink:href="#SVGID_00000114067078242557977080000002679229276547892155_"  style="overflow:visible;"/>
+      </clipPath>
+      <g style="clip-path:url(#SVGID_00000032643569271498170880000004449983823514549912_);">
+        <text transform="matrix(0.1592 -1.4111 0.9937 0.1121 56.5356 482.1894)" class="st32 st33">S</text>
+      </g>
+      <g style="clip-path:url(#SVGID_00000032643569271498170880000004449983823514549912_);">
+        <text transform="matrix(0.2834 -1.3914 0.9799 0.1996 61.0036 441.0946)" class="st32 st35">U</text>
+      </g>
+    </g>
+    <text transform="matrix(0.4392 -1.3504 0.951 0.3093 70.3257 394.8089)" class="st1 st32 st37">N</text>
+    <text transform="matrix(0.4365 -0.8997 0.8997 0.4365 78.3923 340.4323)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.6033 -0.7975 0.7975 0.6033 105.8642 279.3527)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.768 -0.6404 0.6404 0.768 169.5898 194.8099)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.8388 -0.5445 0.5445 0.8388 252.3994 129.7519)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.8515 -0.5243 0.5243 0.8515 258.3066 125.907)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.8577 -0.5141 0.5141 0.8577 264.3344 122.2104)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.8638 -0.5039 0.5039 0.8638 270.3737 118.5347)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.8756 -0.483 0.483 0.8756 276.5024 114.9758)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.8813 -0.4725 0.4725 0.8813 282.6322 111.57)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.8869 -0.4619 0.4619 0.8869 288.8698 108.2659)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.8924 -0.4513 0.4513 0.8924 295.1737 105.0416)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.903 -0.4297 0.4297 0.903 301.4134 101.8086)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9081 -0.4188 0.4188 0.9081 307.8213 98.8435)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.913 -0.4078 0.4078 0.913 314.1667 95.8313)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9226 -0.3857 0.3857 0.9226 320.6351 92.9723)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9272 -0.3745 0.3745 0.9272 327.1584 90.2129)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.9317 -0.3633 0.3633 0.9317 333.6208 87.6372)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9402 -0.3406 0.3406 0.9402 340.2726 85.0429)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9443 -0.3292 0.3292 0.9443 346.8321 82.589)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.9482 -0.3177 0.3177 0.9482 353.5683 80.3242)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.952 -0.3061 0.3061 0.952 360.2208 78.0613)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9592 -0.2828 0.2828 0.9592 366.865 75.9384)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9626 -0.2711 0.2711 0.9626 373.6764 73.9714)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.9658 -0.2593 0.2593 0.9658 380.4151 72.0385)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9719 -0.2355 0.2355 0.9719 387.2362 70.2282)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9747 -0.2236 0.2236 0.9747 394.1163 68.499)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9774 -0.2115 0.2115 0.9774 400.9612 66.962)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9799 -0.1995 0.1995 0.9799 407.8477 65.4523)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9845 -0.1752 0.1752 0.9845 414.782 64.0648)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.9866 -0.163 0.163 0.9866 421.7104 62.7704)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9886 -0.1508 0.1508 0.9886 428.6593 61.6985)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9904 -0.1385 0.1385 0.9904 435.6023 60.6081)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9935 -0.1138 0.1138 0.9935 442.651 59.6099)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9948 -0.1014 0.1014 0.9948 449.5986 58.8236)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.996 -0.089 0.089 0.996 456.6388 58.1219)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9971 -0.0765 0.0765 0.9971 463.6933 57.5883)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.9987 -0.0516 0.0516 0.9987 470.7128 57.006)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9992 -0.039 0.039 0.9992 477.744 56.6761)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9997 -0.0265 0.0265 0.9997 484.8187 56.3637)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9999 -0.0139 0.0139 0.9999 491.8443 56.1632)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9999 0.0112 -0.0112 0.9999 498.9361 56.1405)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.9997 0.0239 -0.0239 0.9997 505.968 56.2487)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.9993 0.0365 -0.0365 0.9993 513.0695 56.3688)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9988 0.0491 -0.0491 0.9988 519.9906 56.6243)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9972 0.0743 -0.0743 0.9972 527.1225 57.0293)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9962 0.0869 -0.0869 0.9962 534.1262 57.5671)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.995 0.0995 -0.0995 0.995 541.1956 58.1237)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9937 0.1121 -0.1121 0.9937 548.1961 58.8319)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9905 0.1372 -0.1372 0.9905 555.144 59.6549)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9887 0.1497 -0.1497 0.9887 562.1426 60.5144)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9867 0.1623 -0.1623 0.9867 569.1689 61.5899)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.9846 0.1747 -0.1747 0.9846 576.0186 62.7681)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9823 0.1872 -0.1872 0.9823 583.0139 63.9558)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9773 0.212 -0.212 0.9773 589.9406 65.2658)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9745 0.2243 -0.2243 0.9745 596.7751 66.817)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 603.6606 68.4007)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9685 0.2489 -0.2489 0.9685 610.5758 70.0528)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9619 0.2732 -0.2732 0.9619 617.3562 71.7685)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9584 0.2853 -0.2853 0.9584 624.1794 73.7356)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9548 0.2973 -0.2973 0.9548 630.9207 75.6532)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.951 0.3093 -0.3093 0.951 637.6884 77.772)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.947 0.3212 -0.3212 0.947 644.3495 79.9615)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9386 0.3449 -0.3449 0.9386 651.0129 82.2632)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9343 0.3566 -0.3566 0.9343 657.6957 84.7681)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9297 0.3682 -0.3682 0.9297 664.2675 87.3001)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.9203 0.3913 -0.3913 0.9203 670.7673 89.8177)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.9153 0.4027 -0.4027 0.9153 677.3053 92.5103)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 683.7311 95.3535)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.905 0.4253 -0.4253 0.905 690.149 98.304)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 696.5687 101.3289)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.8886 0.4586 -0.4586 0.8886 702.8734 104.4275)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 709.1152 107.7234)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.877 0.4804 -0.4804 0.877 715.397 110.9968)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.865 0.5019 -0.5019 0.865 721.5789 114.4471)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.8587 0.5124 -0.5124 0.8587 727.6059 117.9118)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 733.697 121.5868)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.8393 0.5436 -0.5436 0.8393 739.7333 125.1969)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.8326 0.5538 -0.5538 0.8326 745.6255 129.0695)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 751.4931 132.9327)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 757.3152 136.9743)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 763.0628 140.9544)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.7975 0.6033 -0.6033 0.7975 768.8228 145.2063)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 774.358 149.4498)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.7751 0.6319 -0.6319 0.7751 779.9987 153.7913)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.7674 0.6412 -0.6412 0.7674 785.4619 158.1943)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 790.887 162.7091)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 796.1594 167.3414)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.7357 0.6773 -0.6773 0.7357 801.5446 171.9142)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 806.6577 176.7805)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 811.7793 181.5772)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.7023 0.7118 -0.7118 0.7023 816.8833 186.4613)" class="st1 st27 st43"> </text>
+    <text transform="matrix(0.6938 0.7202 -0.7202 0.6938 821.8679 191.5008)" class="st1 st27 st40"> </text>
+    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 826.7486 196.5518)" class="st1 st27 st41"> </text>
+    <text transform="matrix(0.6675 0.7446 -0.7446 0.6675 831.5851 201.6646)" class="st1 st27 st42"> </text>
+    <text transform="matrix(0.8564 1.1327 -0.7977 0.6031 830.4364 211.2733)" class="st1 st32 st37">M</text>
+    <text transform="matrix(0.7007 1.2351 -0.8698 0.4935 872.8011 268.4122)" class="st1 st32 st34">O</text>
+    <text transform="matrix(0.5635 1.3034 -0.9179 0.3968 896.2083 309.3504)" class="st1 st32 st37">O</text>
+    <text transform="matrix(0.4182 1.357 -0.9556 0.2945 915.1421 352.5988)" class="st1 st32 st37">N</text>
+    <text transform="matrix(0.1385 0.9904 -0.9904 0.1385 940.7525 401.5891)" class="st1 st27 st42"> </text>
+    <g class="st1">
+      <defs>
+        <rect id="SVGID_00000044173634533299081450000011943778177354542732_" x="-1.72" y="-0.45" width="1001.45" height="1001.45"/>
+      </defs>
+      <clipPath id="SVGID_00000055686245211294019090000016138431951231983288_">
+        <use xlink:href="#SVGID_00000044173634533299081450000011943778177354542732_"  style="overflow:visible;"/>
       </clipPath>
       
-        <line style="clip-path:url(#SVGID_00000132781560827402557560000002641815592123103639_);fill:none;stroke:#1D1D1B;stroke-width:6;" x1="498.96" y1="7.36" x2="498.96" y2="501.79"/>
+        <line style="clip-path:url(#SVGID_00000055686245211294019090000016138431951231983288_);fill:none;stroke:#1D1D1B;stroke-width:6;" x1="499.2" y1="-0.45" x2="499.2" y2="499.48"/>
     </g>
-    <line class="st43" x1="927.06" y1="747.88" x2="848.78" y2="703.6"/>
-    <line class="st44" x1="64.47" y1="732.33" x2="501.02" y2="505.08"/>
-    <g>
+    <line class="st23" x1="932.07" y1="748.32" x2="852.92" y2="703.54"/>
+    <line class="st21" x1="59.87" y1="732.59" x2="501.28" y2="502.81"/>
+    <g class="st1">
       <defs>
-        <rect id="SVGID_00000183948424138061101910000014266271222514150294_" x="-30.47" y="7.36" width="1058.47" height="1255.74"/>
+        <rect id="SVGID_00000008850554859581095360000008662327561766533566_" x="-1.72" y="-0.45" width="1001.45" height="1001.45"/>
       </defs>
-      <clipPath id="SVGID_00000003088752599224435090000009036049457803382155_">
-        <use xlink:href="#SVGID_00000183948424138061101910000014266271222514150294_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000109008588321318563030000011727892904078485422_">
+        <use xlink:href="#SVGID_00000008850554859581095360000008662327561766533566_"  style="overflow:visible;"/>
       </clipPath>
-      <path style="clip-path:url(#SVGID_00000003088752599224435090000009036049457803382155_);fill:#1D1D1B;" d="M137.31,251.58
-        c11.09,0.03,20.12-8.85,20.32-19.89c0.21-11.56-9.06-20.71-20.31-20.69c-11.17,0.02-20.1,8.92-20.28,19.94
-        C116.85,242.6,126.29,251.62,137.31,251.58 M137.37,207.07c13.48-0.01,24.38,11.02,24.33,24.46
-        c-0.05,13.38-10.99,24.34-24.53,24.27c-13.32-0.06-24.19-10.98-24.2-24.35C112.95,218.01,123.89,207.03,137.37,207.07"/>
-      <path style="clip-path:url(#SVGID_00000003088752599224435090000009036049457803382155_);fill:#1D1D1B;" d="M137.34,225.88
-        c2.97,0,5.41,2.42,5.43,5.37c0.02,2.99-2.45,5.49-5.43,5.46c-3.02-0.03-5.39-2.39-5.42-5.42
-        C131.88,228.33,134.35,225.88,137.34,225.88"/>
-      <path style="clip-path:url(#SVGID_00000003088752599224435090000009036049457803382155_);fill:#1D1D1B;" d="M941.01,438.82
-        c8.57,4.44,13.19,10.88,13.6,19.53c-0.1,8.67-4.51,15.26-12.84,19.96c7.43,0.36,16.14-2.7,20.95-10.01
-        c4.6-6.99,3.92-15.75-1.8-21.97C955.86,440.83,949.16,438.44,941.01,438.82 M943.84,481.16c-3.07,0.04-5.59-0.23-8.05-0.84
-        c-0.77-0.19-1.25-0.68-1.29-1.32c-0.04-0.62,0.4-1.19,1.16-1.41c2.47-0.73,4.75-1.76,6.81-3.16c3.94-2.68,6.61-6.12,8.01-10.29
-        c0.78-2.34,1.04-4.73,0.78-7.15c-0.48-4.54-2.52-8.49-6.11-11.81c-2.76-2.55-6.09-4.31-9.95-5.32c-0.74-0.19-1.28-0.53-1.39-1.25
-        c-0.09-0.62,0.27-1.25,0.95-1.45c0.98-0.28,1.97-0.54,2.97-0.73c1.65-0.32,3.32-0.48,5.01-0.49c6.08-0.01,11.57,1.55,16.35,4.82
-        c4.76,3.26,7.82,7.49,9.23,12.61c0.58,2.1,0.76,4.24,0.61,6.4c-0.33,4.84-2.26,9.16-5.76,12.94c-3.22,3.48-7.3,5.91-12.17,7.32
-        C948.52,480.75,945.96,481.11,943.84,481.16"/>
-      <path style="clip-path:url(#SVGID_00000003088752599224435090000009036049457803382155_);fill:#1D1D1B;" d="M278.7,917.6v-30.78
-        c0-0.64-0.74-0.97-1.18-0.51l-12,12.53c-0.25,0.27-0.66,0.28-0.94,0.03l-0.87-0.78c-0.31-0.27-0.32-0.76-0.04-1.06l15.78-16.64
-        c0.27-0.29,0.71-0.29,0.98,0l15.8,16.67c0.28,0.3,0.26,0.79-0.04,1.06l-0.83,0.75c-0.28,0.25-0.69,0.23-0.94-0.04
-        c-3.98-4.18-7.96-8.35-11.97-12.55c-0.43-0.46-1.18-0.14-1.18,0.51l0,0.97c0,10.78,0,18.99,0,29.86c0,0.4-0.31,0.73-0.69,0.73
-        h-1.17C279.01,918.32,278.7,918,278.7,917.6"/>
+      <path style="clip-path:url(#SVGID_00000109008588321318563030000011727892904078485422_);fill:#1D1D1B;" d="M92.03,315.66
+        c11.22,0.03,20.34-8.94,20.55-20.11c0.21-11.69-9.16-20.94-20.54-20.92c-11.29,0.02-20.32,9.02-20.5,20.16
+        C71.34,306.58,80.89,315.69,92.03,315.66 M92.09,270.65c13.63-0.01,24.65,11.14,24.6,24.73c-0.05,13.52-11.11,24.61-24.8,24.54
+        c-13.47-0.06-24.45-11.11-24.47-24.62C67.4,281.71,78.46,270.6,92.09,270.65"/>
+      <path style="clip-path:url(#SVGID_00000109008588321318563030000011727892904078485422_);fill:#1D1D1B;" d="M92.06,289.67
+        c3,0,5.47,2.44,5.49,5.43c0.02,3.02-2.48,5.55-5.49,5.52c-3.05-0.03-5.45-2.41-5.48-5.48C86.53,292.14,89.04,289.67,92.06,289.67"
+        />
+      <path style="clip-path:url(#SVGID_00000109008588321318563030000011727892904078485422_);fill:#1D1D1B;" d="M946.18,435.81
+        c8.66,4.49,13.34,11,13.75,19.75c-0.1,8.76-4.55,15.43-12.98,20.18c7.51,0.37,16.31-2.73,21.18-10.12
+        c4.66-7.07,3.96-15.93-1.82-22.21C961.19,437.85,954.42,435.43,946.18,435.81 M949.04,478.63c-3.1,0.04-5.65-0.24-8.14-0.85
+        c-0.78-0.19-1.26-0.69-1.3-1.34c-0.04-0.63,0.4-1.2,1.17-1.43c2.49-0.74,4.81-1.78,6.88-3.2c3.99-2.71,6.69-6.19,8.1-10.41
+        c0.79-2.37,1.05-4.78,0.79-7.23c-0.49-4.59-2.54-8.59-6.18-11.95c-2.79-2.58-6.15-4.36-10.06-5.38c-0.75-0.2-1.29-0.54-1.4-1.26
+        c-0.09-0.63,0.27-1.27,0.96-1.47c0.99-0.29,1.99-0.54,3.01-0.74c1.67-0.33,3.36-0.49,5.07-0.49c6.15-0.01,11.69,1.56,16.53,4.87
+        c4.81,3.29,7.91,7.57,9.33,12.75c0.58,2.13,0.76,4.29,0.61,6.47c-0.33,4.9-2.28,9.26-5.82,13.08c-3.26,3.52-7.38,5.97-12.3,7.4
+        C953.77,478.21,951.18,478.57,949.04,478.63"/>
+      <path style="clip-path:url(#SVGID_00000109008588321318563030000011727892904078485422_);fill:#1D1D1B;" d="M276.49,919.92v-31.13
+        c0-0.65-0.75-0.98-1.19-0.52l-12.14,12.67c-0.26,0.27-0.67,0.28-0.95,0.04l-0.88-0.79c-0.31-0.28-0.33-0.77-0.04-1.07l15.95-16.83
+        c0.28-0.29,0.72-0.29,0.99,0l15.98,16.85c0.28,0.3,0.27,0.8-0.04,1.07l-0.84,0.76c-0.28,0.25-0.69,0.23-0.95-0.04
+        c-4.03-4.23-8.05-8.44-12.1-12.69c-0.44-0.46-1.19-0.14-1.19,0.52l0,0.98c0,10.9,0,19.2,0,30.19c0,0.4-0.31,0.73-0.7,0.73h-1.19
+        C276.8,920.65,276.49,920.32,276.49,919.92"/>
     </g>
-    <line class="st44" x1="924.33" y1="746.74" x2="496.57" y2="504.73"/>
-    <g>
+    <line class="st21" x1="929.31" y1="747.16" x2="496.79" y2="502.45"/>
+    <g class="st1">
       <defs>
-        <rect id="SVGID_00000180358158136833506050000003518133273002974141_" x="-30.47" y="7.36" width="1058.47" height="1255.74"/>
+        <rect id="SVGID_00000170975769482820975400000000172831754188466353_" x="-1.72" y="-0.45" width="1001.45" height="1001.45"/>
       </defs>
-      <clipPath id="SVGID_00000070081953080083390660000005229546437657431202_">
-        <use xlink:href="#SVGID_00000180358158136833506050000003518133273002974141_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000007413237521469248210000016006865127993060519_">
+        <use xlink:href="#SVGID_00000170975769482820975400000000172831754188466353_"  style="overflow:visible;"/>
       </clipPath>
-      <path style="clip-path:url(#SVGID_00000070081953080083390660000005229546437657431202_);fill:#FFFFFF;" d="M498.76,543.69
-        c22.71,0,41.12-18.41,41.12-41.12c0-22.71-18.41-41.12-41.12-41.12c-22.71,0-41.12,18.41-41.12,41.12
-        C457.64,525.28,476.05,543.69,498.76,543.69"/>
+      <path style="clip-path:url(#SVGID_00000007413237521469248210000016006865127993060519_);fill:#FFFFFF;" d="M499.01,541.85
+        c22.96,0,41.58-18.62,41.58-41.58c0-22.96-18.62-41.58-41.58-41.58c-22.96,0-41.58,18.62-41.58,41.58
+        C457.43,523.24,476.04,541.85,499.01,541.85"/>
       
-        <ellipse transform="matrix(0.3827 -0.9239 0.9239 0.3827 -156.42 771.0438)" style="clip-path:url(#SVGID_00000070081953080083390660000005229546437657431202_);fill:none;stroke:#1D1D1B;stroke-width:2;" cx="498.76" cy="502.57" rx="41.12" ry="41.12"/>
+        <ellipse transform="matrix(0.9732 -0.2298 0.2298 0.9732 -101.5906 128.0309)" style="clip-path:url(#SVGID_00000007413237521469248210000016006865127993060519_);fill:none;stroke:#1D1D1B;stroke-width:2;" cx="499.01" cy="500.27" rx="41.58" ry="41.58"/>
+    </g>
+  </g>
+  <g id="Layer_5">
+    <g>
+      <defs>
+        <rect id="SVGID_00000150083249247906112840000003384054307974758590_" x="-33.99" y="0.62" width="1066.99" height="1265.85"/>
+      </defs>
+      <clipPath id="SVGID_00000034786543154091621500000001556715264468141467_">
+        <use xlink:href="#SVGID_00000150083249247906112840000003384054307974758590_"  style="overflow:visible;"/>
+      </clipPath>
+      
+        <circle style="clip-path:url(#SVGID_00000034786543154091621500000001556715264468141467_);fill:none;stroke:#000000;stroke-width:1.914;" cx="499.5" cy="499.82" r="496.41"/>
+      
+        <circle style="clip-path:url(#SVGID_00000034786543154091621500000001556715264468141467_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="500.02" cy="502.99" r="412.18"/>
+    </g>
+    <text transform="matrix(0.1138 0.9935 -0.9935 0.1138 32.8928 548.4286)" class="st27 st50"> </text>
+    <text transform="matrix(0.2236 0.9747 -0.9747 0.2236 31.2229 556.1823)" class="st27 st51"> </text>
+    <text transform="matrix(0.3292 0.9443 -0.9443 0.3292 55.567 650.8142)" class="st27 st50"> </text>
+    <text transform="matrix(0.352 0.936 -0.936 0.352 57.9576 657.7267)" class="st27 st51"> </text>
+    <text transform="matrix(0.3633 0.9317 -0.9317 0.3633 60.5116 664.5814)" class="st27 st52"> </text>
+    <text transform="matrix(0.3745 0.9272 -0.9272 0.3745 63.1706 671.3954)" class="st27 st53"> </text>
+    <text transform="matrix(0.3857 0.9226 -0.9226 0.3857 65.9242 678.1729)" class="st27 st52"> </text>
+    <text transform="matrix(0.4078 0.9131 -0.9131 0.4078 68.7516 684.9185)" class="st27 st50"> </text>
+    <text transform="matrix(0.4188 0.9081 -0.9081 0.4188 71.728 691.5997)" class="st27 st52"> </text>
+    <text transform="matrix(0.4297 0.903 -0.903 0.4297 74.8019 698.2352)" class="st27 st52"> </text>
+    <text transform="matrix(0.4513 0.8924 -0.8924 0.4513 77.9378 704.8459)" class="st27 st51"> </text>
+    <text transform="matrix(0.4619 0.8869 -0.8869 0.4619 81.218 711.3774)" class="st27 st50"> </text>
+    <text transform="matrix(0.4725 0.8813 -0.8813 0.4725 84.6023 717.8636)" class="st27 st50"> </text>
+    <text transform="matrix(0.483 0.8756 -0.8756 0.483 88.0811 724.3012)" class="st27 st50"> </text>
+    <text transform="matrix(0.5038 0.8638 -0.8638 0.5038 91.6311 730.6988)" class="st27 st51"> </text>
+    <text transform="matrix(0.5141 0.8577 -0.8577 0.5141 95.3077 737.0179)" class="st27 st50"> </text>
+    <text transform="matrix(0.5243 0.8515 -0.8515 0.5243 99.0862 743.2867)" class="st27 st51"> </text>
+    <text transform="matrix(0.5445 0.8387 -0.8387 0.5445 102.9209 749.5106)" class="st27 st51"> </text>
+    <text transform="matrix(0.5545 0.8322 -0.8322 0.5545 106.8951 755.6516)" class="st27 st52"> </text>
+    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 110.9621 761.7313)" class="st27 st51"> </text>
+    <text transform="matrix(0.5839 0.8118 -0.8118 0.5839 115.0817 767.7761)" class="st27 st50"> </text>
+    <text transform="matrix(0.5935 0.8048 -0.8048 0.5935 119.3412 773.7239)" class="st27 st51"> </text>
+    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 123.6819 779.6046)" class="st27 st51"> </text>
+    <text transform="matrix(0.6126 0.7904 -0.7904 0.6126 128.1122 785.4276)" class="st27 st53"> </text>
+    <text transform="matrix(0.6312 0.7756 -0.7756 0.6312 132.6091 791.197)" class="st27 st53"> </text>
+    <text transform="matrix(0.6404 0.768 -0.768 0.6404 137.22 796.8745)" class="st27 st52"> </text>
+    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 141.9166 802.4815)" class="st27 st51"> </text>
+    <text transform="matrix(0.6675 0.7446 -0.7446 0.6675 146.67 808.0401)" class="st27 st52"> </text>
+    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 151.5468 813.492)" class="st27 st51"> </text>
+    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 156.5016 818.8717)" class="st27 st51"> </text>
+    <text transform="matrix(0.7024 0.7118 -0.7118 0.7024 161.5081 824.2034)" class="st27 st51"> </text>
+    <text transform="matrix(0.7108 0.7034 -0.7034 0.7108 166.6345 829.4257)" class="st27 st53"> </text>
+    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 171.8361 834.5712)" class="st27 st50"> </text>
+    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 177.1127 839.6323)" class="st27 st51"> </text>
+    <text transform="matrix(0.7437 0.6685 -0.6685 0.7437 182.4446 844.636)" class="st27 st50"> </text>
+    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 187.8807 849.5304)" class="st27 st50"> </text>
+    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 193.3915 854.3431)" class="st27 st51"> </text>
+    <text transform="matrix(0.7751 0.6319 -0.6319 0.7751 198.9479 859.1039)" class="st27 st53"> </text>
+    <text transform="matrix(0.7827 0.6225 -0.6225 0.7827 204.609 863.7289)" class="st27 st50"> </text>
+    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 210.3396 868.2795)" class="st27 st50"> </text>
+    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 216.1086 872.7709)" class="st27 st50"> </text>
+    <text transform="matrix(0.8119 0.5838 -0.5838 0.8119 221.9828 877.1276)" class="st27 st50"> </text>
+    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 227.9165 881.4028)" class="st27 st51"> </text>
+    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 233.9202 885.5864)" class="st27 st52"> </text>
+    <text transform="matrix(0.8393 0.5436 -0.5436 0.8393 239.9667 889.7043)" class="st27 st50"> </text>
+    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 246.0976 893.6869)" class="st27 st52"> </text>
+    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 252.2889 897.5859)" class="st27 st51"> </text>
+    <text transform="matrix(0.865 0.5018 -0.5018 0.865 258.5204 901.4203)" class="st27 st50"> </text>
+    <text transform="matrix(0.8711 0.4912 -0.4912 0.8711 264.8318 905.108)" class="st27 st51"> </text>
+    <text transform="matrix(0.877 0.4804 -0.4804 0.877 271.2038 908.7057)" class="st27 st52"> </text>
+    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 277.6259 912.2025)" class="st27 st50"> </text>
+    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 284.0852 915.6357)" class="st27 st50"> </text>
+    <text transform="matrix(0.8997 0.4365 -0.4365 0.8997 290.6189 918.9261)" class="st27 st52"> </text>
+    <text transform="matrix(0.905 0.4253 -0.4253 0.905 297.2 922.1168)" class="st27 st50"> </text>
+    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 303.8335 925.2045)" class="st27 st50"> </text>
+    <text transform="matrix(0.9203 0.3913 -0.3913 0.9203 310.4993 928.2201)" class="st27 st50"> </text>
+    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 317.2226 931.0937)" class="st27 st51"> </text>
+    <text transform="matrix(0.9297 0.3682 -0.3682 0.9297 323.9948 933.8657)" class="st27 st50"> </text>
+    <text transform="matrix(0.9343 0.3566 -0.3566 0.9343 330.8005 936.5292)" class="st27 st50"> </text>
+    <text transform="matrix(0.9429 0.3331 -0.3331 0.9429 337.6427 939.1164)" class="st27 st52"> </text>
+    <text transform="matrix(0.947 0.3212 -0.3212 0.947 344.5347 941.5678)" class="st27 st52"> </text>
+    <text transform="matrix(0.951 0.3093 -0.3093 0.951 351.4674 943.9084)" class="st27 st51"> </text>
+    <text transform="matrix(0.9548 0.2973 -0.2973 0.9548 358.4274 946.1422)" class="st27 st51"> </text>
+    <text transform="matrix(0.962 0.2732 -0.2732 0.962 365.4169 948.3013)" class="st27 st51"> </text>
+    <text transform="matrix(1.3838 0.3185 -0.2243 0.9745 370.3744 959.3099)" class="st32 st54">R</text>
+    <text transform="matrix(1.4066 0.1949 -0.1372 0.9905 417.9798 969.7496)" class="st32 st55">I</text>
+    <text transform="matrix(1.4183 0.0697 -0.0491 0.9988 454.404 974.8386)" class="st32 st55">S</text>
+    <text transform="matrix(1.4195 -0.0376 0.0265 0.9996 497.0292 976.7197)" class="st32 st54">I</text>
+    <text transform="matrix(1.4087 -0.1792 0.1262 0.992 533.9215 975.9493)" class="st32 st56">N</text>
+    <text transform="matrix(1.3801 -0.3344 0.2355 0.9719 588.4196 968.7078)" class="st32 st55">G</text>
+    <text transform="matrix(1.3518 -0.4347 0.3061 0.952 635.5134 956.7258)" class="st32 st55"> </text>
+    <text transform="matrix(1.3351 -0.4837 0.3406 0.9402 653.2335 951.0231)" class="st32 st54"> </text>
+    <text transform="matrix(1.3166 -0.5318 0.3745 0.9272 670.0455 944.9102)" class="st32 st57"> </text>
+    <text transform="matrix(0.9179 -0.3968 0.3968 0.9179 683.0181 930.1212)" class="st27 st50"> </text>
+    <text transform="matrix(0.9081 -0.4188 0.4188 0.9081 689.7341 927.2233)" class="st27 st52"> </text>
+    <text transform="matrix(0.903 -0.4297 0.4297 0.903 696.3773 924.1754)" class="st27 st52"> </text>
+    <text transform="matrix(0.8977 -0.4405 0.4405 0.8977 702.9807 921.0256)" class="st27 st50"> </text>
+    <text transform="matrix(0.8869 -0.4619 0.4619 0.8869 709.5591 917.8196)" class="st27 st50"> </text>
+    <text transform="matrix(0.8813 -0.4725 0.4725 0.8813 716.0526 914.4578)" class="st27 st50"> </text>
+    <text transform="matrix(0.8756 -0.483 0.483 0.8756 722.5029 911.0069)" class="st27 st50"> </text>
+    <text transform="matrix(0.8698 -0.4935 0.4935 0.8698 728.8961 907.4567)" class="st27 st50"> </text>
+    <text transform="matrix(0.8577 -0.5141 0.5141 0.8577 735.2552 903.8397)" class="st27 st50"> </text>
+    <text transform="matrix(0.1055 -1.4161 0.9972 0.0743 58.9927 481.5373)" class="st32 st54"> </text>
+    <text transform="matrix(0.1592 -1.4111 0.9937 0.1121 60.3642 464.3557)" class="st32 st55"> </text>
+    <text transform="matrix(0.2127 -1.404 0.9887 0.1498 62.3928 447.2407)" class="st32 st57"> </text>
+    <text transform="matrix(0.2834 -1.3914 0.9799 0.1996 64.9453 430.3019)" class="st32 st57"> </text>
+    <text transform="matrix(0.3707 -1.3708 0.9653 0.2611 67.8086 413.4971)" class="st32 st54">S</text>
+    <text transform="matrix(0.5063 -1.3267 0.9343 0.3566 78.2023 373.6637)" class="st32 st55">U</text>
+    <text transform="matrix(0.6513 -1.2618 0.8886 0.4586 94.6318 329.5779)" class="st32 st54">N</text>
+    <text transform="matrix(0.6033 -0.7975 0.7975 0.6033 109.9427 276.34)" class="st27 st58"> </text>
+    <text transform="matrix(0.768 -0.6404 0.6404 0.768 171.0856 195.2709)" class="st27 st59"> </text>
+    <text transform="matrix(0.8924 -0.4513 0.4513 0.8924 252.3179 127.9665)" class="st27 st60"> </text>
+    <text transform="matrix(0.9443 -0.3292 0.3292 0.9443 347.476 83.573)" class="st27 st60"> </text>
+    <text transform="matrix(0.9482 -0.3177 0.3177 0.9482 354.1107 81.2507)" class="st27 st59"> </text>
+    <text transform="matrix(0.952 -0.3061 0.3061 0.952 360.7776 79.0313)" class="st27 st61"> </text>
+    <text transform="matrix(0.9592 -0.2828 0.2828 0.9592 367.4691 76.8801)" class="st27 st59"> </text>
+    <text transform="matrix(0.9626 -0.2711 0.2711 0.9626 374.2079 74.8752)" class="st27 st61"> </text>
+    <text transform="matrix(0.9658 -0.2593 0.2593 0.9658 380.9758 72.9744)" class="st27 st59"> </text>
+    <text transform="matrix(0.9689 -0.2474 0.2474 0.9689 387.7675 71.1719)" class="st27 st62"> </text>
+    <text transform="matrix(0.9747 -0.2236 0.2236 0.9747 394.5831 69.4498)" class="st27 st62"> </text>
+    <text transform="matrix(0.9774 -0.2115 0.2115 0.9774 401.4357 67.8722)" class="st27 st59"> </text>
+    <text transform="matrix(0.9799 -0.1995 0.1995 0.9799 408.3063 66.3935)" class="st27 st62"> </text>
+    <text transform="matrix(0.9845 -0.1752 0.1752 0.9845 415.1928 64.9868)" class="st27 st61"> </text>
+    <text transform="matrix(0.9866 -0.163 0.163 0.9866 422.111 63.7383)" class="st27 st59"> </text>
+    <text transform="matrix(0.9886 -0.1508 0.1508 0.9886 429.0416 62.5837)" class="st27 st61"> </text>
+    <text transform="matrix(0.9904 -0.1385 0.1385 0.9904 435.9965 61.548)" class="st27 st59"> </text>
+    <text transform="matrix(0.9935 -0.1138 0.1138 0.9935 442.9594 60.5758)" class="st27 st62"> </text>
+    <text transform="matrix(0.9948 -0.1014 0.1014 0.9948 449.9439 59.7628)" class="st27 st59"> </text>
+    <text transform="matrix(0.996 -0.089 0.089 0.996 456.937 59.0517)" class="st27 st59"> </text>
+    <text transform="matrix(0.9971 -0.0766 0.0766 0.9971 463.9378 58.449)" class="st27 st60"> </text>
+    <text transform="matrix(0.9987 -0.0516 0.0516 0.9987 470.9492 57.9207)" class="st27 st62"> </text>
+    <text transform="matrix(0.9992 -0.039 0.039 0.9992 477.9667 57.5429)" class="st27 st59"> </text>
+    <text transform="matrix(0.9996 -0.0265 0.0265 0.9996 484.9936 57.2737)" class="st27 st59"> </text>
+    <text transform="matrix(0.9999 -0.0139 0.0139 0.9999 492.0175 57.1079)" class="st27 st62"> </text>
+    <text transform="matrix(0.9999 0.0113 -0.0113 0.9999 499.0485 57.019)" class="st27 st62"> </text>
+    <text transform="matrix(0.9997 0.0239 -0.0239 0.9997 506.0755 57.0805)" class="st27 st61"> </text>
+    <text transform="matrix(0.9993 0.0365 -0.0365 0.9993 513.1044 57.2549)" class="st27 st61"> </text>
+    <text transform="matrix(0.9988 0.0491 -0.0491 0.9988 520.127 57.5256)" class="st27 st59"> </text>
+    <text transform="matrix(0.9972 0.0743 -0.0743 0.9972 527.1495 57.8692)" class="st27 st62"> </text>
+    <text transform="matrix(0.9962 0.0869 -0.0869 0.9962 534.1621 58.3739)" class="st27 st59"> </text>
+    <text transform="matrix(0.995 0.0995 -0.0995 0.995 541.1622 58.9805)" class="st27 st59"> </text>
+    <text transform="matrix(0.9937 0.1121 -0.1121 0.9937 548.1594 59.6901)" class="st27 st59"> </text>
+    <text transform="matrix(0.9922 0.1247 -0.1247 0.9922 555.1398 60.5069)" class="st27 st60"> </text>
+    <text transform="matrix(0.9887 0.1498 -0.1498 0.9887 562.1157 61.3921)" class="st27 st62"> </text>
+    <text transform="matrix(0.9867 0.1623 -0.1623 0.9867 569.065 62.4307)" class="st27 st61"> </text>
+    <text transform="matrix(0.9846 0.1747 -0.1747 0.9846 575.9998 63.5678)" class="st27 st59"> </text>
+    <text transform="matrix(0.9823 0.1872 -0.1872 0.9823 582.9181 64.8111)" class="st27 st62"> </text>
+    <text transform="matrix(0.9773 0.212 -0.212 0.9773 589.8272 66.1174)" class="st27 st59"> </text>
+    <text transform="matrix(0.9745 0.2243 -0.2243 0.9745 596.699 67.5815)" class="st27 st62"> </text>
+    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 603.5517 69.1522)" class="st27 st59"> </text>
+    <text transform="matrix(0.9685 0.2489 -0.2489 0.9685 610.3834 70.8256)" class="st27 st59"> </text>
+    <text transform="matrix(0.9653 0.2611 -0.2611 0.9653 617.1835 72.5968)" class="st27 st62"> </text>
+    <text transform="matrix(0.9584 0.2853 -0.2853 0.9584 623.9645 74.4397)" class="st27 st62"> </text>
+    <text transform="matrix(0.9548 0.2973 -0.2973 0.9548 630.7091 76.4376)" class="st27 st61"> </text>
+    <text transform="matrix(0.951 0.3093 -0.3093 0.951 637.4171 78.5301)" class="st27 st59"> </text>
+    <text transform="matrix(0.947 0.3212 -0.3212 0.947 644.0939 80.7274)" class="st27 st62"> </text>
+    <text transform="matrix(0.9387 0.3449 -0.3449 0.9387 650.7524 82.9928)" class="st27 st61"> </text>
+    <text transform="matrix(0.9343 0.3566 -0.3566 0.9343 657.3513 85.4076)" class="st27 st62"> </text>
+    <text transform="matrix(0.9297 0.3682 -0.3682 0.9297 663.9205 87.9164)" class="st27 st61"> </text>
+    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 670.4436 90.5274)" class="st27 st59"> </text>
+    <text transform="matrix(0.9153 0.4027 -0.4027 0.9153 676.9406 93.2084)" class="st27 st62"> </text>
+    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 683.3789 96.0265)" class="st27 st59"> </text>
+    <text transform="matrix(0.905 0.4253 -0.4253 0.905 689.7756 98.9492)" class="st27 st59"> </text>
+    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 696.1428 101.9209)" class="st27 st62"> </text>
+    <text transform="matrix(0.8886 0.4586 -0.4586 0.8886 702.4386 105.0484)" class="st27 st62"> </text>
+    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 708.6856 108.2665)" class="st27 st59"> </text>
+    <text transform="matrix(0.877 0.4804 -0.4804 0.877 714.8856 111.5836)" class="st27 st59"> </text>
+    <text transform="matrix(0.865 0.5018 -0.5018 0.865 721.0497 114.9578)" class="st27 st62"> </text>
+    <text transform="matrix(0.8587 0.5124 -0.5124 0.8587 727.1384 118.4721)" class="st27 st62"> </text>
+    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 733.1763 122.0769)" class="st27 st59"> </text>
+    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 739.1548 125.772)" class="st27 st61"> </text>
+    <text transform="matrix(0.8327 0.5538 -0.5538 0.8327 745.0936 129.5326)" class="st27 st59"> </text>
+    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 750.9504 133.4195)" class="st27 st60"> </text>
+    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 756.748 137.3943)" class="st27 st61"> </text>
+    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 762.5042 141.4247)" class="st27 st62"> </text>
+    <text transform="matrix(0.7975 0.6033 -0.6033 0.7975 768.1724 145.5871)" class="st27 st58"> </text>
+    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 773.7777 149.8286)" class="st27 st59"> </text>
+    <text transform="matrix(0.7827 0.6225 -0.6225 0.7827 779.3156 154.1538)" class="st27 st62"> </text>
+    <text transform="matrix(0.7674 0.6412 -0.6412 0.7674 784.806 158.5454)" class="st27 st62"> </text>
+    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 790.2032 163.0511)" class="st27 st62"> </text>
+    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 795.5318 167.6321)" class="st27 st61"> </text>
+    <text transform="matrix(0.7357 0.6773 -0.6773 0.7357 800.8149 172.2701)" class="st27 st59"> </text>
+    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 805.9968 177.0199)" class="st27 st60"> </text>
+    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 811.1043 181.8505)" class="st27 st59"> </text>
+    <text transform="matrix(0.7024 0.7118 -0.7118 0.7024 816.1664 186.7255)" class="st27 st60"> </text>
+    <text transform="matrix(0.6938 0.7202 -0.7202 0.6938 821.1172 191.7175)" class="st27 st59"> </text>
+    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 825.9918 196.7821)" class="st27 st61"> </text>
+    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 830.7952 201.9165)" class="st27 st59"> </text>
+    <text transform="matrix(0.6586 0.7525 -0.7525 0.6586 835.5358 207.1037)" class="st27 st59"> </text>
+    <text transform="matrix(0.8428 1.1428 -0.8048 0.5935 834.2189 216.7333)" class="st32 st54">M</text>
+    <text transform="matrix(0.6859 1.2434 -0.8756 0.483 875.6199 274.2139)" class="st32 st57">O</text>
+    <text transform="matrix(0.5477 1.3101 -0.9226 0.3857 898.3508 315.4137)" class="st32 st54">O</text>
+    <text transform="matrix(0.4016 1.362 -0.9592 0.2828 916.5994 358.781)" class="st32 st56">N</text>
+    <text transform="matrix(0.1385 0.9904 -0.9904 0.1385 940.8845 408.0496)" class="st27 st59"> </text>
+    <g>
+      <defs>
+        <rect id="SVGID_00000016052306506079909680000000866418170411241400_" x="-33.99" y="0.62" width="1066.99" height="1265.85"/>
+      </defs>
+      <clipPath id="SVGID_00000031191898274517290630000011913926412084237958_">
+        <use xlink:href="#SVGID_00000016052306506079909680000000866418170411241400_"  style="overflow:visible;"/>
+      </clipPath>
+      
+        <line style="clip-path:url(#SVGID_00000031191898274517290630000011913926412084237958_);fill:none;stroke:#1D1D1B;stroke-width:6;" x1="499.7" y1="0.62" x2="499.7" y2="499.03"/>
+    </g>
+    <line class="st64" x1="931.25" y1="747.11" x2="852.34" y2="702.47"/>
+    <line class="st65" x1="61.71" y1="731.43" x2="501.78" y2="502.35"/>
+    <g>
+      <defs>
+        <rect id="SVGID_00000116920710861590562940000013418770212066680733_" x="-33.99" y="0.62" width="1066.99" height="1265.85"/>
+      </defs>
+      <clipPath id="SVGID_00000115473223156706939240000007982817624110009508_">
+        <use xlink:href="#SVGID_00000116920710861590562940000013418770212066680733_"  style="overflow:visible;"/>
+      </clipPath>
+      <path style="clip-path:url(#SVGID_00000115473223156706939240000007982817624110009508_);fill:#1D1D1B;" d="M135.14,246.81
+        c11.18,0.03,20.28-8.92,20.48-20.05c0.21-11.65-9.13-20.88-20.47-20.86c-11.26,0.02-20.26,9-20.44,20.1
+        C114.52,237.76,124.03,246.85,135.14,246.81 M135.2,201.94c13.59-0.01,24.58,11.11,24.52,24.65
+        c-0.05,13.48-11.07,24.53-24.72,24.47c-13.43-0.06-24.38-11.07-24.4-24.54C110.59,212.97,121.61,201.9,135.2,201.94"/>
+      <path style="clip-path:url(#SVGID_00000115473223156706939240000007982817624110009508_);fill:#1D1D1B;" d="M135.17,220.9
+        c2.99,0,5.46,2.44,5.47,5.42c0.02,3.01-2.47,5.53-5.48,5.51c-3.04-0.03-5.44-2.41-5.47-5.47
+        C129.66,223.37,132.16,220.9,135.17,220.9"/>
+      <path style="clip-path:url(#SVGID_00000115473223156706939240000007982817624110009508_);fill:#1D1D1B;" d="M945.31,435.55
+        c8.64,4.48,13.3,10.96,13.71,19.69c-0.11,8.74-4.54,15.39-12.94,20.12c7.49,0.37,16.26-2.73,21.12-10.09
+        c4.64-7.05,3.95-15.88-1.82-22.14C960.28,437.58,953.53,435.17,945.31,435.55 M948.17,478.24c-3.09,0.04-5.63-0.24-8.12-0.84
+        c-0.77-0.19-1.26-0.69-1.3-1.33c-0.04-0.63,0.4-1.2,1.16-1.42c2.49-0.74,4.79-1.78,6.86-3.19c3.98-2.7,6.67-6.17,8.08-10.37
+        c0.79-2.36,1.05-4.77,0.79-7.21c-0.49-4.58-2.54-8.56-6.16-11.91c-2.78-2.57-6.14-4.35-10.03-5.36c-0.75-0.2-1.29-0.53-1.4-1.26
+        c-0.09-0.62,0.27-1.26,0.96-1.47c0.98-0.29,1.98-0.54,3-0.74c1.66-0.32,3.35-0.49,5.05-0.49c6.13-0.01,11.66,1.56,16.48,4.85
+        c4.8,3.28,7.88,7.55,9.3,12.71c0.58,2.12,0.76,4.28,0.61,6.45c-0.33,4.88-2.28,9.23-5.81,13.04c-3.25,3.51-7.36,5.95-12.27,7.38
+        C952.88,477.82,950.3,478.18,948.17,478.24"/>
+      <path style="clip-path:url(#SVGID_00000115473223156706939240000007982817624110009508_);fill:#1D1D1B;" d="M345.24,947.15v-31.03
+        c0-0.65-0.75-0.97-1.19-0.52l-12.1,12.63c-0.26,0.27-0.67,0.28-0.95,0.04l-0.88-0.79c-0.31-0.27-0.33-0.76-0.04-1.07l15.9-16.78
+        c0.27-0.29,0.72-0.29,0.99,0l15.93,16.8c0.28,0.3,0.27,0.79-0.04,1.07l-0.84,0.75c-0.28,0.25-0.69,0.23-0.95-0.04
+        c-4.02-4.22-8.02-8.42-12.06-12.65c-0.44-0.46-1.19-0.14-1.19,0.51l0,0.97c0,10.87,0,19.14,0,30.1c0,0.4-0.31,0.73-0.7,0.73h-1.18
+        C345.55,947.88,345.24,947.55,345.24,947.15"/>
+    </g>
+    <line class="st65" x1="928.49" y1="745.96" x2="497.29" y2="501.99"/>
+    <g>
+      <defs>
+        <rect id="SVGID_00000164504714210072709250000003831633240954841998_" x="-33.99" y="0.62" width="1066.99" height="1265.85"/>
+      </defs>
+      <clipPath id="SVGID_00000003069754528080500820000014905492590936817307_">
+        <use xlink:href="#SVGID_00000164504714210072709250000003831633240954841998_"  style="overflow:visible;"/>
+      </clipPath>
+      <path style="clip-path:url(#SVGID_00000003069754528080500820000014905492590936817307_);fill:#FFFFFF;" d="M499.5,541.27
+        c22.89,0,41.45-18.56,41.45-41.45c0-22.89-18.56-41.45-41.45-41.45c-22.89,0-41.45,18.56-41.45,41.45
+        C458.05,522.72,476.61,541.27,499.5,541.27"/>
+      
+        <ellipse transform="matrix(0.3827 -0.9239 0.9239 0.3827 -153.4229 770.0288)" style="clip-path:url(#SVGID_00000003069754528080500820000014905492590936817307_);fill:none;stroke:#1D1D1B;stroke-width:2;" cx="499.5" cy="499.82" rx="41.45" ry="41.45"/>
     </g>
   </g>
   <g id="Layer_2" class="st0">
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000142865513341117173880000009855403903817047171_" x="-1" y="1" width="997" height="997"/>
+        <rect id="SVGID_00000109734338013313239110000013122894286026002623_" x="-1" y="1" width="997" height="997"/>
       </defs>
-      <clipPath id="SVGID_00000169518645488626160910000005601055182674766517_">
-        <use xlink:href="#SVGID_00000142865513341117173880000009855403903817047171_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000024703912915122908440000011635829101543820987_">
+        <use xlink:href="#SVGID_00000109734338013313239110000013122894286026002623_"  style="overflow:visible;"/>
       </clipPath>
       
-        <circle style="clip-path:url(#SVGID_00000169518645488626160910000005601055182674766517_);fill:none;stroke:#000000;stroke-width:1.914;" cx="497.5" cy="499.5" r="495.71"/>
+        <circle style="clip-path:url(#SVGID_00000024703912915122908440000011635829101543820987_);fill:none;stroke:#000000;stroke-width:1.914;" cx="497.5" cy="499.5" r="495.71"/>
       
-        <circle style="clip-path:url(#SVGID_00000169518645488626160910000005601055182674766517_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="498.02" cy="502.67" r="411.6"/>
+        <circle style="clip-path:url(#SVGID_00000024703912915122908440000011635829101543820987_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="498.02" cy="502.67" r="411.6"/>
     </g>
-    <text transform="matrix(0.1262 0.992 -0.992 0.1262 31.5035 548.0504)" class="st1 st4 st50">P</text>
-    <text transform="matrix(0.163 0.9866 -0.9866 0.163 34.1542 568.7638)" class="st1 st4 st51">l</text>
-    <text transform="matrix(0.1874 0.9823 -0.9823 0.1874 35.5896 577.6464)" class="st1 st4 st50">u</text>
-    <text transform="matrix(0.2236 0.9747 -0.9747 0.2236 39.0638 595.93)" class="st1 st4 st50">t</text>
-    <text transform="matrix(0.2474 0.9689 -0.9689 0.2474 41.5492 606.7338)" class="st1 st4 st52">o</text>
-    <text transform="matrix(0.2711 0.9626 -0.9626 0.2711 46.022 624.0605)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.2945 0.9556 -0.9556 0.2945 48.0805 631.2849)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.3177 0.9482 -0.9482 0.3177 50.2352 638.5128)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.3292 0.9443 -0.9443 0.3292 54.1892 650.2299)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.4405 0.8978 -0.8978 0.4405 54.1905 658.5715)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.5345 0.8452 -0.8452 0.5345 98.971 744.8696)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 103.1791 751.7247)" class="st1 st4 st50">N</text>
-    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 117.9556 773.2099)" class="st1 st4 st51">e</text>
-    <text transform="matrix(0.6312 0.7756 -0.7756 0.6312 127.4441 785.9974)" class="st1 st4 st53">p</text>
-    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 139.3904 800.6343)" class="st1 st4 st50">t</text>
-    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 146.8122 809.3079)" class="st1 st4 st50">u</text>
-    <text transform="matrix(0.7023 0.7118 -0.7118 0.7023 159.4518 822.9501)" class="st1 st4 st50">n</text>
-    <text transform="matrix(0.7357 0.6773 -0.6773 0.7357 172.6931 836.2006)" class="st1 st4 st51">e</text>
-    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 184.2699 847.0045)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.7975 0.6033 -0.6033 0.7975 189.354 852.7848)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 245.0919 893.2388)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 251.5358 897.2307)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.865 0.5018 -0.5018 0.865 258.0116 901.1432)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8711 0.4912 -0.4912 0.8711 264.5181 905.0188)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.877 0.4804 -0.4804 0.877 271.1776 908.6831)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.8886 0.4587 -0.4587 0.8886 277.7851 912.3771)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 284.5084 915.7599)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 291.2873 919.3732)" class="st1 st4 st51">U</text>
-    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 314.0804 929.6262)" class="st1 st4 st50">r</text>
-    <text transform="matrix(0.9386 0.3449 -0.3449 0.9386 326.4411 934.6406)" class="st1 st4 st52">a</text>
-    <text transform="matrix(0.951 0.3093 -0.3093 0.951 341.5428 940.3713)" class="st1 st4 st50">n</text>
-    <text transform="matrix(0.962 0.2732 -0.2732 0.962 359.1041 946.1307)" class="st1 st4 st51">u</text>
-    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 376.9295 951.1717)" class="st1 st4 st50">s</text>
-    <text transform="matrix(0.9846 0.1747 -0.1747 0.9846 389.4464 954.9242)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.9999 0.0112 -0.0112 0.9999 440.9372 966.1556)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.9935 -0.1138 0.1138 0.9935 545.7693 964.2353)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.9904 -0.1385 0.1385 0.9904 553.2224 963.4972)" class="st1 st4 st51">S</text>
-    <text transform="matrix(0.9845 -0.1752 0.1752 0.9845 571.0927 961.0082)" class="st1 st4 st50">a</text>
-    <text transform="matrix(0.9799 -0.1995 0.1995 0.9799 586.9069 958.1279)" class="st1 st4 st50">t</text>
-    <text transform="matrix(0.9719 -0.2355 0.2355 0.9719 598.2083 955.8309)" class="st1 st4 st51">u</text>
-    <text transform="matrix(0.9626 -0.2711 0.2711 0.9626 616.238 951.5035)" class="st1 st4 st51">r</text>
-    <text transform="matrix(0.952 -0.3061 0.3061 0.952 629.6779 947.734)" class="st1 st4 st50">n</text>
-    <text transform="matrix(0.9482 -0.3177 0.3177 0.9482 647.416 941.9219)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.9443 -0.3292 0.3292 0.9443 648.0129 941.7262)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.9402 -0.3406 0.3406 0.9402 655.1163 939.297)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.9317 -0.3633 0.3633 0.9317 662.2809 936.6239)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.9272 -0.3745 0.3745 0.9272 669.3721 933.8688)" class="st1 st4 st53"> </text>
-    <text transform="matrix(0.9179 -0.3968 0.3968 0.9179 676.3792 931.0869)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.913 -0.4078 0.4078 0.913 683.3118 928.0795)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.9081 -0.4188 0.4188 0.9081 690.331 925.0372)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.8978 -0.4405 0.4405 0.8978 697.1882 921.8538)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8924 -0.4513 0.4513 0.8924 703.948 918.5807)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.8869 -0.4619 0.4619 0.8869 710.7153 915.0931)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8756 -0.483 0.483 0.8756 717.4923 911.602)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8698 -0.4935 0.4935 0.8698 724.148 907.9053)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8638 -0.5039 0.5039 0.8638 730.6857 904.204)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8515 -0.5243 0.5243 0.8515 737.2303 900.4347)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.8452 -0.5345 0.5345 0.8452 743.6343 896.398)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.8388 -0.5445 0.5445 0.8388 750.1227 892.3895)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8255 -0.5644 0.5644 0.8255 756.5173 888.2667)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.8187 -0.5742 0.5742 0.8187 762.7377 883.9797)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.8118 -0.5839 0.5839 0.8118 768.9312 879.6628)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.7977 -0.6031 0.6031 0.7977 775.08 875.1364)" class="st1 st4 st51">J</text>
-    <text transform="matrix(0.7756 -0.6312 0.6312 0.7756 784.5693 868.1401)" class="st1 st4 st53">u</text>
-    <text transform="matrix(0.7525 -0.6586 0.6586 0.7525 798.9708 856.3688)" class="st1 st4 st53">p</text>
-    <text transform="matrix(0.7284 -0.6851 0.6851 0.7284 813.173 843.8467)" class="st1 st4 st50">i</text>
-    <text transform="matrix(0.7118 -0.7023 0.7023 0.7118 820.0676 837.4355)" class="st1 st4 st50">t</text>
-    <text transform="matrix(0.6948 -0.7192 0.7192 0.6948 828.0818 829.7282)" class="st1 st4 st51">e</text>
-    <text transform="matrix(0.6685 -0.7438 0.7438 0.6685 839.0933 818.3232)" class="st1 st4 st51">r</text>
-    <text transform="matrix(0.6033 -0.7975 0.7975 0.6033 849.3962 808.7625)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.5333 -0.8459 0.8459 0.5333 891.2245 751.2576)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.5229 -0.8524 0.8524 0.5229 895.2738 744.8021)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.5018 -0.865 0.865 0.5018 899.2397 738.3002)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.4912 -0.8711 0.8711 0.4912 903.006 731.8278)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.4804 -0.877 0.877 0.4804 906.7615 725.1713)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.4587 -0.8886 0.8886 0.4587 910.3605 718.5945)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.4476 -0.8942 0.8942 0.4476 913.8348 711.7628)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.4365 -0.8997 0.8997 0.4365 917.2 704.9904)" class="st1 st4 st52"> </text>
-    <text transform="matrix(0.4141 -0.9102 0.9102 0.4141 920.602 698.2326)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.4027 -0.9153 0.9153 0.4027 923.7062 691.2631)" class="st1 st4 st51"> </text>
-    <text transform="matrix(0.3682 -0.9297 0.9297 0.3682 926.9849 684.432)" class="st1 st4 st51">M</text>
-    <text transform="matrix(0.3212 -0.947 0.947 0.3212 938.1868 655.1653)" class="st1 st4 st52">a</text>
-    <text transform="matrix(0.2853 -0.9584 0.9584 0.2853 943.3663 639.8826)" class="st1 st4 st50">r</text>
-    <text transform="matrix(0.2611 -0.9653 0.9653 0.2611 947.2737 626.5356)" class="st1 st4 st50">s</text>
-    <text transform="matrix(0.1872 -0.9823 0.9823 0.1872 951.4412 614.0736)" class="st1 st4 st53"> </text>
-    <text transform="matrix(0.0112 -0.9999 0.9999 0.0112 964.5175 555.5185)" class="st1 st4 st50"> </text>
-    <text transform="matrix(0.0891 -0.996 0.996 0.0891 49.0051 477.3155)" class="st1 st4 st54">A</text>
-    <text transform="matrix(0.1264 -0.992 0.992 0.1264 51.2616 454.2317)" class="st1 st4 st54">s</text>
-    <text transform="matrix(0.1637 -0.9865 0.9865 0.1637 52.8628 441.825)" class="st1 st4 st55">c</text>
-    <text transform="matrix(0.1885 -0.9821 0.9821 0.1885 55.0632 428.3799)" class="st1 st4 st56">e</text>
-    <text transform="matrix(0.2256 -0.9742 0.9742 0.2256 57.9614 413.4893)" class="st1 st4 st55">n</text>
-    <text transform="matrix(0.2624 -0.965 0.965 0.2624 62.1375 395.9081)" class="st1 st4 st55">d</text>
-    <text transform="matrix(0.2988 -0.9543 0.9543 0.2988 67.0093 378.3467)" class="st1 st4 st54">a</text>
-    <text transform="matrix(0.3349 -0.9423 0.9423 0.3349 71.6607 363.5526)" class="st1 st4 st56">n</text>
-    <text transform="matrix(0.3704 -0.9289 0.9289 0.3704 77.7163 346.5691)" class="st1 st4 st54">t</text>
-    <text transform="matrix(0.4396 -0.8982 0.8982 0.4396 80.954 335.9676)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.5166 -0.8562 0.8562 0.5166 110.4583 278.5822)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.5273 -0.8497 0.8497 0.5273 114.2631 272.3102)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.5586 -0.8294 0.8294 0.5586 118.0859 265.7567)" class="st1 st4 st55">D</text>
-    <text transform="matrix(0.599 -0.8007 0.8007 0.599 131.5838 245.9283)" class="st1 st4 st56">e</text>
-    <text transform="matrix(0.6186 -0.7857 0.7857 0.6186 140.8494 233.5212)" class="st1 st4 st57">c</text>
-    <text transform="matrix(0.6471 -0.7624 0.7624 0.6471 149.2315 222.77)" class="st1 st4 st56">e</text>
-    <text transform="matrix(0.6747 -0.7381 0.7381 0.6747 159.091 211.0812)" class="st1 st4 st57">n</text>
-    <text transform="matrix(0.7012 -0.713 0.713 0.7012 171.2195 197.8585)" class="st1 st4 st56">d</text>
-    <text transform="matrix(0.7267 -0.687 0.687 0.7267 184.08 184.8612)" class="st1 st4 st54">a</text>
-    <text transform="matrix(0.7511 -0.6602 0.6602 0.7511 195.3401 174.1799)" class="st1 st4 st55">n</text>
-    <text transform="matrix(0.7745 -0.6326 0.6326 0.7745 208.9388 162.4783)" class="st1 st4 st55">t</text>
-    <text transform="matrix(0.7895 -0.6138 0.6138 0.7895 217.4813 155.4492)" class="st1 st4 st54"> </text>
-    <text transform="matrix(0.818 -0.5752 0.5752 0.818 222.9163 150.6764)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.8446 -0.5355 0.5355 0.8446 254.7141 128.7592)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.8571 -0.5152 0.5152 0.8571 260.9046 124.9378)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.8632 -0.5049 0.5049 0.8632 267.1549 121.1031)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.8691 -0.4946 0.4946 0.8691 273.3777 117.4302)" class="st1 st4 st54"> </text>
-    <text transform="matrix(0.8807 -0.4737 0.4737 0.8807 279.7747 113.8364)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.8863 -0.4632 0.4632 0.8863 286.1569 110.3556)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.8917 -0.4526 0.4526 0.8917 292.6075 107.0069)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.9023 -0.4312 0.4312 0.9023 299.1263 103.718)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.9074 -0.4204 0.4204 0.9074 305.6293 100.611)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.9123 -0.4095 0.4095 0.9123 312.278 97.4648)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.9308 -0.3655 0.3655 0.9308 318.7746 94.2762)" class="st1 st4 st54">M</text>
-    <text transform="matrix(0.9472 -0.3206 0.3206 0.9472 346.6157 83.5239)" class="st1 st4 st54">o</text>
-    <text transform="matrix(0.9581 -0.2863 0.2863 0.9581 363.1819 77.9689)" class="st1 st4 st56">o</text>
-    <text transform="matrix(0.9708 -0.2399 0.2399 0.9708 379.6001 73.0182)" class="st1 st4 st54">n</text>
-    <text transform="matrix(0.9856 -0.1688 0.1688 0.9856 396.9904 68.0938)" class="st1 st4 st54"> </text>
-    <text transform="matrix(0.9999 0.0145 -0.0145 0.9999 450.8408 56.6246)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.9903 0.1389 -0.1389 0.9903 555.619 60.9842)" class="st1 st4 st54"> </text>
-    <text transform="matrix(0.9885 0.1513 -0.1513 0.9885 562.8632 62.0362)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.9844 0.1761 -0.1761 0.9844 570.0424 63.1795)" class="st1 st4 st55">S</text>
-    <text transform="matrix(0.977 0.2133 -0.2133 0.977 586.8009 66.1913)" class="st1 st4 st56">u</text>
-    <text transform="matrix(0.965 0.2624 -0.2624 0.965 604.3054 69.9662)" class="st1 st4 st55">n</text>
-    <text transform="matrix(0.9505 0.3109 -0.3109 0.9505 621.7055 74.4845)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.8869 0.462 -0.462 0.8869 658.5565 83.6121)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.8224 0.5689 -0.5689 0.8224 750.1296 134.6517)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.8153 0.579 -0.579 0.8153 756.1682 138.8095)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.8081 0.5891 -0.5891 0.8081 762.0727 142.9873)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.778 0.6282 -0.6282 0.778 768.0792 147.1051)" class="st1 st4 st56">M</text>
-    <text transform="matrix(0.7463 0.6656 -0.6656 0.7463 791.2463 165.9728)" class="st1 st4 st55">e</text>
-    <text transform="matrix(0.7214 0.6925 -0.6925 0.7214 802.64 176.118)" class="st1 st4 st55">r</text>
-    <text transform="matrix(0.7044 0.7098 -0.7098 0.7044 811.864 184.9778)" class="st1 st4 st56">c</text>
-    <text transform="matrix(0.6781 0.7349 -0.7349 0.6781 821.5917 194.571)" class="st1 st4 st55">u</text>
-    <text transform="matrix(0.6511 0.759 -0.759 0.6511 833.7454 207.7501)" class="st1 st4 st55">r</text>
-    <text transform="matrix(0.6326 0.7745 -0.7745 0.6326 842.7325 218.2945)" class="st1 st4 st55">y</text>
-    <text transform="matrix(0.5555 0.8315 -0.8315 0.5555 852.9884 228.9934)" class="st1 st4 st54"> </text>
-    <text transform="matrix(0.4842 0.875 -0.875 0.4842 890.613 288.0336)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.4632 0.8863 -0.8863 0.4632 894.1943 294.3471)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.4526 0.8917 -0.8917 0.4526 897.5598 300.8156)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.4419 0.8971 -0.8971 0.4419 900.8656 307.2953)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.4204 0.9074 -0.9074 0.4204 904.0104 313.921)" class="st1 st4 st55"> </text>
-    <text transform="matrix(0.4095 0.9123 -0.9123 0.4095 907.1099 320.4304)" class="st1 st4 st56"> </text>
-    <text transform="matrix(0.3766 0.9264 -0.9264 0.3766 910.1606 327.0858)" class="st1 st4 st55">V</text>
-    <text transform="matrix(0.3432 0.9393 -0.9393 0.3432 917.6188 345.331)" class="st1 st4 st55">e</text>
-    <text transform="matrix(0.3092 0.951 -0.951 0.3092 922.8863 359.5195)" class="st1 st4 st55">n</text>
-    <text transform="matrix(0.2748 0.9615 -0.9615 0.2748 928.3732 376.4134)" class="st1 st4 st56">u</text>
-    <text transform="matrix(0.2399 0.9708 -0.9708 0.2399 933.1396 393.6255)" class="st1 st4 st54">s</text>
-    <text transform="matrix(0.1327 0.9912 -0.9912 0.1327 938.1884 405.4261)" class="st1 st4 st56"> </text>
-    <text transform="matrix(-0.0766 0.9971 -0.9971 -0.0766 950.4935 488.2396)" class="st1 st4 st55"> </text>
+    <text transform="matrix(0.1262 0.992 -0.992 0.1262 31.5035 548.0504)" class="st1 st4 st71">P</text>
+    <text transform="matrix(0.163 0.9866 -0.9866 0.163 34.1542 568.7638)" class="st1 st4 st72">l</text>
+    <text transform="matrix(0.1874 0.9823 -0.9823 0.1874 35.5896 577.6464)" class="st1 st4 st71">u</text>
+    <text transform="matrix(0.2236 0.9747 -0.9747 0.2236 39.0638 595.93)" class="st1 st4 st71">t</text>
+    <text transform="matrix(0.2474 0.9689 -0.9689 0.2474 41.5492 606.7338)" class="st1 st4 st73">o</text>
+    <text transform="matrix(0.2711 0.9626 -0.9626 0.2711 46.022 624.0605)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.2945 0.9556 -0.9556 0.2945 48.0805 631.2849)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.3177 0.9482 -0.9482 0.3177 50.2352 638.5128)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.3292 0.9443 -0.9443 0.3292 54.1892 650.2299)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.4405 0.8978 -0.8978 0.4405 54.1905 658.5715)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.5345 0.8452 -0.8452 0.5345 98.971 744.8696)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 103.1791 751.7247)" class="st1 st4 st71">N</text>
+    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 117.9556 773.2099)" class="st1 st4 st72">e</text>
+    <text transform="matrix(0.6312 0.7756 -0.7756 0.6312 127.4441 785.9974)" class="st1 st4 st74">p</text>
+    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 139.3904 800.6343)" class="st1 st4 st71">t</text>
+    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 146.8122 809.3079)" class="st1 st4 st71">u</text>
+    <text transform="matrix(0.7023 0.7118 -0.7118 0.7023 159.4518 822.9501)" class="st1 st4 st71">n</text>
+    <text transform="matrix(0.7357 0.6773 -0.6773 0.7357 172.6931 836.2006)" class="st1 st4 st72">e</text>
+    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 184.2699 847.0045)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.7975 0.6033 -0.6033 0.7975 189.354 852.7848)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 245.0919 893.2388)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 251.5358 897.2307)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.865 0.5018 -0.5018 0.865 258.0116 901.1432)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8711 0.4912 -0.4912 0.8711 264.5181 905.0188)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.877 0.4804 -0.4804 0.877 271.1776 908.6831)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.8886 0.4587 -0.4587 0.8886 277.7851 912.3771)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 284.5084 915.7599)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 291.2873 919.3732)" class="st1 st4 st72">U</text>
+    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 314.0804 929.6262)" class="st1 st4 st71">r</text>
+    <text transform="matrix(0.9386 0.3449 -0.3449 0.9386 326.4411 934.6406)" class="st1 st4 st73">a</text>
+    <text transform="matrix(0.951 0.3093 -0.3093 0.951 341.5428 940.3713)" class="st1 st4 st71">n</text>
+    <text transform="matrix(0.962 0.2732 -0.2732 0.962 359.1041 946.1307)" class="st1 st4 st72">u</text>
+    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 376.9295 951.1717)" class="st1 st4 st71">s</text>
+    <text transform="matrix(0.9846 0.1747 -0.1747 0.9846 389.4464 954.9242)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.9999 0.0112 -0.0112 0.9999 440.9372 966.1556)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.9935 -0.1138 0.1138 0.9935 545.7693 964.2353)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.9904 -0.1385 0.1385 0.9904 553.2224 963.4972)" class="st1 st4 st72">S</text>
+    <text transform="matrix(0.9845 -0.1752 0.1752 0.9845 571.0927 961.0082)" class="st1 st4 st71">a</text>
+    <text transform="matrix(0.9799 -0.1995 0.1995 0.9799 586.9069 958.1279)" class="st1 st4 st71">t</text>
+    <text transform="matrix(0.9719 -0.2355 0.2355 0.9719 598.2083 955.8309)" class="st1 st4 st72">u</text>
+    <text transform="matrix(0.9626 -0.2711 0.2711 0.9626 616.238 951.5035)" class="st1 st4 st72">r</text>
+    <text transform="matrix(0.952 -0.3061 0.3061 0.952 629.6779 947.734)" class="st1 st4 st71">n</text>
+    <text transform="matrix(0.9482 -0.3177 0.3177 0.9482 647.416 941.9219)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.9443 -0.3292 0.3292 0.9443 648.0129 941.7262)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.9402 -0.3406 0.3406 0.9402 655.1163 939.297)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.9317 -0.3633 0.3633 0.9317 662.2809 936.6239)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.9272 -0.3745 0.3745 0.9272 669.3721 933.8688)" class="st1 st4 st74"> </text>
+    <text transform="matrix(0.9179 -0.3968 0.3968 0.9179 676.3792 931.0869)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.913 -0.4078 0.4078 0.913 683.3118 928.0795)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.9081 -0.4188 0.4188 0.9081 690.331 925.0372)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.8978 -0.4405 0.4405 0.8978 697.1882 921.8538)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8924 -0.4513 0.4513 0.8924 703.948 918.5807)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.8869 -0.4619 0.4619 0.8869 710.7153 915.0931)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8756 -0.483 0.483 0.8756 717.4923 911.602)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8698 -0.4935 0.4935 0.8698 724.148 907.9053)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8638 -0.5039 0.5039 0.8638 730.6857 904.204)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8515 -0.5243 0.5243 0.8515 737.2303 900.4347)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.8452 -0.5345 0.5345 0.8452 743.6343 896.398)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.8388 -0.5445 0.5445 0.8388 750.1227 892.3895)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8255 -0.5644 0.5644 0.8255 756.5173 888.2667)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.8187 -0.5742 0.5742 0.8187 762.7377 883.9797)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.8118 -0.5839 0.5839 0.8118 768.9312 879.6628)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.7977 -0.6031 0.6031 0.7977 775.08 875.1364)" class="st1 st4 st72">J</text>
+    <text transform="matrix(0.7756 -0.6312 0.6312 0.7756 784.5693 868.1401)" class="st1 st4 st74">u</text>
+    <text transform="matrix(0.7525 -0.6586 0.6586 0.7525 798.9708 856.3688)" class="st1 st4 st74">p</text>
+    <text transform="matrix(0.7284 -0.6851 0.6851 0.7284 813.173 843.8467)" class="st1 st4 st71">i</text>
+    <text transform="matrix(0.7118 -0.7023 0.7023 0.7118 820.0676 837.4355)" class="st1 st4 st71">t</text>
+    <text transform="matrix(0.6948 -0.7192 0.7192 0.6948 828.0818 829.7282)" class="st1 st4 st72">e</text>
+    <text transform="matrix(0.6685 -0.7438 0.7438 0.6685 839.0933 818.3232)" class="st1 st4 st72">r</text>
+    <text transform="matrix(0.6033 -0.7975 0.7975 0.6033 849.3962 808.7625)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.5333 -0.8459 0.8459 0.5333 891.2245 751.2576)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.5229 -0.8524 0.8524 0.5229 895.2738 744.8021)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.5018 -0.865 0.865 0.5018 899.2397 738.3002)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.4912 -0.8711 0.8711 0.4912 903.006 731.8278)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.4804 -0.877 0.877 0.4804 906.7615 725.1713)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.4587 -0.8886 0.8886 0.4587 910.3605 718.5945)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.4476 -0.8942 0.8942 0.4476 913.8348 711.7628)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.4365 -0.8997 0.8997 0.4365 917.2 704.9904)" class="st1 st4 st73"> </text>
+    <text transform="matrix(0.4141 -0.9102 0.9102 0.4141 920.602 698.2326)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.4027 -0.9153 0.9153 0.4027 923.7062 691.2631)" class="st1 st4 st72"> </text>
+    <text transform="matrix(0.3682 -0.9297 0.9297 0.3682 926.9849 684.432)" class="st1 st4 st72">M</text>
+    <text transform="matrix(0.3212 -0.947 0.947 0.3212 938.1868 655.1653)" class="st1 st4 st73">a</text>
+    <text transform="matrix(0.2853 -0.9584 0.9584 0.2853 943.3663 639.8826)" class="st1 st4 st71">r</text>
+    <text transform="matrix(0.2611 -0.9653 0.9653 0.2611 947.2737 626.5356)" class="st1 st4 st71">s</text>
+    <text transform="matrix(0.1872 -0.9823 0.9823 0.1872 951.4412 614.0736)" class="st1 st4 st74"> </text>
+    <text transform="matrix(0.0112 -0.9999 0.9999 0.0112 964.5175 555.5185)" class="st1 st4 st71"> </text>
+    <text transform="matrix(0.0891 -0.996 0.996 0.0891 49.0051 477.3155)" class="st1 st4 st75">A</text>
+    <text transform="matrix(0.1264 -0.992 0.992 0.1264 51.2616 454.2317)" class="st1 st4 st75">s</text>
+    <text transform="matrix(0.1637 -0.9865 0.9865 0.1637 52.8628 441.825)" class="st1 st4 st76">c</text>
+    <text transform="matrix(0.1885 -0.9821 0.9821 0.1885 55.0632 428.3799)" class="st1 st4 st77">e</text>
+    <text transform="matrix(0.2256 -0.9742 0.9742 0.2256 57.9614 413.4893)" class="st1 st4 st76">n</text>
+    <text transform="matrix(0.2624 -0.965 0.965 0.2624 62.1375 395.9081)" class="st1 st4 st76">d</text>
+    <text transform="matrix(0.2988 -0.9543 0.9543 0.2988 67.0093 378.3467)" class="st1 st4 st75">a</text>
+    <text transform="matrix(0.3349 -0.9423 0.9423 0.3349 71.6607 363.5526)" class="st1 st4 st77">n</text>
+    <text transform="matrix(0.3704 -0.9289 0.9289 0.3704 77.7163 346.5691)" class="st1 st4 st75">t</text>
+    <text transform="matrix(0.4396 -0.8982 0.8982 0.4396 80.954 335.9676)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.5166 -0.8562 0.8562 0.5166 110.4583 278.5822)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.5273 -0.8497 0.8497 0.5273 114.2631 272.3102)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.5586 -0.8294 0.8294 0.5586 118.0859 265.7567)" class="st1 st4 st76">D</text>
+    <text transform="matrix(0.599 -0.8007 0.8007 0.599 131.5838 245.9283)" class="st1 st4 st77">e</text>
+    <text transform="matrix(0.6186 -0.7857 0.7857 0.6186 140.8494 233.5212)" class="st1 st4 st78">c</text>
+    <text transform="matrix(0.6471 -0.7624 0.7624 0.6471 149.2315 222.77)" class="st1 st4 st77">e</text>
+    <text transform="matrix(0.6747 -0.7381 0.7381 0.6747 159.091 211.0812)" class="st1 st4 st78">n</text>
+    <text transform="matrix(0.7012 -0.713 0.713 0.7012 171.2195 197.8585)" class="st1 st4 st77">d</text>
+    <text transform="matrix(0.7267 -0.687 0.687 0.7267 184.08 184.8612)" class="st1 st4 st75">a</text>
+    <text transform="matrix(0.7511 -0.6602 0.6602 0.7511 195.3401 174.1799)" class="st1 st4 st76">n</text>
+    <text transform="matrix(0.7745 -0.6326 0.6326 0.7745 208.9388 162.4783)" class="st1 st4 st76">t</text>
+    <text transform="matrix(0.7895 -0.6138 0.6138 0.7895 217.4813 155.4492)" class="st1 st4 st75"> </text>
+    <text transform="matrix(0.818 -0.5752 0.5752 0.818 222.9163 150.6764)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.8446 -0.5355 0.5355 0.8446 254.7141 128.7592)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.8571 -0.5152 0.5152 0.8571 260.9046 124.9378)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.8632 -0.5049 0.5049 0.8632 267.1549 121.1031)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.8691 -0.4946 0.4946 0.8691 273.3777 117.4302)" class="st1 st4 st75"> </text>
+    <text transform="matrix(0.8807 -0.4737 0.4737 0.8807 279.7747 113.8364)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.8863 -0.4632 0.4632 0.8863 286.1569 110.3556)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.8917 -0.4526 0.4526 0.8917 292.6075 107.0069)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.9023 -0.4312 0.4312 0.9023 299.1263 103.718)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.9074 -0.4204 0.4204 0.9074 305.6293 100.611)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.9123 -0.4095 0.4095 0.9123 312.278 97.4648)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.9308 -0.3655 0.3655 0.9308 318.7746 94.2762)" class="st1 st4 st75">M</text>
+    <text transform="matrix(0.9472 -0.3206 0.3206 0.9472 346.6157 83.5239)" class="st1 st4 st75">o</text>
+    <text transform="matrix(0.9581 -0.2863 0.2863 0.9581 363.1819 77.9689)" class="st1 st4 st77">o</text>
+    <text transform="matrix(0.9708 -0.2399 0.2399 0.9708 379.6001 73.0182)" class="st1 st4 st75">n</text>
+    <text transform="matrix(0.9856 -0.1688 0.1688 0.9856 396.9904 68.0938)" class="st1 st4 st75"> </text>
+    <text transform="matrix(0.9999 0.0145 -0.0145 0.9999 450.8408 56.6246)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.9903 0.1389 -0.1389 0.9903 555.619 60.9842)" class="st1 st4 st75"> </text>
+    <text transform="matrix(0.9885 0.1513 -0.1513 0.9885 562.8632 62.0362)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.9844 0.1761 -0.1761 0.9844 570.0424 63.1795)" class="st1 st4 st76">S</text>
+    <text transform="matrix(0.977 0.2133 -0.2133 0.977 586.8009 66.1913)" class="st1 st4 st77">u</text>
+    <text transform="matrix(0.965 0.2624 -0.2624 0.965 604.3054 69.9662)" class="st1 st4 st76">n</text>
+    <text transform="matrix(0.9505 0.3109 -0.3109 0.9505 621.7055 74.4845)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.8869 0.462 -0.462 0.8869 658.5565 83.6121)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.8224 0.5689 -0.5689 0.8224 750.1296 134.6517)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.8153 0.579 -0.579 0.8153 756.1682 138.8095)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.8081 0.5891 -0.5891 0.8081 762.0727 142.9873)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.778 0.6282 -0.6282 0.778 768.0792 147.1051)" class="st1 st4 st77">M</text>
+    <text transform="matrix(0.7463 0.6656 -0.6656 0.7463 791.2463 165.9728)" class="st1 st4 st76">e</text>
+    <text transform="matrix(0.7214 0.6925 -0.6925 0.7214 802.64 176.118)" class="st1 st4 st76">r</text>
+    <text transform="matrix(0.7044 0.7098 -0.7098 0.7044 811.864 184.9778)" class="st1 st4 st77">c</text>
+    <text transform="matrix(0.6781 0.7349 -0.7349 0.6781 821.5917 194.571)" class="st1 st4 st76">u</text>
+    <text transform="matrix(0.6511 0.759 -0.759 0.6511 833.7454 207.7501)" class="st1 st4 st76">r</text>
+    <text transform="matrix(0.6326 0.7745 -0.7745 0.6326 842.7325 218.2945)" class="st1 st4 st76">y</text>
+    <text transform="matrix(0.5555 0.8315 -0.8315 0.5555 852.9884 228.9934)" class="st1 st4 st75"> </text>
+    <text transform="matrix(0.4842 0.875 -0.875 0.4842 890.613 288.0336)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.4632 0.8863 -0.8863 0.4632 894.1943 294.3471)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.4526 0.8917 -0.8917 0.4526 897.5598 300.8156)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.4419 0.8971 -0.8971 0.4419 900.8656 307.2953)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.4204 0.9074 -0.9074 0.4204 904.0104 313.921)" class="st1 st4 st76"> </text>
+    <text transform="matrix(0.4095 0.9123 -0.9123 0.4095 907.1099 320.4304)" class="st1 st4 st77"> </text>
+    <text transform="matrix(0.3766 0.9264 -0.9264 0.3766 910.1606 327.0858)" class="st1 st4 st76">V</text>
+    <text transform="matrix(0.3432 0.9393 -0.9393 0.3432 917.6188 345.331)" class="st1 st4 st76">e</text>
+    <text transform="matrix(0.3092 0.951 -0.951 0.3092 922.8863 359.5195)" class="st1 st4 st76">n</text>
+    <text transform="matrix(0.2748 0.9615 -0.9615 0.2748 928.3732 376.4134)" class="st1 st4 st77">u</text>
+    <text transform="matrix(0.2399 0.9708 -0.9708 0.2399 933.1396 393.6255)" class="st1 st4 st75">s</text>
+    <text transform="matrix(0.1327 0.9912 -0.9912 0.1327 938.1884 405.4261)" class="st1 st4 st77"> </text>
+    <text transform="matrix(-0.0766 0.9971 -0.9971 -0.0766 950.4935 488.2396)" class="st1 st4 st76"> </text>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000158730171213944083380000009017451691163140786_" x="-1" y="1" width="997" height="997"/>
+        <rect id="SVGID_00000093170629871173260960000005919162614054048404_" x="-1" y="1" width="997" height="997"/>
       </defs>
-      <clipPath id="SVGID_00000112614482725228793150000009924167761132094103_">
-        <use xlink:href="#SVGID_00000158730171213944083380000009017451691163140786_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000178906763881435514000000009369824763877527473_">
+        <use xlink:href="#SVGID_00000093170629871173260960000005919162614054048404_"  style="overflow:visible;"/>
       </clipPath>
       
-        <line style="clip-path:url(#SVGID_00000112614482725228793150000009924167761132094103_);fill:none;stroke:#1D1D1B;stroke-width:6;" x1="497.69" y1="1" x2="497.69" y2="498.71"/>
+        <line style="clip-path:url(#SVGID_00000178906763881435514000000009369824763877527473_);fill:none;stroke:#1D1D1B;stroke-width:6;" x1="497.69" y1="1" x2="497.69" y2="498.71"/>
       
-        <line style="clip-path:url(#SVGID_00000112614482725228793150000009924167761132094103_);fill:none;stroke:#000000;stroke-width:0.334;" x1="500.12" y1="500.93" x2="500.12" y2="998"/>
+        <line style="clip-path:url(#SVGID_00000178906763881435514000000009369824763877527473_);fill:none;stroke:#000000;stroke-width:0.334;" x1="500.12" y1="500.93" x2="500.12" y2="998"/>
       
-        <line style="clip-path:url(#SVGID_00000112614482725228793150000009924167761132094103_);fill:none;stroke:#000000;stroke-width:0.334;" x1="497.67" y1="500.93" x2="497.67" y2="998"/>
+        <line style="clip-path:url(#SVGID_00000178906763881435514000000009369824763877527473_);fill:none;stroke:#000000;stroke-width:0.334;" x1="497.67" y1="500.93" x2="497.67" y2="998"/>
       
-        <line style="clip-path:url(#SVGID_00000112614482725228793150000009924167761132094103_);fill:none;stroke:#000000;stroke-width:0.334;" x1="495.27" y1="500.93" x2="495.27" y2="998"/>
+        <line style="clip-path:url(#SVGID_00000178906763881435514000000009369824763877527473_);fill:none;stroke:#000000;stroke-width:0.334;" x1="495.27" y1="500.93" x2="495.27" y2="998"/>
     </g>
     <line class="st22" x1="991.83" y1="505.46" x2="4.2" y2="505.46"/>
     <line class="st22" x1="991.83" y1="503" x2="4.2" y2="503"/>
@@ -1569,19 +1878,19 @@ class SmallBirthChart {
     <line class="st21" x1="60.32" y1="730.78" x2="499.77" y2="502.02"/>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000029030411169835112960000002124637754005119888_" x="-1" y="1" width="997" height="997"/>
+        <rect id="SVGID_00000010276678631592717840000012431101330656927391_" x="-1" y="1" width="997" height="997"/>
       </defs>
-      <clipPath id="SVGID_00000053525598749359541670000008117657584932423869_">
-        <use xlink:href="#SVGID_00000029030411169835112960000002124637754005119888_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000067223299860911382000000001338763256882748565_">
+        <use xlink:href="#SVGID_00000010276678631592717840000012431101330656927391_"  style="overflow:visible;"/>
       </clipPath>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M660.16,94.42
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M660.16,94.42
         c11.17,0.03,20.25-8.91,20.45-20.02c0.21-11.64-9.12-20.85-20.45-20.83c-11.24,0.02-20.23,8.98-20.41,20.07
         C639.57,85.38,649.07,94.45,660.16,94.42 M660.23,49.61c13.57-0.01,24.54,11.09,24.49,24.62c-0.05,13.46-11.06,24.5-24.69,24.43
         c-13.41-0.06-24.35-11.06-24.36-24.51C635.65,60.62,646.66,49.57,660.23,49.61"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M660.19,68.55
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M660.19,68.55
         c2.99,0,5.45,2.43,5.46,5.41c0.02,3.01-2.47,5.53-5.47,5.5c-3.04-0.03-5.43-2.4-5.46-5.46C654.69,71.01,657.19,68.55,660.19,68.55
         "/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M418.56,31.51
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M418.56,31.51
         c8.63,4.47,13.28,10.95,13.69,19.66c-0.1,8.72-4.53,15.36-12.92,20.09c7.48,0.37,16.24-2.72,21.09-10.08
         c4.63-7.04,3.94-15.86-1.81-22.11C433.5,33.53,426.76,31.13,418.56,31.51 M421.41,74.13c-3.09,0.04-5.62-0.24-8.1-0.84
         c-0.77-0.19-1.26-0.69-1.3-1.33c-0.04-0.63,0.4-1.2,1.16-1.42c2.48-0.74,4.79-1.78,6.85-3.18c3.97-2.7,6.66-6.16,8.07-10.36
@@ -1589,7 +1898,7 @@ class SmallBirthChart {
         c-0.09-0.62,0.27-1.26,0.96-1.46c0.98-0.29,1.98-0.54,2.99-0.73c1.66-0.32,3.35-0.49,5.04-0.49c6.12-0.01,11.64,1.56,16.45,4.85
         c4.79,3.28,7.87,7.54,9.29,12.69c0.58,2.12,0.76,4.27,0.61,6.45c-0.33,4.87-2.27,9.22-5.8,13.02c-3.24,3.5-7.35,5.95-12.25,7.37
         C426.11,73.72,423.53,74.08,421.41,74.13"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M876.74,256.08
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M876.74,256.08
         c5.28,0.03,9.71-4.21,9.76-9.65c0.05-5.49-4.38-9.81-9.71-9.82c-5.36-0.01-9.54,4.24-9.76,9.27
         C866.76,251.68,871.46,256.12,876.74,256.08 M878.28,266.33v2.31c0,0.64-0.52,1.16-1.16,1.16h-0.87c-0.56,0-1.01-0.45-1.01-1.01
         v-2.45c0-0.04-0.03-0.08-0.08-0.08h-2.43c-0.59,0-1.08-0.48-1.08-1.08v-0.75c0-0.68,0.55-1.23,1.23-1.23h2.24
@@ -1600,7 +1909,7 @@ class SmallBirthChart {
         c-0.05,0.03-0.05,0.1,0,0.13c5.42,3.4,7.74,8.17,6.42,14.58c0,0,0,0.01,0,0.01c-1.61,5.43-5.27,8.52-10.79,9.56
         c-0.03,0.01-0.06,0.04-0.06,0.07v3.94c0,0.04,0.03,0.08,0.08,0.08h2.07c0.75,0,1.37,0.61,1.37,1.37v0.31
         c0,0.77-0.62,1.39-1.39,1.39h-2.07C878.31,266.25,878.28,266.29,878.28,266.33"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M964.45,440.82
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M964.45,440.82
         c0.01-7.24-5.82-13.13-13.05-13.14c-7.35-0.01-13,5.88-13.17,12.76c-0.17,7.5,5.89,13.36,12.94,13.44
         C958.56,453.96,964.49,447.95,964.45,440.82 M943.43,468.65v-3.68c0-0.25,0.2-0.45,0.45-0.45h4.87c0.25,0,0.45-0.2,0.45-0.45
         v-4.93c0-0.68-0.48-1.26-1.14-1.39c-9.28-1.81-14.79-10.47-13.91-18.71c0.99-9.16,8.76-15.6,17.36-15.5
@@ -1608,14 +1917,14 @@ class SmallBirthChart {
         h4.88c0.25,0,0.45,0.2,0.45,0.45v3.69c-0.14,0.01-1.12,0.02-1.26,0.02c-1.66,0-2.48,0-4.14-0.01c-0.31,0-0.41,0.08-0.41,0.4
         c0.01,1.78,0.01,3.13,0.01,4.91c0,0.13,0,0.71,0,0.89c0.01,0.55-4.14,0.5-4.13,0c0-0.15,0-0.91,0-1.05c0-1.78-0.01-2.93,0.01-4.72
         c0.01-0.37-0.12-0.44-0.45-0.44"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M943.56,583.59
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M943.56,583.59
         c7.54-0.01,13.48-6.01,13.45-13.66c-0.03-7.12-6.11-13.26-13.42-13.25c-7.42,0.01-13.45,6.02-13.49,13.37
         C930.06,577.57,936.19,583.64,943.56,583.59 M963.42,547.28h-6.38v-4.17h13.55v13.54h-4.16v-6.24c-2.97,2.97-5.93,5.93-8.91,8.91
         c0.24,0.34,0.53,0.74,0.81,1.16c1.57,2.37,2.52,4.98,2.79,7.79c0.48,5.07-0.91,9.6-4.25,13.47c-2.68,3.11-6.07,5.07-10.1,5.77
         c-5.48,0.95-10.42-0.34-14.69-3.95c-3.08-2.6-5.05-5.91-5.82-9.86c-1.03-5.28,0.07-10.12,3.37-14.4c2.59-3.35,5.98-5.5,10.11-6.39
         c5.26-1.13,10.07-0.05,14.42,3.11c0.19,0.14,0.32,0.24,0.54,0.01c2.82-2.84,5.65-5.67,8.48-8.5
         C963.24,547.48,963.29,547.42,963.42,547.28"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M847.16,784.67
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M847.16,784.67
         l0.02-1.06c0.01-0.67,0.57-1.2,1.24-1.19c0.21,0,0.42,0,0.64,0c2.44-0.08,4.63-0.89,6.56-2.37c2.92-2.24,4.73-5.21,5.79-8.66
         c0.58-1.88,0.85-3.85,0.65-5.81c-0.18-1.74-0.72-3.36-2.05-4.66c-1.19-1.17-2.66-1.67-4.31-1.69c-2.8-0.04-5.79,2.39-6.4,4.92
         c-0.25,1.03-0.17,2.04,0.19,3.02c0.09,0.26,0.23,0.48,0.41,0.67c0.38,0.38,0.57,0.92,0.56,1.46l-0.02,1.02
@@ -1626,7 +1935,7 @@ class SmallBirthChart {
         c0,0.08,0.06,0.15,0.15,0.15l3.31,0.06c0.52,0.01,0.94,0.44,0.93,0.96c-0.02,1.34-1.13,2.4-2.47,2.38l-1.84-0.03
         c-0.08,0-0.15,0.06-0.15,0.15l-0.11,6.2c-0.01,0.81-0.68,1.45-1.49,1.43l-0.56-0.01c-0.75-0.01-1.34-0.63-1.33-1.38l0.11-6.3
         c0-0.08-0.06-0.15-0.15-0.15l-20.53-0.36C847.66,785.83,847.15,785.31,847.16,784.67"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M668.16,934.93
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M668.16,934.93
         l-2.8,0.05c-0.23,0-0.42-0.18-0.43-0.41l-0.42-23.84c0-0.23-0.2-0.41-0.43-0.41l-2.84,0.05c-0.23,0.01-0.42-0.18-0.43-0.41
         l-0.04-2.41c0-0.23,0.18-0.42,0.41-0.43l2.83-0.05c0.23-0.01,0.41-0.2,0.41-0.43l-0.05-2.7c0-0.23,0.18-0.42,0.41-0.43l2.41-0.04
         c0.23,0,0.42,0.18,0.43,0.41l0.05,2.67c0,0.23,0.2,0.41,0.43,0.41l5.24-0.09c0.23,0,0.42,0.18,0.43,0.41l0.04,2.44
@@ -1638,7 +1947,7 @@ class SmallBirthChart {
         c0.17-2.38,1.22-4.35,2.72-6.12c0.92-1.09,1.92-2.12,2.61-3.4c0.96-1.81,1.63-3.71,1.86-5.76c0.25-2.21-0.02-4.33-1.15-6.28
         c-0.7-1.22-1.71-2.08-3.16-2.24c-1.17-0.12-2.33,0.06-3.44,0.46c-2.16,0.77-3.66,2.28-4.84,4.19c-0.31,0.51-0.41,1.03-0.39,1.62
         c0.09,4.17,0.15,8.33,0.23,12.5C668.17,934.72,668.16,934.82,668.16,934.93"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M426.74,968.28
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M426.74,968.28
         c2.13-0.04,3.79-1.75,3.74-3.88c-0.04-2.12-1.77-3.76-3.9-3.73c-2.08,0.04-3.75,1.79-3.7,3.9
         C422.92,966.67,424.65,968.32,426.74,968.28 M424.48,947.41l-3.79,0.07c-0.09,0-0.16,0.06-0.17,0.15
         c-0.7,3.92-2.74,6.94-6.23,8.95c-1.54,0.89-3.21,1.37-4.98,1.53c-0.44,0.04-0.83-0.3-0.83-0.75l-0.04-2.29
@@ -1651,7 +1960,7 @@ class SmallBirthChart {
         c0.94,0.17,1.64,0.94,1.66,1.89l0,0.23c0.02,1-0.85,1.81-1.85,1.68c-2.29-0.31-4.37-1.21-6.21-2.74c-2.29-1.9-3.69-4.33-4.28-7.23
         c-0.02-0.09-0.09-0.15-0.18-0.15l-3.81,0.06c0,0.1,0,0.2,0.01,0.3c0.05,3.05,0.11,6.11,0.15,9.17c0.01,0.24,0.09,0.32,0.31,0.39
         c3.04,0.93,4.9,2.97,5.44,6.09c0.69,4.01-1.96,7.81-5.91,8.64c-4.22,0.88-8.31-1.85-9.08-6.06c-0.69-3.78,1.89-7.58,5.56-8.71"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M220.58,872.45
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M220.58,872.45
         c-1.22-0.15-2.4-0.24-3.57-0.45c-1.8-0.32-3.47-1.02-4.89-2.27c-1.61-1.41-2.57-3.26-3.18-5.35c-0.73-2.5-0.95-5.07-0.92-7.66
         c0.03-2.08,0.17-4.16,0.27-6.24c0.02-0.36,0.05-0.71,0.08-1.15l-1.78,1.48c-0.31,0.26-0.75,0.2-0.99-0.13l-1.12-1.52
         c-0.25-0.34-0.19-0.82,0.12-1.08l5.33-4.46c0.41-0.35,1.01-0.26,1.33,0.18l4.16,5.85c0.22,0.31,0.16,0.75-0.13,0.99l-1.48,1.19
@@ -1669,7 +1978,7 @@ class SmallBirthChart {
         c0.01,0.39-0.29,0.72-0.66,0.73l-5.32,0.09c0,0.19,0.01,0.33,0.01,0.48c0.03,1.92,0.06,3.62,0.1,5.54c0.01,0.29-0.27,0.6-0.55,0.6
         c-0.85,0-1.29,0.01-2.14,0.04c-0.27,0.01-0.58-0.29-0.58-0.62c-0.02-1.93-0.06-3.61-0.1-5.54c0-0.13,0-0.25-0.01-0.41l-5.12,0.09
         c-0.5,0.01-0.91-0.41-0.92-0.94l-0.03-1.54c-0.01-0.52,0.38-0.94,0.87-0.95l5.11-0.09L220.58,872.45z"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M79.5,677.43h-6.7
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M79.5,677.43h-6.7
         c-1.2-0.06-1.2-0.06-1.17,1.18v8.04c-0.23,0-0.41,0-0.59,0c-0.97,0-1.95,0-2.92,0c-0.56,0-0.56,0-0.56-0.54c0-2.73,0-5.45,0-8.18
         v-0.5h-7.87c-0.65,0-1.17-0.53-1.17-1.18v-1.67c0-0.65,0.52-1.18,1.17-1.18h7.85c0.09-0.02,0.06-0.35,0.06-0.47
         c0-2.63-0.04-5.19-0.03-7.82c0-0.34-0.08-0.43-0.43-0.48c-3.82-0.54-7.19-2.08-10.06-4.71c-3.08-2.82-5.04-6.3-5.83-10.42
@@ -1677,16 +1986,16 @@ class SmallBirthChart {
         c2.88,2.17,6.16,3.08,9.73,2.83c6.83-0.48,13-6.05,13.58-13.67c0.05-0.62,0.55-1.09,1.17-1.09h1.65c0.68,0,1.22,0.59,1.17,1.27
         c-0.29,4.27-1.85,8.05-4.73,11.31c-2.95,3.33-6.61,5.31-10.92,6.05c-0.55,0.1-0.94,0.59-0.94,1.15v6.47
         c-0.01,1.3-0.01,1.17,1.17,1.18h6.67c0.65,0,1.17,0.53,1.17,1.18v1.7C80.67,676.9,80.15,677.43,79.5,677.43"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M69.68,653.61
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M69.68,653.61
         c4.18,0.06,7.73-3.44,7.73-7.75c0-4.25-3.31-7.81-7.72-7.81c-4.39,0.01-7.69,3.53-7.71,7.78
         C61.97,650.2,65.55,653.65,69.68,653.61 M57.94,645.85c0.03-6.75,5.46-11.86,11.73-11.88c6.28-0.02,11.83,5.1,11.78,11.94
         c-0.04,6.53-5.17,11.79-11.75,11.79C63.14,657.69,58.01,652.44,57.94,645.85"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M81.74,328.11v-30.99
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M81.74,328.11v-30.99
         c0-0.65-0.75-0.97-1.19-0.52l-12.08,12.61c-0.26,0.27-0.67,0.28-0.94,0.04l-0.88-0.79c-0.31-0.27-0.33-0.76-0.04-1.07l15.88-16.76
         c0.27-0.29,0.72-0.29,0.99,0l15.91,16.78c0.28,0.3,0.27,0.79-0.04,1.07l-0.84,0.75c-0.28,0.25-0.69,0.23-0.95-0.04
         c-4.01-4.21-8.01-8.41-12.04-12.63c-0.44-0.46-1.19-0.14-1.19,0.51l0,0.97c0,10.85,0,19.11,0,30.06c0,0.4-0.31,0.73-0.7,0.73
         h-1.18C82.05,328.84,81.74,328.51,81.74,328.11"/>
-      <path style="clip-path:url(#SVGID_00000053525598749359541670000008117657584932423869_);fill:#1D1D1B;" d="M235.19,109.02v30.99
+      <path style="clip-path:url(#SVGID_00000067223299860911382000000001338763256882748565_);fill:#1D1D1B;" d="M235.19,109.02v30.99
         c0,0.65,0.75,0.97,1.19,0.52l12.08-12.61c0.26-0.27,0.67-0.28,0.94-0.04l0.88,0.79c0.31,0.27,0.33,0.76,0.04,1.07l-15.88,16.76
         c-0.27,0.29-0.72,0.29-0.99,0l-15.91-16.78c-0.28-0.3-0.27-0.79,0.04-1.07l0.84-0.75c0.28-0.25,0.69-0.23,0.95,0.04
         c4.01,4.21,8.01,8.41,12.04,12.63c0.44,0.46,1.19,0.14,1.19-0.51l0-0.97c0-10.85,0-19.11,0-30.06c0-0.4,0.31-0.73,0.7-0.73h1.18
@@ -1698,280 +2007,280 @@ class SmallBirthChart {
     <line class="st22" x1="500.31" y1="505.34" x2="939.14" y2="276.9"/>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000046318252642662225850000013716974262646351034_" x="457.08" y="461" width="81.72" height="81.72"/>
+        <rect id="SVGID_00000018944514607482976630000002071747359777519493_" x="457.08" y="461" width="81.72" height="81.72"/>
       </defs>
-      <clipPath id="SVGID_00000113338805740921752570000005246322612627785100_">
-        <use xlink:href="#SVGID_00000046318252642662225850000013716974262646351034_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000026141973368915492440000014051827406529483918_">
+        <use xlink:href="#SVGID_00000018944514607482976630000002071747359777519493_"  style="overflow:visible;"/>
       </clipPath>
-      <path style="clip-path:url(#SVGID_00000113338805740921752570000005246322612627785100_);fill:#FFFFFF;" d="M497.95,540.04
+      <path style="clip-path:url(#SVGID_00000026141973368915492440000014051827406529483918_);fill:#FFFFFF;" d="M497.95,540.04
         c21.08,0,38.17-17.09,38.17-38.17s-17.09-38.17-38.17-38.17c-21.08,0-38.17,17.09-38.17,38.17S476.86,540.04,497.95,540.04"/>
       
-        <circle style="clip-path:url(#SVGID_00000113338805740921752570000005246322612627785100_);fill:none;stroke:#1D1D1B;stroke-width:2;" cx="497.95" cy="501.86" r="38.17"/>
+        <circle style="clip-path:url(#SVGID_00000026141973368915492440000014051827406529483918_);fill:none;stroke:#1D1D1B;stroke-width:2;" cx="497.95" cy="501.86" r="38.17"/>
     </g>
-    <g class="st63">
-      <polygon class="st64" points="504.5,502.71 504.5,0.5 1152.5,0.5 1152.5,861.15 		"/>
+    <g class="st84">
+      <polygon class="st85" points="504.5,502.71 504.5,0.5 1152.5,0.5 1152.5,861.15 		"/>
       <path class="st1" d="M1152,1v859.3L505,502.41V1H1152 M1153,0H504v503l649,359V0L1153,0z"/>
     </g>
-    <g class="st63">
-      <polygon class="st65" points="-140.02,867.01 502.92,499.23 931.8,760.02 594.98,1313.94 		"/>
+    <g class="st84">
+      <polygon class="st86" points="-140.02,867.01 502.92,499.23 931.8,760.02 594.98,1313.94 		"/>
       <path class="st1" d="M502.92,499.81l428.2,260.38l-336.31,553.07l-733.84-446.23L502.92,499.81 M502.93,498.65L-141,867
         l736.14,447.63l337.35-554.78L502.93,498.65L502.93,498.65z"/>
     </g>
-    <g class="st63">
-      <polygon class="st66" points="-256.46,177.41 498.5,-235.82 495.2,504.71 54.67,745.83 		"/>
+    <g class="st84">
+      <polygon class="st87" points="-256.46,177.41 498.5,-235.82 495.2,504.71 54.67,745.83 		"/>
       <path class="st1" d="M497.99-234.97l-3.29,739.38L54.87,745.15l-310.65-567.54L497.99-234.97 M499-236.67l-756.14,413.88
         l311.61,569.3L495.7,505L499-236.67L499-236.67z"/>
     </g>
-    <g class="st67">
-      <path class="st68" d="M498.17,501.95V5.91c272,0,495.83,223.92,495.83,496.05c0,85.69-22.19,169.94-64.41,244.5L498.17,501.95z"/>
+    <g class="st88">
+      <path class="st89" d="M498.17,501.95V5.91c272,0,495.83,223.92,495.83,496.05c0,85.69-22.19,169.94-64.41,244.5L498.17,501.95z"/>
     </g>
-    <g class="st67">
-      <path class="st69" d="M498.94,499.81L932.63,745.6c-134.84,237.92-441.57,322.74-679.48,187.9
+    <g class="st88">
+      <path class="st90" d="M498.94,499.81L932.63,745.6c-134.84,237.92-441.57,322.74-679.48,187.9
         c-82.91-46.99-150.62-116.77-195.1-201.05L498.94,499.81z"/>
     </g>
-    <g class="st67">
-      <path class="st70" d="M497.83,502.78L54.14,730.03C18.12,659.7-0.67,581.8-0.67,502.78c0-273.47,225.03-498.5,498.5-498.5V502.78z
+    <g class="st88">
+      <path class="st91" d="M497.83,502.78L54.14,730.03C18.12,659.7-0.67,581.8-0.67,502.78c0-273.47,225.03-498.5,498.5-498.5V502.78z
         "/>
     </g>
   </g>
   <g id="Layer_3" class="st0">
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000181791347388630488180000018113183573335523764_" x="3.28" y="0.13" width="999.87" height="999.87"/>
+        <rect id="SVGID_00000145028935292283642640000014518407568976798358_" x="3.28" y="0.13" width="999.87" height="999.87"/>
       </defs>
-      <clipPath id="SVGID_00000071558827276921204800000002785292033269851526_">
-        <use xlink:href="#SVGID_00000181791347388630488180000018113183573335523764_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000038405618884458951900000016848102026150070422_">
+        <use xlink:href="#SVGID_00000145028935292283642640000014518407568976798358_"  style="overflow:visible;"/>
       </clipPath>
       
-        <circle style="clip-path:url(#SVGID_00000071558827276921204800000002785292033269851526_);fill:none;stroke:#000000;stroke-width:1.914;" cx="503.21" cy="500.07" r="497.14"/>
+        <circle style="clip-path:url(#SVGID_00000038405618884458951900000016848102026150070422_);fill:none;stroke:#000000;stroke-width:1.914;" cx="503.21" cy="500.07" r="497.14"/>
       
-        <circle style="clip-path:url(#SVGID_00000071558827276921204800000002785292033269851526_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="503.73" cy="503.24" r="412.79"/>
+        <circle style="clip-path:url(#SVGID_00000038405618884458951900000016848102026150070422_);fill:none;stroke:#1D1D1B;stroke-width:6;" cx="503.73" cy="503.24" r="412.79"/>
     </g>
-    <text transform="matrix(0.1138 0.9935 -0.9935 0.1138 35.9194 548.7509)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.2236 0.9747 -0.9747 0.2236 34.2462 556.5107)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.3292 0.9443 -0.9443 0.3292 58.6253 651.2829)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.352 0.936 -0.936 0.352 61.0225 658.2044)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.3633 0.9317 -0.9317 0.3633 63.5763 665.0718)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.3745 0.9272 -0.9272 0.3745 66.2393 671.8943)" class="st1 st27 st76"> </text>
-    <text transform="matrix(0.3857 0.9226 -0.9226 0.3857 68.9982 678.6757)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.4078 0.9131 -0.9131 0.4078 71.8316 685.4346)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.4188 0.9081 -0.9081 0.4188 74.8067 692.1296)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.4297 0.903 -0.903 0.4297 77.8843 698.7739)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.4513 0.8924 -0.8924 0.4513 81.0302 705.3923)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.4619 0.8869 -0.8869 0.4619 84.3167 711.937)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.4725 0.8813 -0.8813 0.4725 87.7029 718.4324)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.483 0.8756 -0.8756 0.483 91.1848 724.878)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.5038 0.8638 -0.8638 0.5038 94.742 731.2826)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.5141 0.8577 -0.8577 0.5141 98.4263 737.6121)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.5243 0.8515 -0.8515 0.5243 102.2063 743.8851)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.5445 0.8387 -0.8387 0.5445 106.0506 750.1181)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.5545 0.8322 -0.8322 0.5545 110.0301 756.2721)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 114.1003 762.3679)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.5839 0.8118 -0.8118 0.5839 118.2273 768.4163)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.5935 0.8048 -0.8048 0.5935 122.4916 774.3712)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 126.841 780.2648)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.6126 0.7904 -0.7904 0.6126 131.2732 786.0945)" class="st1 st27 st76"> </text>
-    <text transform="matrix(0.6312 0.7756 -0.7756 0.6312 135.7769 791.8722)" class="st1 st27 st76"> </text>
-    <text transform="matrix(0.6404 0.768 -0.768 0.6404 140.3976 797.5569)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 145.1012 803.1716)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.6675 0.7446 -0.7446 0.6675 149.8639 808.7383)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 154.7457 814.2003)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 159.7076 819.5847)" class="st1 st27 st76"> </text>
-    <text transform="matrix(0.7024 0.7118 -0.7118 0.7024 164.7233 824.93)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.7108 0.7034 -0.7034 0.7108 169.8534 830.157)" class="st1 st27 st76"> </text>
-    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 175.0639 835.3068)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 180.3477 840.3776)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.7437 0.6685 -0.6685 0.7437 185.6879 845.3876)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 191.1342 850.2904)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 196.649 855.1116)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.7751 0.6319 -0.6319 0.7751 202.2162 859.8719)" class="st1 st27 st76"> </text>
-    <text transform="matrix(0.7827 0.6225 -0.6225 0.7827 207.887 864.511)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 213.6215 869.0635)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 219.4022 873.5656)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8119 0.5838 -0.5838 0.8119 225.2852 877.9316)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 231.2326 882.2119)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 237.2413 886.3987)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.8393 0.5436 -0.5436 0.8393 243.2962 890.5225)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 249.4388 894.5135)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 255.6372 898.4151)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.865 0.5018 -0.5018 0.865 261.8738 902.255)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8711 0.4912 -0.4912 0.8711 268.1988 905.9527)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.877 0.4804 -0.4804 0.877 274.5773 909.55)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 281.0126 913.0517)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 287.4802 916.4952)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8997 0.4365 -0.4365 0.8997 294.0238 919.7855)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.905 0.4253 -0.4253 0.905 300.6136 922.9799)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 307.2538 926.0729)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.9203 0.3913 -0.3913 0.9203 313.9279 929.0995)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 320.6632 931.9728)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.9297 0.3682 -0.3682 0.9297 327.4426 934.75)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.9343 0.3566 -0.3566 0.9343 334.2617 937.4182)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.9429 0.3331 -0.3331 0.9429 341.1128 940.0149)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.947 0.3212 -0.3212 0.947 348.0152 942.4586)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.951 0.3093 -0.3093 0.951 354.9566 944.8037)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.9548 0.2973 -0.2973 0.9548 361.9294 947.0443)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.962 0.2732 -0.2732 0.962 368.9299 949.2054)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.9653 0.2611 -0.2611 0.9653 375.9741 951.216)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.9685 0.2489 -0.2489 0.9685 383.0466 953.1252)" class="st1 st27 st74"> </text>
-    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 390.144 954.9201)" class="st1 st27 st76"> </text>
-    <text transform="matrix(0.9773 0.212 -0.212 0.9773 397.2665 956.6506)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.9799 0.1996 -0.1996 0.9799 404.4209 958.2183)" class="st1 st27 st74"> </text>
+    <text transform="matrix(0.1138 0.9935 -0.9935 0.1138 35.9479 548.7038)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.2236 0.9747 -0.9747 0.2236 34.2246 556.528)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.3292 0.9443 -0.9443 0.3292 58.6259 651.2278)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.352 0.936 -0.936 0.352 61.0445 658.1829)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.3633 0.9317 -0.9317 0.3633 63.5795 665.0348)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.3745 0.9272 -0.9272 0.3745 66.2692 671.8553)" class="st1 st27 st97"> </text>
+    <text transform="matrix(0.3857 0.9226 -0.9226 0.3857 69.0004 678.672)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.4078 0.913 -0.913 0.4078 71.8012 685.4148)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.4188 0.9081 -0.9081 0.4188 74.8704 692.1569)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.4297 0.903 -0.903 0.4297 77.826 698.7357)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.4513 0.8924 -0.8924 0.4513 81.0094 705.445)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.4619 0.8869 -0.8869 0.4619 84.3038 711.9263)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.4725 0.8813 -0.8813 0.4725 87.6939 718.4412)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.483 0.8756 -0.8756 0.483 91.2196 724.8694)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.5039 0.8638 -0.8638 0.5039 94.7398 731.2698)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.5141 0.8577 -0.8577 0.5141 98.4616 737.6306)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.5243 0.8515 -0.8515 0.5243 102.1944 743.9098)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.5445 0.8388 -0.8388 0.5445 106.0717 750.1277)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.5545 0.8322 -0.8322 0.5545 110.0168 756.2798)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 114.1548 762.3806)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.5839 0.8118 -0.8118 0.5839 118.2402 768.4597)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.5935 0.8048 -0.8048 0.5935 122.5281 774.4079)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 126.8532 780.2139)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.6126 0.7904 -0.7904 0.6126 131.3071 786.1365)" class="st1 st27 st97"> </text>
+    <text transform="matrix(0.6312 0.7756 -0.7756 0.6312 135.7812 791.9195)" class="st1 st27 st97"> </text>
+    <text transform="matrix(0.6404 0.768 -0.768 0.6404 140.4184 797.56)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 145.0604 803.2235)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.6675 0.7446 -0.7446 0.6675 149.8691 808.7134)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 154.6968 814.2308)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 159.6951 819.5942)" class="st1 st27 st97"> </text>
+    <text transform="matrix(0.7023 0.7118 -0.7118 0.7023 164.6855 824.9439)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.7108 0.7034 -0.7034 0.7108 169.8115 830.1516)" class="st1 st27 st97"> </text>
+    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 175.114 835.3401)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 180.3297 840.4061)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.7438 0.6685 -0.6685 0.7438 185.7129 845.3885)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 191.0845 850.3256)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 196.6271 855.1614)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.7751 0.6319 -0.6319 0.7751 202.2302 859.8277)" class="st1 st27 st97"> </text>
+    <text transform="matrix(0.7827 0.6224 -0.6224 0.7827 207.9304 864.4756)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 213.6702 869.0244)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 219.4205 873.5733)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8119 0.5838 -0.5838 0.8119 225.3152 877.993)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 231.2482 882.2189)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 237.1932 886.4027)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.8393 0.5436 -0.5436 0.8393 243.3089 890.5854)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 249.457 894.548)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 255.6716 898.411)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.865 0.5018 -0.5018 0.865 261.9124 902.2128)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8711 0.4912 -0.4912 0.8711 268.1928 905.9849)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.877 0.4804 -0.4804 0.877 274.6153 909.5355)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 280.9763 913.0861)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8942 0.4476 -0.4476 0.8942 287.4662 916.4529)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8997 0.4365 -0.4365 0.8997 293.9912 919.7495)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.905 0.4253 -0.4253 0.905 300.5613 922.9746)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 307.3016 926.1004)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.9203 0.3913 -0.3913 0.9203 313.9186 929.06)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 320.6555 931.9995)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.9297 0.3682 -0.3682 0.9297 327.4852 934.7291)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.9343 0.3566 -0.3566 0.9343 334.2307 937.3744)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.9429 0.3331 -0.3331 0.9429 341.1134 940.035)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.947 0.3212 -0.3212 0.947 347.9652 942.4875)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.951 0.3093 -0.3093 0.951 354.9388 944.8502)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.9548 0.2973 -0.2973 0.9548 361.8712 947.0724)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.962 0.2732 -0.2732 0.962 368.9571 949.2667)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.9653 0.2611 -0.2611 0.9653 375.9294 951.2173)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.9685 0.2489 -0.2489 0.9685 383.0483 953.1723)" class="st1 st27 st95"> </text>
+    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 390.0931 954.9308)" class="st1 st27 st97"> </text>
+    <text transform="matrix(0.9773 0.212 -0.212 0.9773 397.2253 956.6594)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.9799 0.1996 -0.1996 0.9799 404.475 958.2396)" class="st1 st27 st95"> </text>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000168827598408079405360000005272255343616398742_" x="3.28" y="0.13" width="999.87" height="999.87"/>
+        <rect id="SVGID_00000114056230840910645560000009445037469721841854_" x="3.28" y="0.13" width="999.87" height="999.87"/>
       </defs>
-      <clipPath id="SVGID_00000082340703084473091900000012382666650506167430_">
-        <use xlink:href="#SVGID_00000168827598408079405360000005272255343616398742_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000132076724614747123310000013699768362014509975_">
+        <use xlink:href="#SVGID_00000114056230840910645560000009445037469721841854_"  style="overflow:visible;"/>
       </clipPath>
-      <g style="clip-path:url(#SVGID_00000082340703084473091900000012382666650506167430_);">
-        <text transform="matrix(1.4089 0.177 -0.1247 0.9922 410.3378 969.5187)" class="st31 st78">M</text>
+      <g style="clip-path:url(#SVGID_00000132076724614747123310000013699768362014509975_);">
+        <text transform="matrix(1.4089 0.177 -0.1247 0.9922 410.3563 969.5519)" class="st32 st99">M</text>
       </g>
-      <g style="clip-path:url(#SVGID_00000082340703084473091900000012382666650506167430_);">
-        <text transform="matrix(1.4199 -0.0198 0.0139 0.9999 483.202 977.7559)" class="st31 st79">O</text>
+      <g style="clip-path:url(#SVGID_00000132076724614747123310000013699768362014509975_);">
+        <text transform="matrix(1.4199 -0.0198 0.0139 0.9999 483.197 977.7186)" class="st32 st100">O</text>
       </g>
-      <g style="clip-path:url(#SVGID_00000082340703084473091900000012382666650506167430_);">
-        <text transform="matrix(1.4108 -0.1616 0.1138 0.9935 532.1439 977.244)" class="st31 st80">O</text>
+      <g style="clip-path:url(#SVGID_00000132076724614747123310000013699768362014509975_);">
+        <text transform="matrix(1.4108 -0.1616 0.1138 0.9935 532.1583 977.1995)" class="st32 st101">O</text>
       </g>
     </g>
-    <text transform="matrix(1.3841 -0.3175 0.2236 0.9747 580.9338 971.9805)" class="st1 st31 st78">N</text>
-    <text transform="matrix(1.357 -0.4182 0.2945 0.9557 634.1059 959.1929)" class="st1 st31 st79"> </text>
-    <text transform="matrix(1.3351 -0.4837 0.3406 0.9402 657.1682 951.9322)" class="st1 st31 st79"> </text>
-    <text transform="matrix(1.3166 -0.5318 0.3745 0.9272 674.0029 945.8129)" class="st1 st31 st78"> </text>
-    <text transform="matrix(0.9179 -0.3968 0.3968 0.9179 686.9943 931.0014)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.9081 -0.4188 0.4188 0.9081 693.7166 928.0957)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.903 -0.4297 0.4297 0.903 700.3789 925.0446)" class="st1 st27 st75"> </text>
-    <text transform="matrix(0.8977 -0.4405 0.4405 0.8977 706.9905 921.8903)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8869 -0.4619 0.4619 0.8869 713.5715 918.6772)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8813 -0.4725 0.4725 0.8813 720.0809 915.3149)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8756 -0.483 0.483 0.8756 726.5352 911.8555)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8698 -0.4935 0.4935 0.8698 732.9432 908.2997)" class="st1 st27 st73"> </text>
-    <text transform="matrix(0.8577 -0.5141 0.5141 0.8577 739.3102 904.682)" class="st1 st27 st73"> </text>
+    <text transform="matrix(1.3841 -0.3175 0.2236 0.9747 580.965 971.9655)" class="st1 st32 st99">N</text>
+    <text transform="matrix(1.357 -0.4182 0.2945 0.9556 634.0649 959.2053)" class="st1 st32 st100"> </text>
+    <text transform="matrix(1.3351 -0.4837 0.3406 0.9402 657.1423 951.9532)" class="st1 st32 st100"> </text>
+    <text transform="matrix(1.3166 -0.5319 0.3745 0.9272 674.0397 945.7782)" class="st1 st32 st99"> </text>
+    <text transform="matrix(0.9179 -0.3968 0.3968 0.9179 686.9914 930.9918)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.9081 -0.4188 0.4188 0.9081 693.7835 928.1237)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.903 -0.4297 0.4297 0.903 700.3165 925.006)" class="st1 st27 st96"> </text>
+    <text transform="matrix(0.8978 -0.4405 0.4405 0.8978 707.0242 921.8928)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8869 -0.4619 0.4619 0.8869 713.5578 918.6664)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8813 -0.4725 0.4725 0.8813 720.0716 915.3243)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8756 -0.483 0.483 0.8756 726.5728 911.8436)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8698 -0.4935 0.4935 0.8698 732.9858 908.2365)" class="st1 st27 st94"> </text>
+    <text transform="matrix(0.8577 -0.5141 0.5141 0.8577 739.3466 904.7013)" class="st1 st27 st94"> </text>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000183244876221701230230000004792260190052697492_" x="3.28" y="0.13" width="999.87" height="999.87"/>
+        <rect id="SVGID_00000042702098459025038810000013725706179312375685_" x="3.28" y="0.13" width="999.87" height="999.87"/>
       </defs>
-      <clipPath id="SVGID_00000008828878773806641850000014457549009316655019_">
-        <use xlink:href="#SVGID_00000183244876221701230230000004792260190052697492_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000178925506942591337620000002675767581528343229_">
+        <use xlink:href="#SVGID_00000042702098459025038810000013725706179312375685_"  style="overflow:visible;"/>
       </clipPath>
-      <g style="clip-path:url(#SVGID_00000008828878773806641850000014457549009316655019_);">
-        <text transform="matrix(0.1592 -1.4111 0.9937 0.1121 61.4524 482.0305)" class="st31 st80">A</text>
+      <g style="clip-path:url(#SVGID_00000178925506942591337620000002675767581528343229_);">
+        <text transform="matrix(0.1592 -1.4111 0.9937 0.1121 61.4434 482.0074)" class="st32 st101">A</text>
       </g>
-      <g style="clip-path:url(#SVGID_00000008828878773806641850000014457549009316655019_);">
-        <text transform="matrix(0.301 -1.3877 0.9773 0.212 66.8017 435.1687)" class="st31 st78">S</text>
+      <g style="clip-path:url(#SVGID_00000178925506942591337620000002675767581528343229_);">
+        <text transform="matrix(0.301 -1.3877 0.9773 0.212 66.8144 435.1544)" class="st32 st99">S</text>
       </g>
     </g>
-    <text transform="matrix(0.4392 -1.3504 0.951 0.3093 75.2077 394.8114)" class="st1 st31 st80">C</text>
-    <text transform="matrix(0.5719 -1.2998 0.9153 0.4027 89.7563 349.9232)" class="st1 st31 st78">E</text>
-    <text transform="matrix(0.6975 -1.2369 0.8711 0.4912 106.0958 312.062)" class="st1 st31 st79">N</text>
-    <text transform="matrix(0.8429 -1.1427 0.8047 0.5936 132.2969 265.9568)" class="st1 st31 st80">D</text>
-    <text transform="matrix(0.9618 -1.0446 0.7357 0.6773 160.069 227.875)" class="st1 st31 st80">A</text>
-    <text transform="matrix(1.0686 -0.9352 0.6586 0.7525 191.743 192.9605)" class="st1 st31 st80">N</text>
-    <text transform="matrix(1.1528 -0.8291 0.5839 0.8118 232.092 158.2575)" class="st1 st31 st82">T</text>
-    <text transform="matrix(0.8387 -0.5445 0.5445 0.8387 256.4624 130.4443)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.8924 -0.4513 0.4513 0.8924 255.6593 127.6657)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.9747 -0.2236 0.2236 0.9747 350.1097 80.0782)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9948 -0.1014 0.1014 0.9948 453.2264 59.398)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.996 -0.089 0.089 0.996 460.2289 58.6822)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9971 -0.0766 0.0766 0.9971 467.2424 58.0748)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.9987 -0.0516 0.0516 0.9987 474.2625 57.5329)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9992 -0.039 0.039 0.9992 481.2899 57.1544)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9996 -0.0265 0.0265 0.9996 488.3257 56.8795)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9999 -0.0139 0.0139 0.9999 495.3621 56.7085)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9999 0.0113 -0.0113 0.9999 502.4043 56.611)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.9997 0.0239 -0.0239 0.9997 509.4403 56.6678)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.9993 0.0365 -0.0365 0.9993 516.4771 56.8348)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9988 0.0491 -0.0491 0.9988 523.5109 57.1045)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9972 0.0743 -0.0743 0.9972 530.5469 57.4439)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9962 0.0869 -0.0869 0.9962 537.5703 57.9388)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.995 0.0995 -0.0995 0.995 544.5831 58.544)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9937 0.1121 -0.1121 0.9937 551.584 59.2489)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9922 0.1247 -0.1247 0.9922 558.5797 60.0632)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.9887 0.1498 -0.1498 0.9887 565.5656 60.9421)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9867 0.1623 -0.1623 0.9867 572.5264 61.9756)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.9846 0.1747 -0.1747 0.9846 579.4741 63.1155)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9823 0.1872 -0.1872 0.9823 586.4015 64.3544)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9799 0.1996 -0.1996 0.9799 593.3106 65.6977)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9745 0.2243 -0.2243 0.9745 600.2067 67.1157)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 607.0684 68.6811)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9685 0.2489 -0.2489 0.9685 613.9078 70.35)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9653 0.2611 -0.2611 0.9653 620.7251 72.1213)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.9584 0.2853 -0.2853 0.9584 627.5173 73.9607)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9548 0.2973 -0.2973 0.9548 634.27 75.9555)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.951 0.3093 -0.3093 0.951 640.9919 78.0472)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.947 0.3212 -0.3212 0.947 647.6813 80.2446)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9387 0.3449 -0.3449 0.9387 654.3478 82.5057)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9343 0.3566 -0.3566 0.9343 660.9629 84.9164)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9297 0.3682 -0.3682 0.9297 667.5368 87.4261)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 674.0775 90.0359)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.9153 0.4027 -0.4027 0.9153 680.5867 92.7157)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 687.0347 95.5345)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.905 0.4253 -0.4253 0.905 693.4434 98.4518)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.8997 0.4365 -0.4365 0.8997 699.8075 101.4687)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.8886 0.4586 -0.4586 0.8886 706.1296 104.554)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 712.3917 107.7726)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.877 0.4804 -0.4804 0.877 718.6033 111.0879)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.865 0.5018 -0.5018 0.865 724.7803 114.4595)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.8587 0.5124 -0.5124 0.8587 730.8808 117.9773)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 736.9266 121.5842)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 742.9203 125.278)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.8327 0.5538 -0.5538 0.8327 748.8715 129.0385)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 754.7392 132.9286)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 760.5472 136.905)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 766.3182 140.9318)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.7975 0.6033 -0.6033 0.7975 771.9952 145.0966)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 777.6077 149.3436)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.7827 0.6225 -0.6225 0.7827 783.1614 153.676)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.7674 0.6412 -0.6412 0.7674 788.6642 158.065)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 794.0712 162.571)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 799.4145 167.1574)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.7357 0.6773 -0.6773 0.7357 804.7083 171.7949)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 809.8978 176.5536)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 815.0173 181.3863)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.7024 0.7118 -0.7118 0.7024 820.096 186.2643)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.6938 0.7202 -0.7202 0.6938 825.0554 191.2533)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 829.941 196.3242)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 834.7507 201.4609)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.6586 0.7525 -0.7525 0.6586 839.5086 206.6524)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 844.1516 211.9454)" class="st1 st27 st83"> </text>
-    <text transform="matrix(0.6404 0.768 -0.768 0.6404 848.7216 217.3018)" class="st1 st27 st86"> </text>
-    <text transform="matrix(0.6219 0.7831 -0.7831 0.6219 853.2301 222.7059)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.6126 0.7904 -0.7904 0.6126 857.6252 228.2075)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 861.9329 233.7749)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.5839 0.8118 -0.8118 0.5839 866.1922 239.3788)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.5742 0.8187 -0.8187 0.5742 870.3225 245.0819)" class="st1 st27 st85"> </text>
-    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 874.3652 250.8412)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.5545 0.8322 -0.8322 0.5545 878.3267 256.6595)" class="st1 st27 st84"> </text>
-    <text transform="matrix(0.7155 1.2266 -0.8638 0.5038 875.0514 266.6991)" class="st1 st31 st79">S</text>
-    <text transform="matrix(0.5947 1.2895 -0.9081 0.4188 895.9531 302.2648)" class="st1 st31 st82">U</text>
-    <text transform="matrix(0.4347 1.3518 -0.952 0.3061 915.9244 344.8588)" class="st1 st31 st80">N</text>
-    <text transform="matrix(0.1508 0.9886 -0.9886 0.1508 942.5564 393.3705)" class="st1 st27 st86"> </text>
+    <text transform="matrix(0.4392 -1.3504 0.951 0.3093 75.2093 394.7692)" class="st1 st32 st101">C</text>
+    <text transform="matrix(0.5719 -1.2998 0.9153 0.4027 89.7526 349.8924)" class="st1 st32 st100">E</text>
+    <text transform="matrix(0.6975 -1.2369 0.8711 0.4912 106.1198 312.047)" class="st1 st32 st100">N</text>
+    <text transform="matrix(0.843 -1.1427 0.8047 0.5936 132.2881 265.9908)" class="st1 st32 st100">D</text>
+    <text transform="matrix(0.9618 -1.0447 0.7357 0.6774 160.1171 227.9318)" class="st1 st32 st101">A</text>
+    <text transform="matrix(1.0686 -0.9352 0.6586 0.7525 191.7165 192.9798)" class="st1 st32 st101">N</text>
+    <text transform="matrix(1.1528 -0.8291 0.5839 0.8118 232.0798 158.2119)" class="st1 st32 st101">T</text>
+    <text transform="matrix(0.8388 -0.5445 0.5445 0.8388 256.4538 130.4823)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.8924 -0.4513 0.4513 0.8924 255.7295 127.7002)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.9747 -0.2236 0.2236 0.9747 350.1151 80.0691)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9948 -0.1014 0.1014 0.9948 453.1779 59.3893)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.996 -0.089 0.089 0.996 460.2064 58.6787)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9971 -0.0765 0.0765 0.9971 467.2497 58.137)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.9987 -0.0516 0.0516 0.9987 474.2578 57.5393)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9992 -0.039 0.039 0.9992 481.275 57.2018)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9997 -0.0265 0.0265 0.9997 488.339 56.8805)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9999 -0.0139 0.0139 0.9999 495.3521 56.6677)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9999 0.0112 -0.0112 0.9999 502.4357 56.6315)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.9997 0.0239 -0.0239 0.9997 509.4567 56.728)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.9993 0.0365 -0.0365 0.9993 516.5447 56.8435)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9988 0.0491 -0.0491 0.9988 523.4566 57.0831)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9972 0.0743 -0.0743 0.9972 530.5803 57.4754)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9962 0.0869 -0.0869 0.9962 537.5735 57.9977)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.995 0.0995 -0.0995 0.995 544.6324 58.5484)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9937 0.1121 -0.1121 0.9937 551.6199 59.2427)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9922 0.1247 -0.1247 0.9922 558.6091 60.0595)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.9887 0.1497 -0.1497 0.9887 565.5499 60.8946)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9867 0.1623 -0.1623 0.9867 572.5675 61.9627)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.9846 0.1747 -0.1747 0.9846 579.4107 63.1361)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9823 0.1872 -0.1872 0.9823 586.3888 64.3062)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9799 0.1996 -0.1996 0.9799 593.3207 65.7613)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9745 0.2243 -0.2243 0.9745 600.1362 67.1388)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9716 0.2366 -0.2366 0.9716 607.0082 68.7078)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9685 0.2489 -0.2489 0.9685 613.918 70.3484)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9653 0.2611 -0.2611 0.9653 620.707 72.099)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.9584 0.2853 -0.2853 0.9584 627.5085 73.9981)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9548 0.2973 -0.2973 0.9548 634.2403 75.9107)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.951 0.3093 -0.3093 0.951 641.0035 78.0144)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.947 0.3212 -0.3212 0.947 647.6567 80.1985)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9386 0.3449 -0.3449 0.9386 654.3136 82.4766)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9343 0.3566 -0.3566 0.9343 660.9911 84.9664)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9297 0.3682 -0.3682 0.9297 667.5537 87.4893)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.9251 0.3798 -0.3798 0.9251 674.0966 90.0354)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.9153 0.4027 -0.4027 0.9153 680.5834 92.6691)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.9102 0.4141 -0.4141 0.9102 686.999 95.4952)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.905 0.4253 -0.4253 0.905 693.4107 98.4309)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.8997 0.4365 -0.4365 0.8997 699.7506 101.4609)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.8886 0.4586 -0.4586 0.8886 706.1261 104.5257)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.8829 0.4696 -0.4696 0.8829 712.3627 107.8045)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.877 0.4804 -0.4804 0.877 718.6413 111.0686)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.865 0.5019 -0.5019 0.865 724.819 114.4963)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.8587 0.5124 -0.5124 0.8587 730.8406 117.9491)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.8524 0.5229 -0.5229 0.8524 736.9288 121.6112)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.8459 0.5333 -0.5333 0.8459 742.9285 125.3234)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.8326 0.5538 -0.5538 0.8326 748.8548 129.0601)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.8258 0.5639 -0.5639 0.8258 754.7171 132.9094)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.8189 0.5739 -0.5739 0.8189 760.5338 136.942)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.8047 0.5936 -0.5936 0.8047 766.2828 140.896)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.7975 0.6033 -0.6033 0.7975 772.0358 145.1338)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.7901 0.6129 -0.6129 0.7901 777.568 149.3636)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.7827 0.6224 -0.6224 0.7827 783.2075 153.6311)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.7674 0.6412 -0.6412 0.7674 788.6693 158.0749)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.7596 0.6504 -0.6504 0.7596 794.093 162.5788)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.7517 0.6595 -0.6595 0.7517 799.3658 167.1989)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.7357 0.6773 -0.6773 0.7357 804.7512 171.746)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.7275 0.6861 -0.6861 0.7275 809.8617 176.6057)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.7192 0.6948 -0.6948 0.7192 814.9835 181.3863)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.7023 0.7118 -0.7118 0.7023 820.0911 186.2472)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.6938 0.7202 -0.7202 0.6938 825.0737 191.271)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.6851 0.7284 -0.7284 0.6851 829.9525 196.3095)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.6764 0.7366 -0.7366 0.6764 834.7769 201.4066)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.6586 0.7525 -0.7525 0.6586 839.4622 206.6943)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.6496 0.7603 -0.7603 0.6496 844.1235 211.9913)" class="st1 st27 st103"> </text>
+    <text transform="matrix(0.6404 0.768 -0.768 0.6404 848.728 217.3192)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.6219 0.7831 -0.7831 0.6219 853.1816 222.719)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.6126 0.7904 -0.7904 0.6126 857.668 228.2405)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.6031 0.7977 -0.7977 0.6031 861.9754 233.8231)" class="st1 st27 st106"> </text>
+    <text transform="matrix(0.5839 0.8118 -0.8118 0.5839 866.1315 239.3662)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.5742 0.8187 -0.8187 0.5742 870.3594 245.0547)" class="st1 st27 st105"> </text>
+    <text transform="matrix(0.5644 0.8255 -0.8255 0.5644 874.4061 250.8669)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.5545 0.8322 -0.8322 0.5545 878.3173 256.6646)" class="st1 st27 st104"> </text>
+    <text transform="matrix(0.7155 1.2266 -0.8638 0.5039 875.0805 266.6603)" class="st1 st32 st100">S</text>
+    <text transform="matrix(0.5947 1.2895 -0.9081 0.4188 895.947 302.3079)" class="st1 st32 st107">U</text>
+    <text transform="matrix(0.4347 1.3518 -0.952 0.3061 915.9668 344.8334)" class="st1 st32 st101">N</text>
+    <text transform="matrix(0.1508 0.9886 -0.9886 0.1508 942.5288 393.4192)" class="st1 st27 st106"> </text>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000173848028880875986560000016228605267473000589_" x="3.28" y="0.13" width="999.87" height="999.87"/>
+        <rect id="SVGID_00000183929986982432420880000014104324981123404446_" x="3.28" y="0.13" width="999.87" height="999.87"/>
       </defs>
-      <clipPath id="SVGID_00000043455531333354059290000013793338294531857824_">
-        <use xlink:href="#SVGID_00000173848028880875986560000016228605267473000589_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000029048063138552116650000016430035492302358666_">
+        <use xlink:href="#SVGID_00000183929986982432420880000014104324981123404446_"  style="overflow:visible;"/>
       </clipPath>
       
-        <line style="clip-path:url(#SVGID_00000043455531333354059290000013793338294531857824_);fill:none;stroke:#1D1D1B;stroke-width:6;" x1="503.41" y1="0.13" x2="503.41" y2="499.28"/>
+        <line style="clip-path:url(#SVGID_00000029048063138552116650000016430035492302358666_);fill:none;stroke:#1D1D1B;stroke-width:6;" x1="503.41" y1="0.13" x2="503.41" y2="499.28"/>
     </g>
     <line class="st23" x1="935.59" y1="747.72" x2="856.57" y2="703.01"/>
     <line class="st21" x1="64.77" y1="732.02" x2="505.49" y2="502.6"/>
     <g class="st1">
       <defs>
-        <rect id="SVGID_00000041264265065527230910000009443184289080147865_" x="3.28" y="0.13" width="999.87" height="999.87"/>
+        <rect id="SVGID_00000000905232091197371250000004960701764055789956_" x="3.28" y="0.13" width="999.87" height="999.87"/>
       </defs>
-      <clipPath id="SVGID_00000179648187280118422510000014757945935065016705_">
-        <use xlink:href="#SVGID_00000041264265065527230910000009443184289080147865_"  style="overflow:visible;"/>
+      <clipPath id="SVGID_00000107563652224930072640000017931892919337254332_">
+        <use xlink:href="#SVGID_00000000905232091197371250000004960701764055789956_"  style="overflow:visible;"/>
       </clipPath>
-      <path style="clip-path:url(#SVGID_00000179648187280118422510000014757945935065016705_);fill:#1D1D1B;" d="M868.06,241.16
+      <path style="clip-path:url(#SVGID_00000107563652224930072640000017931892919337254332_);fill:#1D1D1B;" d="M868.06,241.16
         c11.2,0.03,20.31-8.93,20.51-20.08c0.21-11.67-9.15-20.91-20.5-20.89c-11.27,0.02-20.29,9.01-20.47,20.13
         C847.41,232.1,856.94,241.2,868.06,241.16 M868.12,196.22c13.61-0.01,24.61,11.13,24.56,24.69c-0.05,13.5-11.09,24.57-24.76,24.5
         c-13.45-0.06-24.42-11.09-24.43-24.58C843.47,207.27,854.51,196.18,868.12,196.22"/>
-      <path style="clip-path:url(#SVGID_00000179648187280118422510000014757945935065016705_);fill:#1D1D1B;" d="M868.09,215.22
+      <path style="clip-path:url(#SVGID_00000107563652224930072640000017931892919337254332_);fill:#1D1D1B;" d="M868.09,215.22
         c3,0,5.46,2.44,5.48,5.43c0.02,3.02-2.47,5.54-5.48,5.51c-3.05-0.03-5.44-2.41-5.48-5.48
         C862.57,217.68,865.07,215.22,868.09,215.22"/>
-      <path style="clip-path:url(#SVGID_00000179648187280118422510000014757945935065016705_);fill:#1D1D1B;" d="M367.25,921.36
+      <path style="clip-path:url(#SVGID_00000107563652224930072640000017931892919337254332_);fill:#1D1D1B;" d="M367.25,921.36
         c8.65,4.49,13.32,10.98,13.73,19.72c-0.1,8.75-4.55,15.41-12.96,20.15c7.5,0.37,16.29-2.73,21.15-10.11
         c4.65-7.06,3.96-15.9-1.82-22.18C382.24,923.4,375.47,920.98,367.25,921.36 M370.11,964.11c-3.1,0.04-5.64-0.24-8.13-0.84
         c-0.77-0.19-1.26-0.69-1.3-1.33c-0.04-0.63,0.4-1.2,1.17-1.43c2.49-0.74,4.8-1.78,6.87-3.19c3.98-2.71,6.68-6.18,8.09-10.39
@@ -1979,7 +2288,7 @@ class SmallBirthChart {
         c-0.09-0.63,0.27-1.27,0.96-1.47c0.99-0.29,1.99-0.54,3-0.74c1.66-0.32,3.36-0.49,5.06-0.49c6.14-0.01,11.68,1.56,16.5,4.86
         c4.81,3.29,7.89,7.56,9.31,12.73c0.58,2.12,0.76,4.28,0.61,6.46c-0.33,4.89-2.28,9.25-5.81,13.06c-3.25,3.51-7.37,5.96-12.28,7.39
         C374.82,963.69,372.24,964.06,370.11,964.11"/>
-      <path style="clip-path:url(#SVGID_00000179648187280118422510000014757945935065016705_);fill:#1D1D1B;" d="M38.66,544.6v-31.08
+      <path style="clip-path:url(#SVGID_00000107563652224930072640000017931892919337254332_);fill:#1D1D1B;" d="M38.66,544.6v-31.08
         c0-0.65-0.75-0.98-1.19-0.52l-12.12,12.65c-0.26,0.27-0.67,0.28-0.95,0.04l-0.88-0.79c-0.31-0.27-0.33-0.77-0.04-1.07l15.93-16.8
         c0.27-0.29,0.72-0.29,0.99,0l15.96,16.83c0.28,0.3,0.27,0.8-0.04,1.07l-0.84,0.75c-0.28,0.25-0.69,0.23-0.95-0.04
         c-4.02-4.22-8.04-8.43-12.08-12.67c-0.44-0.46-1.19-0.14-1.19,0.51l0,0.98c0,10.88,0,19.17,0,30.14c0,0.4-0.31,0.73-0.7,0.73
@@ -2086,7 +2395,7 @@ class SmallBirthChart {
   
   
   generateChartTable() {
-    const importantPlanets = ['Sun', 'Moon', 'Ascendant'];
+    const importantPlanets = ['Sun', 'Moon', 'Rising'];
     const table = document.createElement('table');
     table.classList.add('planet-sign-table');
   
@@ -2178,63 +2487,63 @@ class SmallBirthChart {
   static getSignWordSVG(sign) {
     switch (sign) {
       case "Aries":
-        return `<text transform="rotate(88.854 -12.926 30.334)" font-size="200" font-family="Krungthep">
-    Aries
+        return `<text transform="rotate(88.854 -12.926 30.334)" font-size="30" font-family="Krungthep">
+    Ari
   </text>`;
         break;
       case "Taurus":
-        return `<text transform="rotate(88.854 7.47 9.713)" font-size="200" font-family="Krungthep">
-    Taurus
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="30" font-family="Krungthep">
+    Tau
   </text>`;
         break;
       case "Gemini":
-        return `<text transform="rotate(88.854 7.47 9.713)" font-size="240" font-family="Krungthep">
-    Gemini
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="30" font-family="Krungthep">
+    Gem
   </text>`;
         break;
       case "Cancer":
-        return `<text transform="rotate(88.854 7.47 9.713)" font-size="200" font-family="Krungthep">
-    Cancer
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="30" font-family="Krungthep">
+    Can
   </text>`;
         break;
       case "Leo":
-        return `<text transform="rotate(88.854 2.112 15.074)" font-size="200" font-family="Krungthep">
+        return `<text transform="rotate(88.854 2.112 15.074)" font-size="30" font-family="Krungthep">
     Leo
   </text>`;
         break;
       case "Virgo":
-        return `<text transform="rotate(88.854 7.47 9.713)" font-size="200" font-family="Krungthep">
-    Virgo
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="30" font-family="Krungthep">
+    Vir
   </text>`;
         break;
       case "Libra":
-        return `<text transform="rotate(88.854 -11.61 29.074)" letter-spacing="25" font-size="200" font-family="Krungthep">
-    Libra
+        return `<text transform="rotate(88.854 -11.61 29.074)"  font-size="30" font-family="Krungthep">
+    Lib
   </text>`;
         break;
       case "Scorpio":
-        return `<text transform="rotate(88.854 7.47 9.713)" font-size="200" font-family="Krungthep">
-    Scorpio
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="30" font-family="Krungthep">
+    Sco
   </text>`;
         break;
       case "Sagittarius":
-        return `<text transform="rotate(88.854 7.47 9.713)" font-size="200" font-family="Krungthep">
-    Sagittarius
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="30" font-family="Krungthep">
+    Sag
   </text>`;
         break;
       case "Capricorn":
-        return `<text transform="rotate(88.854 .623 10.473)" font-size="200" font-family="Krungthep">
-    Capricorn
+        return `<text transform="rotate(88.854 .623 10.473)" font-size="30" font-family="Krungthep">
+    Cap
   </text>`;
         break;
       case "Aquarius":
-        return `<text transform="rotate(88.854 7.47 9.713)" font-size="200" font-family="Krungthep">
-    Aquarius
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="30" font-family="Krungthep">
+    Aqu
   </text>`;
         break;
       case "Pisces":
-        return `<text transform="rotate(88.854 -14.881 32.32)" letter-spacing="25" font-size="200" font-family="Krungthep">
-    Pisces
+        return `<text transform="rotate(88.854 -14.881 32.32)"  font-size="30" font-family="Krungthep">
+    Pis
   </text>`;
         break;
       default:
@@ -2276,7 +2585,7 @@ class SmallBirthChart {
   static planets = Object.freeze([
     "Sun",
     "Moon",
-    "Ascendant",
+    "Rising",
     "Mercury",
     "Venus",
     "Mars",
@@ -2291,7 +2600,7 @@ class SmallBirthChart {
   static reducedPlanets = Object.freeze([
     "Sun",
     "Moon",
-    "Ascendant",
+    "Rising",
   ]);
 }
 

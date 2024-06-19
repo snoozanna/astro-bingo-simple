@@ -1,7 +1,7 @@
 import { uuidv4 } from "../utilities.js";
 import SmallBirthChart from "./SmallBirthChart.js";
 
-const { planets } = SmallBirthChart;
+const { reducedPlanets } = SmallBirthChart;
 
 /****************************************************************
  * Constructor for a player
@@ -34,7 +34,7 @@ class Player extends SmallBirthChart {
   markCalled(callItem) {
     super.markCalled(callItem);
     let noOfCalledItems = 0;
-    for (const planet of planets) {
+    for (const planet of reducedPlanets) {
       if(this[planet].called) {
         noOfCalledItems += 1;
       }

@@ -1,4 +1,4 @@
-import BirthChart from "./BirthChart.js";
+import SmallBirthChart from "./SmallBirthChart.js";
 import Player from "./Player.js";
 import {
   connectToWebSocket,
@@ -43,9 +43,10 @@ class AstrologyBingoGameController {
         );
       }
       this.potentialCallList = [];
-      for (const sign of BirthChart.signs) {
-        for (const planet of BirthChart.planets) {
+      for (const sign of SmallBirthChart.signs) {
+        for (const planet of SmallBirthChart.reducedPlanets) {
           this.potentialCallList.push({ planet, sign });
+          console.log("push", planet, sign)
         }
       }
     }
@@ -161,6 +162,7 @@ class AstrologyBingoGameController {
 
   addPlayer(data) {
     let p = data;
+    console.log("player", data)
     if (!(data instanceof Player)) {
       p = new Player(data);
     }
@@ -267,12 +269,14 @@ class AstrologyBingoGameController {
   }
 
   reset({ signal = true } = {}) {
-    // const confirm = window.confirm("Are you sure?");
-    // if (confirm) {
-    //   console.log("yes");
-    // } else {
-    //   console.log("no");
-    // }
+  //   if (window.location.pathname !== "/current-call.html") {
+  //     console.log("window.location.pathname", window.location.pathname);
+  //     const confirmReset = window.confirm("Are you sure?");
+  //     if (!confirmReset) {
+  //         // If the user clicks "No", exit the function early
+  //         return;
+  //     }
+  // }
 
     for (const item of this.alreadyCalled) {
       delete item.callPosition;
@@ -345,11 +349,11 @@ class AstrologyBingoGameController {
       );
     }
 
-    const { signs, planets } = BirthChart;
+    const { signs, reducedPlanets } = SmallBirthChart;
 
-    if (!planets.includes(planet)) {
+    if (!reducedPlanets.includes(planet)) {
       throw new Error(
-        `Planet supplied to getCatchPhrase must be a recognised planet (One of ${planets.join(
+        `Planet supplied to getCatchPhrase must be a recognised planet (One of ${reducedPlanets.join(
           ", ",
         )}). Received ${planet}`,
       );
@@ -392,15 +396,15 @@ class AstrologyBingoGameController {
   }
 
   static getRandomPlanet() {
-    const Rn = getRandomIntInclusive(0, BirthChart.planets.length - 1);
-    let planetToCall = BirthChart.planets[Rn];
+    const Rn = getRandomIntInclusive(0, SmallBirthChart.reducedPlanets.length - 1);
+    let planetToCall = SmallBirthChart.reducedPlanets[Rn];
     // // console.log("planetToCall", planetToCall);
     return planetToCall;
   }
 
   static getRandomSign() {
-    const Rn = getRandomIntInclusive(0, BirthChart.signs.length - 1);
-    let signToCall = BirthChart.signs[Rn];
+    const Rn = getRandomIntInclusive(0, SmallBirthChart.signs.length - 1);
+    let signToCall = SmallBirthChart.signs[Rn];
     // // console.log("signToCall", signToCall);
     return signToCall;
   }
@@ -434,19 +438,19 @@ class AstrologyBingoGameController {
       Aquarius: "See you soon, Aquarius Moon",
       Pisces: "Humming a tune, Pisces Moon",
     },
-    Ascendant: {
-      Aries: "1st amendment, Aries Ascendant",
-      Taurus: "Loves pie and we don't mean Pythagorus, Ascendant in Taurus",
+    Rising: {
+      Aries: "1st amendment, Aries Rising",
+      Taurus: "Loves pie and we don't mean Pythagorus, Rising in Taurus",
       Gemini: "Personality will Multiply, Ascendent in Gemini",
-      Cancer: "Crabbies Ginger Ale, Cancer Ascendant",
-      Leo: "Fiercely independent, Leo Ascendant",
-      Virgo: "Work commitment, Virgo Ascendant",
-      Libra: "Balancing Act, Libra Ascendant",
-      Scorpio: "Moody Swamp, Scorpio Ascendant",
-      Sagittarius: "I need to leave the country, Sagittarius Ascendant",
-      Capricorn: "Let me speak to the manager, Capricorn Ascendant",
-      Aquarius: "Feed the people, Aquarius Ascendant",
-      Pisces: "Finding Nemo Pisces Ascendant",
+      Cancer: "Crabbies Ginger Ale, Cancer Rising",
+      Leo: "Fiercely independent, Leo Rising",
+      Virgo: "Work commitment, Virgo Rising",
+      Libra: "Balancing Act, Libra Rising",
+      Scorpio: "Moody Swamp, Scorpio Rising",
+      Sagittarius: "I need to leave the country, Sagittarius Rising",
+      Capricorn: "Let me speak to the manager, Capricorn Rising",
+      Aquarius: "Feed the people, Aquarius Rising",
+      Pisces: "Finding Nemo Pisces Rising",
     },
     Mercury: {
       Aries: "Things might get hairy, Mercury in Aries",

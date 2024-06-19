@@ -3,7 +3,7 @@ import BirthChart from "./classes/BirthChart.js";
 import Player from "./classes/Player.js";
 
 const alice = {
-  Ascendant: "Scorpio",
+  Rising: "Scorpio",
   Chiron: "Cancer",
   Descendant: "Taurus",
   Jupiter: "Cancer",
