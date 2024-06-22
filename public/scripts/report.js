@@ -6,7 +6,7 @@ import Report from "./components/Report.js";
  ****************************************************************/
 
 const game = new AstrologyBingoGameController();
-// console.log("game", game);
+console.log("game", game);
 
 const mountNode = document.getElementById("report-container");
 // console.log("mountNode", mountNode);

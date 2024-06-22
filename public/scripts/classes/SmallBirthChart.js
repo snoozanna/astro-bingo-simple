@@ -344,7 +344,7 @@ class SmallBirthChart {
       locationDisplay.textContent = `Lat: ${this.latitude.toFixed(
         2,
       )}, Long: ${this.longitude.toFixed(2)}`;
-      console.log(dateDisplay, timeDisplay);
+      // console.log(dateDisplay, timeDisplay);
       birthdayDisplay.append(dateDisplay, timeDisplay, locationDisplay);
       // heading.append(birthdayDisplay);
       mountNode.append(birthdayDisplay);
@@ -359,7 +359,7 @@ class SmallBirthChart {
     const symbolsToPopulate = [];
     // console.log("planets", planets);
     for (const [planet, sign] of Object.entries(this)) {
-      console.log(planet, sign);
+      // console.log(planet, sign);
       if (!planets.includes(planet)) {
         console.log(`skipping ${planet}`);
         continue;
@@ -564,7 +564,7 @@ class SmallBirthChart {
     const symbolsToPopulate = [];
     // console.log("planets", planets);
     for (const [planet, sign] of Object.entries(this)) {
-      console.log(planet, sign);
+      // console.log(planet, sign);
       if (!reducedPlanets.includes(planet)) {
         // console.log(`skipping ${planet}`);
         continue;
@@ -624,7 +624,7 @@ class SmallBirthChart {
       symbolsToPopulate.push(currentSymbol, currentWord);
       // symbolsToPopulate.push( currentWord);
     }
-    console.log("symbolsToPopulate", symbolsToPopulate);
+    // console.log("symbolsToPopulate", symbolsToPopulate);
 
    
 
@@ -636,7 +636,6 @@ class SmallBirthChart {
     );
     // console.log("chartImg", chartImg);
     chartImg.id = "chart";
-    console.log("hello");
     chartImg.classList.add("bc-template", "materialboxed", "chart-outline", "simple-chart");
     chartImg.setAttribute("viewBox", "-30 -30 1060 1060");
     chartImg.innerHTML = `<style type="text/css">

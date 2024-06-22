@@ -39,6 +39,7 @@ class PlayerListDisplay {
       showControls: true,
       sorted: false,
       showingResults: false,
+      reloadCelebs: false,
     };
     this.options = { ...defaults, ...options };
 
@@ -138,7 +139,25 @@ class PlayerListDisplay {
             }),
           );
         });
-        this.controls.append(showResults);
+
+        const reloadCelebs = document.createElement("button");
+        reloadCelebs.classList.add("waves-effect", "waves-light", "btn");
+        reloadCelebs.id = "reloadCelebs";
+        reloadCelebs.textContent = "Reload Celebs";
+        reloadCelebs.addEventListener("click", () => {
+          this.game.addCelebsToLocalStorage();
+          // this.game.reset();
+          // this.render();
+          // this.game.socket.send(
+          //   JSON.stringify({
+          //     type: "toggle-result-visibility",
+          //     data: this.options.showingResults,
+          //     controllerId: this.game._id,
+          //   }),
+          // );
+        });
+        this.controls.append(showResults, reloadCelebs);
+
       }
       mountNode.append(this.controls);
     }

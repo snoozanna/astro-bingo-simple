@@ -6,6 +6,7 @@ import {
   getRandomIntInclusive,
   uuidv4,
 } from "../utilities.js";
+import celebs from "./../../players/celebs.js"
 
 /****************************************************************
  * The controller for a game
@@ -18,7 +19,9 @@ class AstrologyBingoGameController {
     alreadyCalled: "called",
     players: "players",
   };
+  
   constructor() {
+    console.log("hello", celebs);
     this._id = uuidv4();
 
     const potentialsData = localStorage.getItem(
@@ -30,9 +33,13 @@ class AstrologyBingoGameController {
     const playerData = localStorage.getItem(
       AstrologyBingoGameController.storageLabels.players,
     );
+
+
     const potentials = JSON.parse(potentialsData);
     const called = JSON.parse(calledData);
     const players = JSON.parse(playerData);
+    // const players = celebs;
+   
 
     if (potentials != null && Array.isArray(potentials)) {
       this.potentialCallList = potentials;
@@ -160,6 +167,27 @@ class AstrologyBingoGameController {
     );
   }
 
+
+
+addCelebsToLocalStorage(){
+// delete current players
+
+this.players = [];
+this.savePlayers();
+celebs.map((celeb)=> {
+  console.log("player", celeb)
+  // let p = celeb;
+  //   if (!(celeb instanceof Player)) {
+  //     p = new Player(celeb);
+  //   }
+  this.players.push(celeb);
+  console.log("adding celeb", celeb)
+  this.savePlayers();
+  this.socket.send(JSON.stringify({ type: "player-added" }));
+})
+    
+  }
+
   addPlayer(data) {
     let p = data;
     console.log("player", data)
@@ -198,16 +226,16 @@ class AstrologyBingoGameController {
       console.log("Showing results: sorting by score");
       this.players
         .sort((p1, p2) => {
-          console.log(`${p1.name} score: ${p1.score}`);
-          console.log(`${p2.name} score: ${p2.score}`);
+          // console.log(`${p1.name} score: ${p1.score}`);
+          // console.log(`${p2.name} score: ${p2.score}`);
           return p1.score - p2.score;
         })
         .reverse();
     } else {
       console.log("[un]sorting by created");
       this.players.sort((p1, p2) => {
-        console.log(`${p1.name} created: ${p1.created}`);
-        console.log(`${p2.name} created: ${p2.created}`);
+        // console.log(`${p1.name} created: ${p1.created}`);
+        // console.log(`${p2.name} created: ${p2.created}`);
         return p1.created - p2.created;
       });
     }
@@ -383,7 +411,7 @@ class AstrologyBingoGameController {
   }
 
   savePlayers() {
-    // console.log("this.players", this.players);
+    console.log("this.players", this.players);
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.players,
       JSON.stringify(this.players),

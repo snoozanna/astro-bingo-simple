@@ -10,6 +10,7 @@ const { reducedPlanets } = SmallBirthChart;
 
 class Player extends SmallBirthChart {
   constructor({ chartData, _id = uuidv4() }) {
+
     super(chartData);
     this._id = _id;
     this.created = chartData.created || Date.now();
