@@ -350,7 +350,36 @@ button.danger{
 section.grid-section.simple-generator > .upper-controls{
   display: flex;
   flex-direction: column;
-  height: 60vh;
+
   padding: 3rem;
 
+}
+
+
+
+@media screen and (max-width: 450px) {
+
+  section.grid-section > .upper-controls{
+    display: flex;
+    flex-direction: column;
+  
+    padding: 3rem;
+  }
+  .call-table > tbody > tr >th, 
+  .call-table > thead > tr >th, 
+  .call-table > tfoot > tr >th{
+    font-size: 1rem;
+  }
+  .footer-nav{
+    overflow: scroll;
+  }
+  .phrase{
+    font-size: 3rem;
+    flex-grow: 1;
+    height: 60vh;
+  }
+
+  .list-group{
+    grid-template-columns: inherit;
+  }
 }
