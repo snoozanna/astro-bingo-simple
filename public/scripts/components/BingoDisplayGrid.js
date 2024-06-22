@@ -11,7 +11,7 @@ import { isElement } from "../utilities.js";
 class BingoDisplayGrid {
   constructor({
     game,
-    domNodes: { gridArea, controls, phraseDisplay, prevCallDisplay },
+    domNodes: { gridArea, controls, phraseDisplay, prevCallDisplay, resetNode },
     classes: {
       calledClass = "called",
       hoveringClass = "hover",
@@ -23,6 +23,7 @@ class BingoDisplayGrid {
     this.game = game;
     this.gridArea = gridArea;
     this.controls = controls;
+    this.resetNode = resetNode;
     this.phraseDisplay = phraseDisplay;
     this.prevCallDisplay = prevCallDisplay;
     this.classes = {
@@ -63,7 +64,7 @@ class BingoDisplayGrid {
           console.log(`grid for controller ${evt.controllerId} doing nothing`);
       }
     });
-
+console.log("resetNode", resetNode)
     // Listen for errors
     socket.addEventListener("error", (err) => {
       // console.log("error from the grid", err);
@@ -101,8 +102,9 @@ class BingoDisplayGrid {
       button.addEventListener("click", (e) => {
         this.game.reset();
       });
-      this.controls.append(button);
+      this.resetNode.append(button);
     }
+  
   }
 
   // clearPhrase() {
@@ -185,7 +187,6 @@ class BingoDisplayGrid {
 
     // Put this here after the cloning.
     td.id = "blank-cell";
-
     if (settings.features.controls && !this.controls.querySelector("#call")) {
       // Put the call button in
       const callButton = document.createElement("button");

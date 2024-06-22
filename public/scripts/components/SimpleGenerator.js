@@ -10,7 +10,7 @@ import { isElement } from "../utilities.js";
 class SimpleGenerator {
   constructor({
     game,
-    domNodes: { gridArea, controls, phraseDisplay, prevCallDisplay, gameControls },
+    domNodes: { gridArea, controls, phraseDisplay, prevCallDisplay, gameControls, resetNode },
     classes: {
       calledClass = "called",
       hoveringClass = "hover",
@@ -22,6 +22,7 @@ class SimpleGenerator {
     this.game = game;
     this.gridArea = gridArea;
     this.controls = controls;
+    this.resetNode = resetNode;
     this.phraseDisplay = phraseDisplay;
     this.prevCallDisplay = prevCallDisplay;
     this.gameControls = gameControls;
@@ -101,8 +102,9 @@ class SimpleGenerator {
       button.addEventListener("click", (e) => {
         this.game.reset();
       });
-      this.controls.append(button);
+      this.resetNode.append(button);
     }
+  
   }
 
   // clearPhrase() {

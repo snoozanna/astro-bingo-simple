@@ -53,7 +53,7 @@ class AstrologyBingoGameController {
       for (const sign of SmallBirthChart.signs) {
         for (const planet of SmallBirthChart.reducedPlanets) {
           this.potentialCallList.push({ planet, sign });
-          console.log("push", planet, sign)
+          // console.log("push", planet, sign)
         }
       }
     }

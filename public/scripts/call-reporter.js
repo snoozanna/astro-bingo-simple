@@ -10,6 +10,7 @@ const grid = new BingoDisplayGrid({
   domNodes: {
     gridArea: document.getElementById("grid-container"),
     controls: document.getElementById("controls"),
+    resetNode: document.getElementById("resetNode"),
     phraseDisplay: document.getElementById("phrase"),
     prevCallDisplay: document.getElementById("prevCall"),
     // upperControls: document.getElementById("upperControls"),

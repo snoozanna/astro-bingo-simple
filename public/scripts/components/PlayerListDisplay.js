@@ -116,7 +116,7 @@ class PlayerListDisplay {
       if (!this.controls) {
         const controls = document.createElement("div");
         controls.id = "controls";
-        controls.classList.add("controls");
+        controls.classList.add("controls", "PLDisplay");
         this.controls = controls;
       }
       if (!this.controls.querySelector("#showResults")) {
@@ -141,7 +141,7 @@ class PlayerListDisplay {
         });
 
         const reloadCelebs = document.createElement("button");
-        reloadCelebs.classList.add("waves-effect", "waves-light", "btn");
+        reloadCelebs.classList.add("waves-effect", "waves-light", "btn", "danger");
         reloadCelebs.id = "reloadCelebs";
         reloadCelebs.textContent = "Reload Celebs";
         reloadCelebs.addEventListener("click", () => {
@@ -168,6 +168,24 @@ class PlayerListDisplay {
     } = this;
     if (!players.length) {
       mountNode.innerHTML = "<p>No players yet...</p>";
+      const reloadCelebs = document.createElement("button");
+        reloadCelebs.classList.add("waves-effect", "waves-light", "btn");
+        reloadCelebs.id = "reloadCelebs";
+        reloadCelebs.textContent = "Reload Celebs";
+        reloadCelebs.addEventListener("click", () => {
+          this.game.addCelebsToLocalStorage();
+          // this.game.reset();
+          // this.render();
+          // this.game.socket.send(
+          //   JSON.stringify({
+          //     type: "toggle-result-visibility",
+          //     data: this.options.showingResults,
+          //     controllerId: this.game._id,
+          //   }),
+          // );
+        });
+        mountNode.append(reloadCelebs);
+      
     } else {
       const list = document.createElement("ol");
       list.classList.add("list-group");

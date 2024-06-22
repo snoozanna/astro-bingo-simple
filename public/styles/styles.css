@@ -149,6 +149,12 @@ path {
   padding: 7px;
 }
 
+.controls.PLDisplay{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse
+}
+
 .footer-nav {
   display: flex;
   border: none;
@@ -334,4 +340,17 @@ g.transparent > line {
 .fig-logo{
 
  max-width: 100px;
+}
+
+button.danger{
+  background: #f44336;
+}
+
+
+section.grid-section.simple-generator > .upper-controls{
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  padding: 3rem;
+
 }
