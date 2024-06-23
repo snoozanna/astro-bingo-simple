@@ -37,6 +37,8 @@ class CurrentCall {
     socket.addEventListener("error", (err) => {
       console.log("error from the current call", err);
     });
+
+    this.setupAutoRefresh();
   }
 
   addControls() {
@@ -50,6 +52,17 @@ class CurrentCall {
     //   });
     //   this.controls.append(button);
     // }
+  }
+
+  setupAutoRefresh() {
+    this.refreshInterval = setInterval(() => {
+      console.log("refreshing");
+      this.render();
+    }, 2000); // 2000 milliseconds = 2 seconds
+  }
+
+  destroy() {
+    clearInterval(this.refreshInterval);
   }
 
   render(overrides = {}) {
