@@ -68,8 +68,8 @@ export async function makeCall(url = "", options = {}) {
 }
 
 export function connectToWebSocket(
-  // socketURL = "ws://localhost:3001/",
-  socketURL = "wss://astrobingosimple.netlify.app/",
+  socketURL = "ws://localhost:3001/",
+  // socketURL = "wss://astrobingosimple.netlify.app/",
   connectionHandler = function connectionHandler(event) {
     // console.log("Socket open!!");
   },
